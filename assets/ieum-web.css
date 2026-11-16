@@ -137,12 +137,11 @@
   }
 
   #ieumWorkspace {
-    grid-template-columns: minmax(0, 1fr) minmax(210px, 27%);
+    grid-template-columns: minmax(0, 1fr);
     gap: 16px;
   }
 
-  #ieumWorkspace .ieum-desk-main,
-  #ieumWorkspace .ieum-right-rail { scrollbar-gutter: auto; }
+  #ieumWorkspace .ieum-desk-main { scrollbar-gutter: auto; }
 
   .ieum-dm-panel { height: clamp(300px, calc(100dvh - 216px), 720px); }
 }
@@ -168,12 +167,13 @@
 
   .ieum-home-hero .ieum-header-actions .btn { padding: 6px 3px; font-size: 12px; }
   .ieum-home-hero .ieum-web-calendar { display: inline-flex; }
+  #ieumHomeExtras #ieumPinned { display: none; }
   .ieum-desk-head { flex-wrap: wrap; padding: 14px; }
   .ieum-home-section { margin-top: 12px; padding: 12px; }
   .ieum-workspace .ieum-participation { padding: 12px; }
   .ieum-workspace .ieum-participation .campus-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ieum-home-shortcuts .btn { min-height: 44px; }
-  .ieum-right-rail { gap: 12px; }
+  .ieum-home-extras { gap: 12px; }
 
   .ieum-landing-hero { min-height: 0; gap: 8px; padding: 13px 16px 16px; }
   .ieum-landing-access { padding: 17px 16px 19px; }

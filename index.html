@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
 <meta name="color-scheme" content="light"><meta name="robots" content="noindex,nofollow">
 <title>이음 · 충남반도체마이스터고등학교</title>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-FHVmxUw63iQjYHjgmqxu57n8K7Hojrud+2nyfVSeLYY='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; frame-src blob:; connect-src 'self' https://bareun-csmh-student-care.kimm2112.chatgpt.site; base-uri 'none'; object-src 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-+sj/iWESLZQmF7ldnMDEqvAFiLIn5sSCS7O7rZcN4nQ='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; frame-src blob:; connect-src 'self' https://bareun-csmh-student-care.kimm2112.chatgpt.site; base-uri 'none'; object-src 'none'; form-action 'none'">
   <meta name="referrer" content="no-referrer">
   <meta name="description" content="충남반도체마이스터고등학교의 소통 공간 이음에서 교내 소식, 학사일정, 시간표와 급식을 확인해요.">
   <meta property="og:title" content="이음 · 충남반도체마이스터고등학교">
@@ -330,9 +330,15 @@ html{scrollbar-gutter:stable}
 }
 
 #ieumStudentMain{max-width:1480px;padding:20px 24px 38px}
-.ieum-workspace{display:grid;grid-template-columns:200px minmax(0,1fr) minmax(258px,296px);gap:18px;align-items:start;--green:#023f8f;--green-dark:#082f62;--mint:#e8f2ff;--line:#dfebf8}
-.ieum-rail,.ieum-right-rail{position:sticky;top:80px}
-.ieum-right-rail{display:grid;gap:14px}
+.ieum-workspace{display:grid;grid-template-columns:200px minmax(0,1fr);gap:18px;align-items:start;--green:#023f8f;--green-dark:#082f62;--mint:#e8f2ff;--line:#dfebf8}
+.ieum-rail{position:sticky;top:80px}
+.ieum-home-extras{display:grid;gap:14px;margin-top:14px}
+#eventQuestionsDialog{width:min(640px,calc(100% - 24px));max-width:640px}
+.ieum-event-question-heading{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.ieum-event-question-heading h3{margin:0}
+.ieum-event-question p{white-space:pre-wrap;overflow-wrap:anywhere}
+.ieum-event-answer{border-left:3px solid #a5c8f0;background:#edf5ff;border-radius:8px;padding:9px 12px;margin-top:8px}
+.ieum-event-answer p{margin:4px 0 0}
 .ieum-rail,.ieum-pinned{padding:14px 12px;border:1px solid #dce8f7;border-radius:14px;background:#fff}
 .ieum-rail-brand{display:flex;align-items:center;gap:8px;padding:7px 6px 15px}
 .ieum-rail-brand>span,.ieum-feature-icon{display:grid;place-items:center;flex:0 0 32px;width:32px;height:32px;border-radius:9px;color:#023f8f;background:#e8f2ff}
@@ -532,20 +538,19 @@ body[data-sync="shared"] [data-login-kind="staff"]{display:none}
 }
 @media(max-width:1050px){
   #ieumStudentMain{padding:16px}
-  .ieum-workspace{grid-template-columns:160px minmax(0,1fr) 237px;gap:11px}
+  .ieum-workspace{grid-template-columns:160px minmax(0,1fr);gap:11px}
 }
 @media(min-width:761px){
   #studentPortal:not(.hidden):has(#ieumWorkspace:not(.hidden)){display:flex;flex-direction:column;height:100dvh;min-height:0}
   #ieumStudentMain:has(#ieumWorkspace:not(.hidden)){display:flex;flex:1;min-height:0;width:100%}
   #ieumWorkspace:not(.hidden){width:100%;min-height:0;align-items:stretch}
-  #ieumWorkspace .ieum-rail,#ieumWorkspace .ieum-right-rail{position:static;min-height:0}
-  #ieumWorkspace .ieum-rail{align-self:start;max-height:100%;overflow-y:auto}
-  #ieumWorkspace .ieum-desk-main,#ieumWorkspace .ieum-right-rail{min-height:0;min-width:0;overflow-y:auto;overflow-x:hidden;
+  #ieumWorkspace .ieum-rail{position:static;min-height:0;align-self:start;max-height:100%;overflow-y:auto}
+  #ieumWorkspace .ieum-desk-main{min-height:0;min-width:0;overflow-y:auto;overflow-x:hidden;
     overscroll-behavior-y:contain;scrollbar-gutter:stable}
 }
 @media(max-width:760px){
   .ieum-workspace{grid-template-columns:minmax(0,1fr)}
-  .ieum-rail,.ieum-right-rail{position:static}
+  .ieum-rail{position:static}
   .ieum-nav{display:flex;flex-wrap:wrap}
   .ieum-nav-label{width:100%}
   .ieum-desk-head{padding:13px}
@@ -647,8 +652,7 @@ body[data-sync="shared"] [data-login-kind="staff"]{display:none}
   <section class="campus-surface ieum-desk-main" id="campusSurface" aria-label="교내 소통">
     <div id="campusContent"></div>
     <p class="campus-status small" id="campusStatus" role="status"></p>
-  </section>
-  <aside class="ieum-right-rail" aria-label="학교 일정과 추천곡">
+    <aside class="ieum-home-extras hidden" id="ieumHomeExtras" aria-label="학교 일정과 추천곡">
     <section id="ieumPinned" class="ieum-pinned" aria-label="고정 학사일정">
     <div class="ieum-pinned-head"><div><span>학교 일정</span><h2>학사일정</h2></div><button type="button" class="icon-btn" data-campus-calendar aria-label="큰 달력 열기"><svg aria-hidden="true"><use href="#i-calendar"/></svg></button></div>
     <div class="ieum-month"><strong id="pinnedMonth"></strong><div class="ieum-calendar-buttons" aria-label="달력 이동">
@@ -660,7 +664,8 @@ body[data-sync="shared"] [data-login-kind="staff"]{display:none}
     <a class="small ieum-source" href="http://cnsm.cnehs.kr/schdList.do?m=1202&amp;s=yes" target="_blank" rel="noopener noreferrer">학교 누리집 학사일정 ↗</a>
     </section>
     <section id="pinnedSong" class="ieum-pinned-song" aria-label="이번 주 학생 추천 노래"></section>
-  </aside>
+    </aside>
+  </section>
 </div><section id="ownDiscipline" class="hidden" aria-label="바른 학생 생활지도" tabindex="-1"><div class="ieum-bareun-bar"><button class="btn secondary" type="button" data-campus-tab="home">← 이음 홈</button><strong id="bareunTitle">바른 · 학생 생활지도</strong><div class="campus-field-row"><button type="button" class="btn secondary ieum-duty-button hidden" id="bareunDutyView" data-duty-roster>선도표 보기</button><button type="button" class="btn primary ieum-duty-register hidden" id="bareunDutyRegister" data-duty-roster-register><svg aria-hidden="true"><use href="#i-upload"/></svg>선도표 등록</button></div></div><section id="bareunCouncilPanel" class="ieum-bareun-council hidden"><h2>학생회 생활지도</h2><p id="bareunCouncilRole"></p><button type="button" class="btn primary ieum-duty-register" id="bareunRecordEntry">생활지도 기록 등록</button></section><div id="bareunOwnRecords"><div class="flex between gap own-heading"><div><span class="pill green" id="ownMode">학생 전용</span><h1>내 지도 기록</h1><p><strong id="ownName"></strong><span id="ownIdentity"></span></p></div><button class="btn secondary" data-action="student-refresh"><svg><use href="#i-clock"/></svg>새로고침</button></div><div class="month-toolbar own-period"><button id="ownPrev" class="icon-btn" data-action="own-prev" aria-label="이전 월"><svg style="transform:rotate(180deg)"><use href="#i-chevron"/></svg></button><input id="ownMonth" type="month" min="2026-11" aria-label="조회할 월"><button class="icon-btn" id="ownNext" data-action="own-next" aria-label="다음 월"><svg><use href="#i-chevron"/></svg></button><button class="period-all" id="ownAll" data-action="own-all">전체</button></div><div id="ownStats" class="stats own-stats"></div><section class="panel"><div class="panel-head"><h2>지도 기록<span class="count-badge" id="ownCount">0</span></h2></div><div id="ownHistory"></div></section><p id="ownError" class="form-error" role="alert"></p><footer class="footer"><span>바른 · 본인 기록 조회</span><span id="ownUpdate"></span></footer></div></section></main></section>
 <section id="ieumStaffHome" class="student-portal hidden" aria-labelledby="ieumStaffHeading">
   <header class="own-topbar">
@@ -695,6 +700,22 @@ body[data-sync="shared"] [data-login-kind="staff"]{display:none}
     <div class="meal-grid" id="mealResults"></div>
     <p class="campus-status small" id="mealStatus" role="status"></p>
     <a class="meal-source small" href="https://open.neis.go.kr/portal/data/service/selectServicePage.do?infId=OPEN17320190722180924242823&amp;infSeq=2" target="_blank" rel="noopener noreferrer">출처 · 나이스 교육정보 개방 포털</a>
+  </div>
+</dialog>
+<dialog id="eventQuestionsDialog" class="modal" aria-labelledby="eventQuestionsTitle">
+  <div class="modal-head">
+    <div><h2 id="eventQuestionsTitle">행사 질문·답변</h2><p id="eventQuestionsEvent"></p></div>
+    <button type="button" class="icon-btn" data-close="eventQuestionsDialog" aria-label="닫기"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+  </div>
+  <div class="panel-body stack">
+    <form id="eventQuestionsForm" class="stack hidden">
+      <label class="field" for="eventQuestionsContent"><span id="eventQuestionsLabel">행사 질문</span><textarea id="eventQuestionsContent" rows="3" maxlength="500" required></textarea></label>
+      <div class="ieum-item-actions"><button type="submit" class="btn primary" id="eventQuestionsSubmit">질문 등록</button>
+      <button type="button" class="btn secondary hidden" id="eventQuestionsCancel">취소</button></div>
+    </form>
+    <div class="ieum-event-question-heading"><h3>등록된 질문</h3><button type="button" class="btn secondary" id="eventQuestionsRefresh">새로고침</button></div>
+    <div class="campus-items" id="eventQuestionsList" aria-live="polite"></div>
+    <p class="campus-status small" id="eventQuestionsStatus" role="status"></p>
   </div>
 </dialog>
 <dialog id="scheduleDialog" class="modal" aria-labelledby="scheduleTitle">
@@ -982,6 +1003,7 @@ body[data-sync="shared"] [data-login-kind="staff"]{display:none}
 </form>
 <form id="teacherLoginForm" class="login-form hidden">
   <h2>이음 선생님 로그인</h2>
+  <label class="field">직책<select name="roleId"><option value="teacher">선생님</option><option value="principal">교장선생님</option><option value="vice-principal">교감선생님</option></select></label>
   <label class="field">이름<input name="name" maxlength="40" autocomplete="username" required></label>
   <label class="field">비밀번호<input name="password" type="password" maxlength="64" autocomplete="current-password" required></label>
   <label class="ieum-remember-login hidden"><input type="checkbox" data-save-login> 이 PC에 로그인 정보 저장</label>
@@ -1474,6 +1496,7 @@ function resetCampus() {
   setCouncilAccess(false);
   showMessageBadge();
   $('campusContent').replaceChildren();
+  $('ieumHomeExtras').classList.add('hidden');
   $('managedDutyRegister').classList.add('hidden');
   $('bareunSwitchAccount').classList.add('hidden');
   $('ieumStaffExtras').replaceChildren();
@@ -1481,6 +1504,7 @@ function resetCampus() {
   councilAccountRows = [];
   resetCouncilProfile();
   resetParticipation();
+  closeDialog('eventQuestionsDialog');
   resetWorkspace();
   resetRoster();
   $('campusStatus').textContent = '';
@@ -1609,6 +1633,7 @@ async function showCampus(page, message = '', target, fromBack = false) {
   const fromDiscipline = campus.page === 'discipline';
   campus.page = page;
   campus.target = location;
+  $('ieumHomeExtras').classList.toggle('hidden', page !== 'home');
   if (locationChanged) $('campusSurface').scrollTop=0;
   syncCampusBack();
   workspace.items = [];
@@ -1649,8 +1674,6 @@ async function showCampus(page, message = '', target, fromBack = false) {
     $('ownDiscipline').focus();
     return;
   }
-  if (!workspace.month) loadPinnedCalendar();
-  loadPinnedSong(request);
   if (page === 'nurijip') { showNurijip(location.section); return; }
   if (page === 'chat') { openChatRoom(location.room); return; }
   if (page === 'messages') { showDmPage(request); return; }
@@ -1658,6 +1681,8 @@ async function showCampus(page, message = '', target, fromBack = false) {
   if (page === 'home') {
     $('campusContent').innerHTML = workspaceHome();
     renderCampusIdentity();
+    if (!workspace.month) loadPinnedCalendar();
+    loadPinnedSong(request);
     loadWorkspaceHome();
     if (fromDiscipline) bareun.focus();
     return;
@@ -1918,15 +1943,24 @@ function openCampusPortal() {
   showOwnPortal('home');
 }
 
+function updateTeacherNameField() {
+  const form = $('teacherLoginForm');
+  const ordinary = form.elements.roleId.value === 'teacher';
+  const name = form.elements.name;
+  name.required = ordinary;
+  name.disabled = !ordinary;
+  name.closest('label').classList.toggle('hidden', !ordinary);
+}
+
 async function teacherLogin(event) {
   event.preventDefault();
   const form=event.currentTarget,button=event.submitter,status=$('teacherLoginError');
-  const {name,password}=Object.fromEntries(new FormData(form));
+  const {name,password,roleId}=Object.fromEntries(new FormData(form));
   const remember=remembersLogin('teacher');
   button.disabled=true;
   status.textContent='';
   try {
-    const result=await post('/login',{kind:'teacher',name,password});
+    const result=await post('/login',{kind:'teacher',name,password,roleId});
     rememberSuccessfulLogin('teacher',remember,result.user,password);
     applySession(result);
     form.elements.password.value='';
@@ -2132,6 +2166,7 @@ async function switchIeumAccount(event) {
 }
 
 function initCampus() {
+  initEventQuestions();
   $('ieumSwitchAccount').addEventListener('click',switchIeumAccount);
   $('bareunSwitchAccount').addEventListener('click',switchIeumAccount);
   document.addEventListener('keydown', event => {
@@ -2197,6 +2232,7 @@ function initCampus() {
   }
   $('councilLoginForm').addEventListener('submit', councilLogin);
   $('teacherLoginForm').addEventListener('submit',teacherLogin);
+  $('teacherLoginForm').elements.roleId.addEventListener('change',updateTeacherNameField);
   $('councilLoginForm').addEventListener('input',updateCouncilInitialNameField);
   $('councilOwnPasswordForm').addEventListener('submit',changeCouncilOwnPassword);
   $('councilAccountForm').addEventListener('submit', saveCouncilAccount);
@@ -2561,6 +2597,7 @@ function workspaceHome() {
         <a class="btn secondary ieum-outbound" href="https://www.moducbt.com/" target="_blank" rel="noopener noreferrer">모두의 CBT <span aria-hidden="true">↗</span></a>
         <a class="btn secondary ieum-outbound" href="https://read365.edunet.net/" target="_blank" rel="noopener noreferrer">독서로 <span aria-hidden="true">↗</span></a>
         <a class="btn secondary ieum-outbound" href="https://www.1365.go.kr/vols/main.do" target="_blank" rel="noopener noreferrer">1365 자원봉사포털 <span aria-hidden="true">↗</span></a>
+        <a class="btn secondary ieum-outbound" href="https://www.instagram.com/csmh_ieum/" target="_blank" rel="noopener noreferrer">학생회 인스타 <span aria-hidden="true">↗</span></a>
       </div></section>
     <section class="ieum-desk-section ieum-home-section"><header><h2>이번 주 한마디</h2></header>
     <p>${weekPrompt()}</p><button type="button" class="text-btn" data-ieum-prompt="question">자유 소통에 한마디 남기기</button></section>`;
@@ -2708,6 +2745,7 @@ function workspaceEventCards(items) {
     }).join('')}</ul>` : ''}
     <div class="ieum-item-actions">${item.capacity>0?`<button class="btn secondary" type="button" data-participation-page="events"
       data-item-id="${Number(item.id)}">${item.joined?'내 신청 확인':canPublish()?'신청 관리':'행사 신청'}</button>`:''}
+      <button class="btn secondary" type="button" data-event-questions="${Number(item.id)}">질문·답변</button>
       ${canPublish() ? editorButton('events','행사 수정',item.id) : ''}${moderationButton('events',item.id)}</div></article>`).join('');
 }
 
@@ -3101,6 +3139,101 @@ function initEventPreview() {
     if (!event.target.matches('input[name=files]')) return;
     $('ieumDraftFiles').innerHTML = [...event.target.files].map((file,index)=>`<li><span>${esc(file.name)}</span>
       <button type="button" class="btn secondary" data-draft-preview="${index}" aria-label="${esc(file.name)} 미리보기">미리보기</button></li>`).join('');
+  });
+}
+
+const eventQuestions = { id:0, request:0, items:[], action:'ask', questionId:0 };
+
+function eventQuestionsRoute(id) {
+  return '/campus/event-questions?event=' + id;
+}
+
+function eventQuestionEditor(action = 'ask', item, focus = false) {
+  eventQuestions.action = action;
+  eventQuestions.questionId = item?.id ?? 0;
+  const field = $('eventQuestionsContent');
+  $('eventQuestionsForm').classList.toggle('hidden', action === 'ask' && !ownStudent);
+  $('eventQuestionsCancel').classList.toggle('hidden', action === 'ask');
+  $('eventQuestionsLabel').textContent = action === 'answer' ? '학생회 답변' : '행사 질문';
+  $('eventQuestionsSubmit').textContent = action === 'edit' ? '질문 수정 저장' : action === 'answer' ? '답변 저장' : '질문 등록';
+  field.value = action === 'answer' ? item.answer : item?.question ?? '';
+  if (focus) field.focus();
+}
+
+function eventQuestionCard(item) {
+  const action = (key,label) => `<button type="button" class="btn secondary" data-question-action="${key}" data-question-id="${Number(item.id)}">${label}</button>`;
+  return `<article class="campus-item ieum-event-question">
+    <span class="small muted">${esc(item.author)} · ${esc(formatCampusTime(item.createdAt))}</span>
+    <p>${esc(item.question)}</p>
+    ${item.answer ? `<div class="ieum-event-answer"><strong>학생회 답변 · ${esc(item.answerBy)}</strong><p>${esc(item.answer)}</p></div>` : ''}
+    <div class="ieum-item-actions">${item.own ? action('edit','질문 수정') : ''}
+      ${canPublish() ? action('answer',item.answer?'답변 수정':'답변 달기') : ''}
+      ${canPublish() && item.answer ? action('clear-answer','답변 삭제') : ''}
+      ${item.own || canPublish() ? action('delete','질문 삭제') : ''}</div></article>`;
+}
+
+async function loadEventQuestions(message = '') {
+  const { id } = eventQuestions;
+  const request = ++eventQuestions.request;
+  const status = $('eventQuestionsStatus');
+  status.textContent = '질문을 불러오는 중…';
+  try {
+    const data = await api(eventQuestionsRoute(id),{signal:AbortSignal.timeout(12000)});
+    if (request !== eventQuestions.request || !$('eventQuestionsDialog').open) return;
+    eventQuestions.items = data.items;
+    $('eventQuestionsEvent').textContent = data.title || '제목 없는 행사';
+    $('eventQuestionsList').innerHTML = data.items.map(eventQuestionCard).join('');
+    status.textContent = message || (data.items.length ? '' : '아직 등록된 질문이 없어요.');
+  } catch (error) {
+    if (request === eventQuestions.request) status.textContent = error.message;
+  }
+}
+
+async function saveEventQuestion(action, id, content, button, eventId = eventQuestions.id) {
+  const token = service.token;
+  if (eventId !== eventQuestions.id || !$('eventQuestionsDialog').open) return;
+  button.disabled = true;
+  try {
+    await post(eventQuestionsRoute(eventId),{action,id,content});
+    if (token !== service.token || eventId !== eventQuestions.id || !$('eventQuestionsDialog').open) return;
+    eventQuestionEditor();
+    await loadEventQuestions(['delete','clear-answer'].includes(action) ? '삭제했어요.' : '저장했어요.');
+  } catch (error) {
+    if (token === service.token && eventId === eventQuestions.id) $('eventQuestionsStatus').textContent = error.message;
+  } finally { button.disabled = false; }
+}
+
+function initEventQuestions() {
+  const dialog = $('eventQuestionsDialog');
+  document.addEventListener('click',event => {
+    const button = event.target.closest('[data-event-questions]');
+    if (!button || !campusParticipant()) return;
+    eventQuestions.id = Number(button.dataset.eventQuestions);
+    eventQuestions.items = [];
+    $('eventQuestionsEvent').textContent = '';
+    $('eventQuestionsList').replaceChildren();
+    eventQuestionEditor();
+    showDialog(dialog.id);
+    loadEventQuestions();
+  });
+  dialog.addEventListener('close', () => { eventQuestions.request++; eventQuestions.id = 0; });
+  $('eventQuestionsRefresh').addEventListener('click', () => loadEventQuestions());
+  $('eventQuestionsCancel').addEventListener('click', () => eventQuestionEditor('ask',undefined,Boolean(ownStudent)));
+  $('eventQuestionsForm').addEventListener('submit',event => {
+    event.preventDefault();
+    saveEventQuestion(eventQuestions.action,eventQuestions.questionId,$('eventQuestionsContent').value,$('eventQuestionsSubmit'));
+  });
+  $('eventQuestionsList').addEventListener('click',event => {
+    const button = event.target.closest('[data-question-action]');
+    const item = eventQuestions.items.find(row => row.id === Number(button?.dataset.questionId));
+    if (!item) return;
+    const action = button.dataset.questionAction;
+    if (action === 'edit' || action === 'answer') eventQuestionEditor(action,item,true);
+    else {
+      const eventId = eventQuestions.id;
+      const title = action === 'delete' ? '이 질문을 삭제할까요?' : '이 답변을 삭제할까요?';
+      confirmBox(title,'삭제한 내용은 다시 볼 수 없어요.',() => saveEventQuestion(action,item.id,'',button,eventId),'삭제');
+    }
   });
 }
 
@@ -4753,6 +4886,8 @@ function initSavedLogin() {
       $('studentLoginId').value=credentials.Username;
       $('studentLoginPassword').value=credentials.Password;
     } else if (kind==='teacher') {
+      form.elements.roleId.value=credentials.RoleId || 'teacher';
+      updateTeacherNameField();
       form.elements.name.value=credentials.Username;
       form.elements.password.value=credentials.Password;
     } else {
