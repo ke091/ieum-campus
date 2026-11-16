@@ -1,40 +1,46 @@
 .ieum-web-dock,
-.ieum-web-calendar,
-.ieum-mobile-brand {
+.ieum-web-calendar {
   display: none;
 }
 
+#loginDialog:has(#entryChoose:not(.hidden)) {
+  width: 432px;
+  max-width: calc(100vw - 28px);
+  border-radius: 20px;
+}
+
+#entryChoose.ieum-landing {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 22px;
+  padding: clamp(18px, 6vw, 28px);
+}
+
+#entryChoose .ieum-landing-access > :is(h2, p) { display: none; }
+#entryChoose .ieum-landing-access { padding: 0; }
+#entryChoose .ieum-entry-actions { margin: 0; }
+#entryChoose .ieum-choice { min-height: 55px; }
+
+.ieum-web-brand {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  text-align: center;
+  padding-top: 4px;
+}
+
+.ieum-web-brand img.school-logo { width: clamp(64px, 18vw, 72px); height: auto; object-fit: contain; }
+.ieum-web-brand h1 { margin: 2px 0 0; font-size: 38px; line-height: 1.1; letter-spacing: -.045em; color: #09396f; }
+.ieum-web-brand p { margin: 0; color: #50657a; font-size: 13px; font-weight: 650; }
+
+@media (max-height: 440px) {
+  #entryChoose.ieum-landing { gap: 12px; padding-block: 14px; }
+  #entryChoose .ieum-choice { min-height: 48px; }
+  .ieum-web-brand { gap: 4px; padding-top: 0; }
+  .ieum-web-brand img.school-logo { width: 48px; }
+  .ieum-web-brand h1 { font-size: 32px; }
+}
+
 @media (max-width: 760px), (max-width: 1400px) and (pointer: coarse) {
-  #loginDialog:has(#entryChoose:not(.hidden)) {
-    width: 428px;
-    max-width: calc(100vw - 28px);
-    border-radius: 20px;
-  }
-
-  #entryChoose.ieum-landing {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 22px;
-    padding: clamp(18px, 6vw, 28px);
-  }
-
-  #entryChoose .ieum-landing-hero,
-  #entryChoose .ieum-landing-access > :is(h2, p) { display: none; }
-
-  #entryChoose .ieum-landing-access { padding: 0; }
-  #entryChoose .ieum-entry-actions { margin: 0; }
-  #entryChoose .ieum-choice { min-height: 55px; }
-
-  .ieum-mobile-brand {
-    display: grid;
-    justify-items: center;
-    gap: 8px;
-    text-align: center;
-    padding-top: 4px;
-  }
-
-  .ieum-mobile-brand img.school-logo { width: 68px; height: 68px; object-fit: contain; }
-  .ieum-mobile-brand h1 { margin: 2px 0 0; font-size: 38px; line-height: 1.1; letter-spacing: -.045em; color: #09396f; }
-  .ieum-mobile-brand p { margin: 0; color: #50657a; font-size: 13px; font-weight: 650; }
   #campusSurface > .ieum-home-extras { margin-top: 14px; }
 
   #studentPortal .own-topbar {
