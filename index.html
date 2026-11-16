@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
 <meta name="color-scheme" content="light"><meta name="robots" content="noindex,nofollow">
 <title>이음 · 충남반도체마이스터고등학교</title>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-+sj/iWESLZQmF7ldnMDEqvAFiLIn5sSCS7O7rZcN4nQ='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; frame-src blob:; connect-src 'self' https://bareun-csmh-student-care.kimm2112.chatgpt.site; base-uri 'none'; object-src 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-PT5sa8ifyvjSoprNB+kdem6NRNoQqSOh0dgV5LJgAnk='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; frame-src blob:; connect-src 'self' https://bareun-csmh-student-care.kimm2112.chatgpt.site; base-uri 'none'; object-src 'none'; form-action 'none'">
   <meta name="referrer" content="no-referrer">
   <meta name="description" content="충남반도체마이스터고등학교의 소통 공간 이음에서 교내 소식, 학사일정, 시간표와 급식을 확인해요.">
   <meta property="og:title" content="이음 · 충남반도체마이스터고등학교">
@@ -3830,14 +3830,14 @@ function setTimetableClasses(classes, grade, room) {
   options('timetableRoom',classes.filter(item=>item.grade===selected?.grade).map(item=>item.room),'반',selected?.room);
 }
 
-function renderTimetable({selected,days,lessons,lessonError}) {
+function renderTimetable({selected,days,lessons,lessonError,savedOn}) {
   const {date,weekly} = timetableView;
   const table = $('timetableGrid'), daily = $('timetableDay');
   const visible = weekly ? lessons : lessons.filter(lesson=>lesson.date===date);
   table.classList.toggle('hidden',!weekly || !visible.length);
   daily.classList.toggle('hidden',weekly || !visible.length);
   $('timetableRetry').classList.toggle('hidden',!lessonError);
-  $('timetableStatus').textContent = lessonError || (visible.length ? '' :
+  $('timetableStatus').textContent = lessonError || (visible.length ? (savedOn ? shortSchoolDay(savedOn)+'에 저장한 나이스 시간표입니다.' : '') :
     selected ? (weekly ? '선택한 주' : '선택한 날짜') + '의 시간표가 나이스에 아직 등록되지 않았어요.' :
       '이 학년도의 등록 학급이 아직 없어요.');
   const subjects = new Map();
