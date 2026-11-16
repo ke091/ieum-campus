@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
 <meta name="color-scheme" content="light"><meta name="robots" content="noindex,nofollow">
 <title>이음 · 충남반도체마이스터고등학교</title>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-PT5sa8ifyvjSoprNB+kdem6NRNoQqSOh0dgV5LJgAnk='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; frame-src blob:; connect-src 'self' https://bareun-csmh-student-care.kimm2112.chatgpt.site; base-uri 'none'; object-src 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-p90TstTj5xADPX9y5WRhwPSpYLNm0ZCv6lLQvOjgWLs='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; frame-src blob:; connect-src 'self' https://bareun-csmh-student-care.kimm2112.chatgpt.site https://raw.githubusercontent.com; base-uri 'none'; object-src 'none'; form-action 'none'">
   <meta name="referrer" content="no-referrer">
   <meta name="description" content="충남반도체마이스터고등학교의 소통 공간 이음에서 교내 소식, 학사일정, 시간표와 급식을 확인해요.">
   <meta property="og:title" content="이음 · 충남반도체마이스터고등학교">
@@ -3793,6 +3793,7 @@ function resetRoster() {
 }
 
 const timetableView = { date:'', weekly:false, grade:0, room:0, classes:[], classYear:'', request:null, result:null };
+const timetableWebFeed = { load:null };
 const dutyView = { request:null, url:'', editing:false, draftUrl:'', draftRequest:0, draftFile:null };
 const dutyRoute = '/bareun/duty-roster';
 const canPostDutyRoster = () => councilAccount();
@@ -3910,7 +3911,19 @@ async function loadTimetable(grade=timetableView.grade,room=timetableView.room) 
   $('timetableStatus').textContent = '나이스 시간표를 불러오는 중…';
   const params = new URLSearchParams({week,grade:String(grade || ''),room:String(room || '')});
   try {
-    const result = await api('/campus/timetable?'+params,{signal:request.signal});
+    const loadWeb = () => !request.signal.aborted && timetableWebFeed.load?.(week,grade,room);
+    let result;
+    try {
+      result = await api('/campus/timetable?'+params,{signal:request.signal});
+    } catch (error) {
+      if (![502,503].includes(error.status)) throw error;
+      result = await loadWeb();
+      if (!result) throw error;
+    }
+    if (result.lessonError || result.backup==='bundled') {
+      const refreshed = await loadWeb();
+      if (refreshed && (!result.savedOn || refreshed.savedOn>=result.savedOn)) result = refreshed;
+    }
     if (!request.signal.aborted && $('timetableDialog').open) {
       if (!result.lessonError) timetableView.result = {week,data:result};
       setTimetableClasses(result.classes,result.selected?.grade ?? grade,result.selected?.room ?? room);

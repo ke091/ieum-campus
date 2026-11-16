@@ -5,6 +5,49 @@
   const compact = matchMedia('(max-width: 1180px)');
   const phone = matchMedia('(max-width: 760px)');
 
+  let timetableFeed;
+  let timetableFeedUntil = 0;
+  async function getTimetableFeed() {
+    if (Date.now() < timetableFeedUntil) return timetableFeed;
+    timetableFeedUntil = Date.now() + 180000;
+    timetableFeed = (async () => {
+      const urls = ['https://raw.githubusercontent.com/ke091/ieum-campus/main/data/timetable.json','./data/timetable.json'];
+      for (const url of urls) {
+        try {
+          const response = await fetch(url,{signal:AbortSignal.timeout(2300),credentials:'omit'});
+          if (!response.ok) continue;
+          const body = await response.text();
+          if (body.length > 1500000) continue;
+          const data = JSON.parse(body);
+          if (/^20\d{2}-\d{2}-\d{2}$/.test(data?.checkedOn) && data.lessons && typeof data.lessons === 'object') return data;
+        } catch { /* Use the published copy when the data feed cannot be read. */ }
+      }
+      return null;
+    })();
+    return timetableFeed;
+  }
+
+  timetableWebFeed.load = async (week,grade,room) => {
+    const data = await getTimetableFeed();
+    if (!data) return null;
+    const academicYear = day => Number(day.slice(0,4)) - Number(Number(day.slice(5,7))<3);
+    const rooms = new Map();
+    for (const key of Object.keys(data.lessons)) {
+      const parts = /^(20\d{2}-\d{2}-\d{2}):([1-3]):([1-9]\d?)$/.exec(key);
+      if (!parts || academicYear(parts[1]) !== academicYear(week)) continue;
+      rooms.set(parts[2]+':'+parts[3],{grade:Number(parts[2]),room:Number(parts[3])});
+    }
+    const classes = [...rooms.values()].sort((a,b)=>a.grade-b.grade || a.room-b.room);
+    const selected = rooms.get(grade+':'+room) ?? classes.find(item=>item.grade===grade) ?? classes[0];
+    if (!selected) return null;
+    const days = Array.from({length:5},(_,index)=>timetableDate(week,index));
+    const lessons = data.lessons[[week,selected.grade,selected.room].join(':')];
+    if (!Array.isArray(lessons) || !lessons.length || lessons.length>250 || !lessons.every(item=>item &&
+        days.includes(item.date) && Number.isInteger(item.period) && item.period>=0 && item.period<=20 &&
+        typeof item.subject==='string' && item.subject.length>0 && item.subject.length<=200)) return null;
+    return {classes,selected,days,lessons,savedOn:data.checkedOn,backup:'web'};
+  };
+
   const dock = document.createElement('nav');
   dock.className = 'ieum-web-dock';
   dock.setAttribute('aria-label', '빠른 메뉴');

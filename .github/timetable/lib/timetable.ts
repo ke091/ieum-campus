@@ -12,6 +12,40 @@ const lessonCache = new Map<string, { expires: number; items: Lesson[] }>();
 const dateOffset = (date: Date, days: number) => new Date(date.getTime() + days * 86400000).toISOString().slice(0, 10);
 const headers = { 'Cache-Control': 'no-store' };
 const savedLessons: Record<string,Lesson[]> = timetableSnapshot.lessons;
+type TimetableSnapshot = { checkedOn: string; lessons: Record<string,Lesson[]> };
+let recentSnapshot: { expires: number; data: TimetableSnapshot | null } | undefined;
+
+async function loadRefreshedSnapshot() {
+  if (recentSnapshot && recentSnapshot.expires > Date.now()) return recentSnapshot.data;
+  let data: TimetableSnapshot | null = null;
+  try {
+    const response = await fetch('https://raw.githubusercontent.com/ke091/ieum-campus/main/data/timetable.json', {
+      signal:AbortSignal.timeout(2400), redirect:'error',
+    });
+    if (!response.ok) throw Error('Scheduled timetable data unavailable');
+    const body = await response.text();
+    if (body.length > 1500000) throw Error('Scheduled timetable data is too large');
+    const snapshot = JSON.parse(body) as TimetableSnapshot;
+    if (/^20\d{2}-\d{2}-\d{2}$/.test(snapshot.checkedOn) && snapshot.checkedOn >= timetableSnapshot.checkedOn &&
+        snapshot.lessons && typeof snapshot.lessons === 'object') data = snapshot;
+  } catch { /* The release includes a copy for times when the refresh feed is unavailable. */ }
+  recentSnapshot = { data, expires:Date.now() + (data ? 15 : 2) * 60000 };
+  return data;
+}
+
+async function fallbackClasses(year: string) {
+  const cached = classCache.get(year)?.items;
+  if (cached?.length) return cached;
+  if (savedClasses[year]?.length) return savedClasses[year];
+  const snapshot = await loadRefreshedSnapshot();
+  const items = new Map<string,Class>();
+  for (const key of Object.keys(snapshot?.lessons ?? {})) {
+    const match = /^(20\d{2})-(\d{2})-\d{2}:([1-3]):([1-9]\d?)$/.exec(key);
+    if (!match || Number(match[1]) - Number(Number(match[2]) < 3) !== Number(year)) continue;
+    items.set(match[3]+':'+match[4],{grade:Number(match[3]),room:Number(match[4])});
+  }
+  return [...items.values()].sort((a,b) => a.grade-b.grade || a.room-b.room);
+}
 
 function parseLessons(rows: SchoolRow[], start: string, end: string, selected: Class) {
   const lessons: Lesson[] = [];
@@ -124,10 +158,9 @@ export async function timetableApi(request: Request, key?: string) {
   let classes: Class[];
   try {
     classes = await loadClasses(year, AbortSignal.timeout(4500), key);
-    if (!classes.length) classes = savedClasses[year] ?? classes;
+    if (!classes.length) classes = await fallbackClasses(year);
   } catch {
-    const saved = classCache.get(year)?.items;
-    classes = saved?.length ? saved : savedClasses[year] ?? [];
+    classes = await fallbackClasses(year);
     if (!classes.length) return Response.json({ error:'나이스 학급 목록을 불러오지 못했습니다.' }, { status:502, headers });
   }
   const selected = classes.find(item => item.grade === grade && item.room === room) ??
@@ -136,9 +169,17 @@ export async function timetableApi(request: Request, key?: string) {
     const lessons = selected ? await loadLessons(week, days[4], year, selected, key) : [];
     return Response.json({ classes, selected, days, lessons }, { headers });
   } catch {
-    const lessons = selected ? savedLessons[[week,selected.grade,selected.room].join(':')] : undefined;
+    const lookup = [week,selected?.grade,selected?.room].join(':');
+    const refreshed = await loadRefreshedSnapshot();
+    const freshRows = refreshed?.lessons[lookup];
+    if (refreshed && Array.isArray(freshRows) && freshRows.length && freshRows.length <= 250 &&
+        freshRows.every(row => row && days.includes(row.date) && Number.isInteger(row.period) && row.period>=0 &&
+          row.period<=20 && typeof row.subject==='string' && row.subject.length>0 && row.subject.length<=200)) {
+      return Response.json({ classes, selected, days, lessons:freshRows, savedOn:refreshed.checkedOn, backup:'scheduled' }, { headers });
+    }
+    const lessons = savedLessons[lookup];
     if (lessons?.length) return Response.json({ classes, selected, days, lessons,
-      savedOn:timetableSnapshot.checkedOn }, { headers });
+      savedOn:timetableSnapshot.checkedOn, backup:'bundled' }, { headers });
     return Response.json({ classes, selected, days, lessons:[],
       lessonError:'선택한 학급의 시간표를 불러오지 못했어요. 다시 조회하거나 다른 학급을 선택할 수 있어요.' }, { headers });
   }
