@@ -2,10 +2,10 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
 <meta name="color-scheme" content="light"><meta name="robots" content="noindex,nofollow">
 <title>이음 · 충남반도체마이스터고등학교</title>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Zn1L7Q6blWtoI3XgyHNRdvdzFqUUbeIr9NZJ/c3llUk='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; frame-src blob:; connect-src 'self' https://bareun-csmh-student-care.kimm2112.chatgpt.site; base-uri 'none'; object-src 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-FHVmxUw63iQjYHjgmqxu57n8K7Hojrud+2nyfVSeLYY='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; frame-src blob:; connect-src 'self' https://bareun-csmh-student-care.kimm2112.chatgpt.site; base-uri 'none'; object-src 'none'; form-action 'none'">
   <meta name="referrer" content="no-referrer">
   <meta name="description" content="충남반도체마이스터고등학교의 소통 공간 이음에서 교내 소식, 학사일정, 시간표와 급식을 확인해요.">
   <meta property="og:title" content="이음 · 충남반도체마이스터고등학교">
@@ -556,6 +556,7 @@ body[data-sync="shared"] [data-login-kind="staff"]{display:none}
   .ieum-desk-head.ieum-home-hero{align-items:flex-start;flex-direction:column}
 }
 </style>
+<link rel="stylesheet" href="./assets/ieum-web.css">
 </head>
 <body class="auth-mode" data-entry="choose" data-sync="shared">
 <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"><defs>
@@ -743,7 +744,7 @@ body[data-sync="shared"] [data-login-kind="staff"]{display:none}
       <strong id="timetablePeriodLabel" class="ieum-timetable-period"></strong>
     </div>
     <ol class="ieum-timetable-day" id="timetableDay"></ol>
-    <div class="ieum-timetable-scroll"><table class="ieum-timetable hidden" id="timetableGrid"></table></div>
+    <div class="ieum-timetable-scroll" role="region" tabindex="0" aria-label="주간 시간표"><table class="ieum-timetable hidden" id="timetableGrid"></table></div>
     <p class="small muted" id="timetableStatus" role="status"></p>
     <div><button type="button" class="btn secondary hidden" id="timetableRetry">다시 조회</button></div>
     <a class="small ieum-source" href="https://open.neis.go.kr/portal/data/service/selectServicePage.do?infId=OPEN18620200826103326268120&amp;infSeq=1" target="_blank" rel="noopener noreferrer">나이스 고등학교 시간표 출처 ↗</a>
@@ -2546,7 +2547,7 @@ function workspaceHome() {
     [service.user.department, service.user.role, service.user.name === service.user.role ? '' : service.user.name].filter(Boolean).join(' · ');
   const actions = `<div class="ieum-header-actions">
     <button class="btn secondary" type="button" data-campus-meals>오늘 급식</button>
-    <button class="btn secondary" type="button" data-school-timetable>오늘 시간표</button></div>`;
+    <button class="btn secondary" type="button" data-school-timetable>오늘 시간표</button><button class="btn secondary ieum-web-calendar" type="button" data-campus-calendar>학사일정</button></div>`;
   return workspaceHeader('이음', identity, actions, true) +
     `<section class="ieum-desk-section ieum-home-section"><header><h2>최근 교내 소식</h2><div class="ieum-section-actions">
       ${canPublish()?editorButton('notices','소식 올리기'):''}<button type="button" class="text-btn" data-campus-tab="notices">전체 보기</button></div></header>
@@ -3764,6 +3765,11 @@ async function loadTimetable(grade=timetableView.grade,room=timetableView.room) 
   }
   timetableView.request?.abort();
   const request = new AbortController();
+  let timedOut = false;
+  const deadline = setTimeout(() => {
+    timedOut = true;
+    request.abort();
+  }, 20000);
   timetableView.request = request;
   $('timetableGrid').classList.add('hidden');
   $('timetableDay').classList.add('hidden');
@@ -3771,18 +3777,19 @@ async function loadTimetable(grade=timetableView.grade,room=timetableView.room) 
   $('timetableStatus').textContent = '나이스 시간표를 불러오는 중…';
   const params = new URLSearchParams({week,grade:String(grade || ''),room:String(room || '')});
   try {
-    const result = await api('/campus/timetable?'+params,{signal:AbortSignal.any([request.signal,AbortSignal.timeout(20000)])});
+    const result = await api('/campus/timetable?'+params,{signal:request.signal});
     if (!request.signal.aborted && $('timetableDialog').open) {
       if (!result.lessonError) timetableView.result = {week,data:result};
       setTimetableClasses(result.classes,result.selected?.grade ?? grade,result.selected?.room ?? room);
       renderTimetable(result);
     }
   } catch (error) {
-    if (!request.signal.aborted && $('timetableDialog').open) {
-      $('timetableStatus').textContent = error.message;
+    if ((!request.signal.aborted || timedOut) && timetableView.request===request && $('timetableDialog').open) {
+      $('timetableStatus').textContent = timedOut ? '나이스 응답이 지연됐어요. 다시 조회해 주세요.' : error.message;
       $('timetableRetry').classList.remove('hidden');
     }
   } finally {
+    clearTimeout(deadline);
     if (timetableView.request===request) timetableView.request=null;
   }
 }
@@ -3790,7 +3797,7 @@ async function loadTimetable(grade=timetableView.grade,room=timetableView.room) 
 function openTimetable() {
   if (!service.user) return;
   timetableView.date = schoolDate();
-  timetableView.weekly = true;
+  timetableView.weekly = !matchMedia('(max-width: 760px)').matches;
   timetableView.result = null;
   timetableView.classYear = '';
   showDialog('timetableDialog');
@@ -4770,5 +4777,6 @@ initMessages();
 initSavedLogin();
 initApp();</script>
 <script src="./assets/ieum-xlsx.js" defer></script>
+<script src="./assets/ieum-web.js" defer></script>
 </body>
 </html>
