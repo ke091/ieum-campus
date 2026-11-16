@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
 <meta name="color-scheme" content="light"><meta name="robots" content="noindex,nofollow">
 <title>이음 · 충남반도체마이스터고등학교</title>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-p90TstTj5xADPX9y5WRhwPSpYLNm0ZCv6lLQvOjgWLs='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; frame-src blob:; connect-src 'self' https://bareun-csmh-student-care.kimm2112.chatgpt.site https://raw.githubusercontent.com; base-uri 'none'; object-src 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-2KXEI8KMOmmmFx8TF0ve7EzpAhuJ9orRYISerUEpWFE='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; frame-src blob:; connect-src 'self' https://bareun-csmh-student-care.kimm2112.chatgpt.site https://raw.githubusercontent.com; base-uri 'none'; object-src 'none'; form-action 'none'">
   <meta name="referrer" content="no-referrer">
   <meta name="description" content="충남반도체마이스터고등학교의 소통 공간 이음에서 교내 소식, 학사일정, 시간표와 급식을 확인해요.">
   <meta property="og:title" content="이음 · 충남반도체마이스터고등학교">
@@ -330,9 +330,9 @@ html{scrollbar-gutter:stable}
 }
 
 #ieumStudentMain{max-width:1480px;padding:20px 24px 38px}
-.ieum-workspace{display:grid;grid-template-columns:200px minmax(0,1fr);gap:18px;align-items:start;--green:#023f8f;--green-dark:#082f62;--mint:#e8f2ff;--line:#dfebf8}
-.ieum-rail{position:sticky;top:80px}
-.ieum-home-extras{display:grid;gap:14px;margin-top:14px}
+.ieum-workspace{display:grid;grid-template-columns:200px minmax(0,1fr) minmax(258px,296px);gap:18px;align-items:start;--green:#023f8f;--green-dark:#082f62;--mint:#e8f2ff;--line:#dfebf8}
+.ieum-rail,#ieumWorkspace > .ieum-home-extras{position:sticky;top:80px}
+.ieum-home-extras{display:grid;gap:14px;min-width:0}
 #eventQuestionsDialog{width:min(640px,calc(100% - 24px));max-width:640px}
 .ieum-event-question-heading{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .ieum-event-question-heading h3{margin:0}
@@ -538,19 +538,20 @@ body[data-sync="shared"] [data-login-kind="staff"]{display:none}
 }
 @media(max-width:1050px){
   #ieumStudentMain{padding:16px}
-  .ieum-workspace{grid-template-columns:160px minmax(0,1fr);gap:11px}
+  .ieum-workspace{grid-template-columns:160px minmax(0,1fr) 237px;gap:11px}
 }
 @media(min-width:761px){
   #studentPortal:not(.hidden):has(#ieumWorkspace:not(.hidden)){display:flex;flex-direction:column;height:100dvh;min-height:0}
   #ieumStudentMain:has(#ieumWorkspace:not(.hidden)){display:flex;flex:1;min-height:0;width:100%}
   #ieumWorkspace:not(.hidden){width:100%;min-height:0;align-items:stretch}
   #ieumWorkspace .ieum-rail{position:static;min-height:0;align-self:start;max-height:100%;overflow-y:auto}
-  #ieumWorkspace .ieum-desk-main{min-height:0;min-width:0;overflow-y:auto;overflow-x:hidden;
+  #ieumWorkspace > .ieum-home-extras{position:static}
+  #ieumWorkspace .ieum-desk-main,#ieumWorkspace > .ieum-home-extras{min-height:0;min-width:0;overflow-y:auto;overflow-x:hidden;
     overscroll-behavior-y:contain;scrollbar-gutter:stable}
 }
 @media(max-width:760px){
   .ieum-workspace{grid-template-columns:minmax(0,1fr)}
-  .ieum-rail{position:static}
+  .ieum-rail,#ieumWorkspace > .ieum-home-extras{position:static}
   .ieum-nav{display:flex;flex-wrap:wrap}
   .ieum-nav-label{width:100%}
   .ieum-desk-head{padding:13px}
@@ -652,7 +653,8 @@ body[data-sync="shared"] [data-login-kind="staff"]{display:none}
   <section class="campus-surface ieum-desk-main" id="campusSurface" aria-label="교내 소통">
     <div id="campusContent"></div>
     <p class="campus-status small" id="campusStatus" role="status"></p>
-    <aside class="ieum-home-extras hidden" id="ieumHomeExtras" aria-label="학교 일정과 추천곡">
+  </section>
+  <aside class="ieum-home-extras hidden" id="ieumHomeExtras" aria-label="학교 일정과 추천곡">
     <section id="ieumPinned" class="ieum-pinned" aria-label="고정 학사일정">
     <div class="ieum-pinned-head"><div><span>학교 일정</span><h2>학사일정</h2></div><button type="button" class="icon-btn" data-campus-calendar aria-label="큰 달력 열기"><svg aria-hidden="true"><use href="#i-calendar"/></svg></button></div>
     <div class="ieum-month"><strong id="pinnedMonth"></strong><div class="ieum-calendar-buttons" aria-label="달력 이동">
@@ -664,8 +666,7 @@ body[data-sync="shared"] [data-login-kind="staff"]{display:none}
     <a class="small ieum-source" href="http://cnsm.cnehs.kr/schdList.do?m=1202&amp;s=yes" target="_blank" rel="noopener noreferrer">학교 누리집 학사일정 ↗</a>
     </section>
     <section id="pinnedSong" class="ieum-pinned-song" aria-label="이번 주 학생 추천 노래"></section>
-    </aside>
-  </section>
+  </aside>
 </div><section id="ownDiscipline" class="hidden" aria-label="바른 학생 생활지도" tabindex="-1"><div class="ieum-bareun-bar"><button class="btn secondary" type="button" data-campus-tab="home">← 이음 홈</button><strong id="bareunTitle">바른 · 학생 생활지도</strong><div class="campus-field-row"><button type="button" class="btn secondary ieum-duty-button hidden" id="bareunDutyView" data-duty-roster>선도표 보기</button><button type="button" class="btn primary ieum-duty-register hidden" id="bareunDutyRegister" data-duty-roster-register><svg aria-hidden="true"><use href="#i-upload"/></svg>선도표 등록</button></div></div><section id="bareunCouncilPanel" class="ieum-bareun-council hidden"><h2>학생회 생활지도</h2><p id="bareunCouncilRole"></p><button type="button" class="btn primary ieum-duty-register" id="bareunRecordEntry">생활지도 기록 등록</button></section><div id="bareunOwnRecords"><div class="flex between gap own-heading"><div><span class="pill green" id="ownMode">학생 전용</span><h1>내 지도 기록</h1><p><strong id="ownName"></strong><span id="ownIdentity"></span></p></div><button class="btn secondary" data-action="student-refresh"><svg><use href="#i-clock"/></svg>새로고침</button></div><div class="month-toolbar own-period"><button id="ownPrev" class="icon-btn" data-action="own-prev" aria-label="이전 월"><svg style="transform:rotate(180deg)"><use href="#i-chevron"/></svg></button><input id="ownMonth" type="month" min="2026-11" aria-label="조회할 월"><button class="icon-btn" id="ownNext" data-action="own-next" aria-label="다음 월"><svg><use href="#i-chevron"/></svg></button><button class="period-all" id="ownAll" data-action="own-all">전체</button></div><div id="ownStats" class="stats own-stats"></div><section class="panel"><div class="panel-head"><h2>지도 기록<span class="count-badge" id="ownCount">0</span></h2></div><div id="ownHistory"></div></section><p id="ownError" class="form-error" role="alert"></p><footer class="footer"><span>바른 · 본인 기록 조회</span><span id="ownUpdate"></span></footer></div></section></main></section>
 <section id="ieumStaffHome" class="student-portal hidden" aria-labelledby="ieumStaffHeading">
   <header class="own-topbar">
@@ -948,6 +949,10 @@ body[data-sync="shared"] [data-login-kind="staff"]{display:none}
 </dialog>
 <input id="csvInput" type="file" accept=".csv,text/csv" hidden><input id="backupInput" type="file" accept=".json,application/json" hidden>
 <dialog id="loginDialog" class="modal login" aria-label="이음 로그인"><div class="login-layout"><div class="login-school"><img class="school-logo" data-school-logo width="54" height="54" alt="학교 로고"><span>충남반도체마이스터고등학교</span></div><section id="entryChoose" class="login-form ieum-landing">
+  <header class="ieum-mobile-brand">
+    <img class="school-logo" data-school-logo width="68" height="68" alt="">
+    <h1>이음</h1><p>충남반도체마이스터고등학교</p>
+  </header>
   <div class="ieum-landing-hero">
     <div class="ieum-landing-school"><img class="school-logo" data-school-logo width="42" height="42" alt=""><span>충남반도체마이스터고등학교</span></div>
     <div class="ieum-chip">
@@ -1633,7 +1638,7 @@ async function showCampus(page, message = '', target, fromBack = false) {
   const fromDiscipline = campus.page === 'discipline';
   campus.page = page;
   campus.target = location;
-  $('ieumHomeExtras').classList.toggle('hidden', page !== 'home');
+  showCampusExtras(request);
   if (locationChanged) $('campusSurface').scrollTop=0;
   syncCampusBack();
   workspace.items = [];
@@ -1681,8 +1686,6 @@ async function showCampus(page, message = '', target, fromBack = false) {
   if (page === 'home') {
     $('campusContent').innerHTML = workspaceHome();
     renderCampusIdentity();
-    if (!workspace.month) loadPinnedCalendar();
-    loadPinnedSong(request);
     loadWorkspaceHome();
     if (fromDiscipline) bareun.focus();
     return;
@@ -1729,6 +1732,15 @@ async function showCampus(page, message = '', target, fromBack = false) {
     }
   }
   await loadItems(true);
+}
+
+function showCampusExtras(request) {
+  const extras = $('ieumHomeExtras');
+  const visible = campus.page !== 'discipline' && (campus.page === 'home' || extras.parentElement === $('ieumWorkspace'));
+  extras.classList.toggle('hidden', !visible);
+  if (!visible || $('studentPortal').classList.contains('hidden')) return;
+  if (!workspace.month) loadPinnedCalendar();
+  loadPinnedSong(request);
 }
 
 function showStaffHome(open) {

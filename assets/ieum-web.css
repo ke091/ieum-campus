@@ -1,9 +1,42 @@
 .ieum-web-dock,
-.ieum-web-calendar {
+.ieum-web-calendar,
+.ieum-mobile-brand {
   display: none;
 }
 
-@media (max-width: 1180px) {
+@media (max-width: 760px), (max-width: 1400px) and (pointer: coarse) {
+  #loginDialog:has(#entryChoose:not(.hidden)) {
+    width: 428px;
+    max-width: calc(100vw - 28px);
+    border-radius: 20px;
+  }
+
+  #entryChoose.ieum-landing {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+    padding: clamp(18px, 6vw, 28px);
+  }
+
+  #entryChoose .ieum-landing-hero,
+  #entryChoose .ieum-landing-access > :is(h2, p) { display: none; }
+
+  #entryChoose .ieum-landing-access { padding: 0; }
+  #entryChoose .ieum-entry-actions { margin: 0; }
+  #entryChoose .ieum-choice { min-height: 55px; }
+
+  .ieum-mobile-brand {
+    display: grid;
+    justify-items: center;
+    gap: 8px;
+    text-align: center;
+    padding-top: 4px;
+  }
+
+  .ieum-mobile-brand img.school-logo { width: 68px; height: 68px; object-fit: contain; }
+  .ieum-mobile-brand h1 { margin: 2px 0 0; font-size: 38px; line-height: 1.1; letter-spacing: -.045em; color: #09396f; }
+  .ieum-mobile-brand p { margin: 0; color: #50657a; font-size: 13px; font-weight: 650; }
+  #campusSurface > .ieum-home-extras { margin-top: 14px; }
+
   #studentPortal .own-topbar {
     min-height: 59px;
     height: auto;
@@ -131,7 +164,7 @@
   }
 }
 
-@media (min-width: 761px) and (max-width: 1180px) {
+@media (min-width: 761px) and (max-width: 1400px) and (pointer: coarse) {
   #ieumStudentMain:has(#ieumWorkspace:not(.hidden)) {
     padding: 16px 18px calc(71px + env(safe-area-inset-bottom));
   }
@@ -175,10 +208,6 @@
   .ieum-home-shortcuts .btn { min-height: 44px; }
   .ieum-home-extras { gap: 12px; }
 
-  .ieum-landing-hero { min-height: 0; gap: 8px; padding: 13px 16px 16px; }
-  .ieum-landing-access { padding: 17px 16px 19px; }
-  .ieum-choice { min-height: 53px; }
-
   dialog.modal {
     max-width: calc(100% - 20px);
     max-height: min(90dvh, 100dvh - 16px - env(safe-area-inset-bottom));
@@ -201,10 +230,6 @@
   .ieum-dm-composer #dmEmoji,
   .ieum-dm-composer .btn { width: auto; min-height: 44px; }
   .ieum-dm-actions summary { min-height: 34px; min-width: 34px; }
-}
-
-@media (min-width: 641px) and (max-width: 760px) {
-  #entryChoose.ieum-landing { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 390px) {

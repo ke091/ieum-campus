@@ -2,8 +2,10 @@
   const workspace = document.getElementById('ieumWorkspace');
   const rail = workspace.querySelector('.ieum-rail');
   const sourceNav = document.getElementById('campusNav');
-  const compact = matchMedia('(max-width: 1180px)');
+  const compact = matchMedia('(max-width: 760px), (max-width: 1400px) and (pointer: coarse)');
   const phone = matchMedia('(max-width: 760px)');
+  const main = document.getElementById('campusSurface');
+  const extras = document.getElementById('ieumHomeExtras');
 
   let timetableFeed;
   let timetableFeedUntil = 0;
@@ -87,11 +89,15 @@
   }
 
   function positionNavigation() {
-    if (compact.matches) menu.append(rail);
-    else {
+    if (compact.matches) {
+      menu.append(rail);
+      main.append(extras);
+    } else {
       if (menu.open) menu.close();
       workspace.prepend(rail);
+      workspace.insertBefore(extras,dock);
     }
+    if (campusParticipant()) showCampusExtras(campus.request);
   }
 
   toggle.addEventListener('click', () => {
