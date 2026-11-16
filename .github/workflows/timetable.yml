@@ -1,0 +1,39 @@
+name: Refresh school timetable data
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 21 * * 0-4'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: school-timetable-data
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+      - name: Pull and validate the school timetable
+        run: |
+          printf '%s\n' '{"checkedOn":"","lessons":{}}' > .github/timetable/lib/timetable-snapshot.json
+          node .github/timetable/scripts/update-timetable-snapshot.mjs
+          mkdir -p data
+          cp .github/timetable/lib/timetable-snapshot.json data/timetable.json
+      - name: Publish the verified timetable data
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- data/timetable.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Refresh school timetable data'
+          git pull --rebase origin main
+          git push origin HEAD:main

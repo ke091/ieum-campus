@@ -1,0 +1,11 @@
+{
+  "2026": [
+    { "grade": 1, "room": 1 },
+    { "grade": 1, "room": 2 },
+    { "grade": 1, "room": 3 },
+    { "grade": 2, "room": 1 },
+    { "grade": 2, "room": 2 },
+    { "grade": 2, "room": 3 },
+    { "grade": 3, "room": 1 }
+  ]
+}
