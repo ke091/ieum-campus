@@ -72,6 +72,8 @@
     box-shadow: 0 -4px 18px #15355e10;
   }
 
+  .ieum-web-dock.ieum-web-dock-personal { grid-template-columns: repeat(3,minmax(0,1fr)); }
+
   .ieum-web-dock button {
     position: relative;
     display: grid;

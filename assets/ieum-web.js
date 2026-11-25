@@ -55,7 +55,7 @@
   dock.setAttribute('aria-label', '빠른 메뉴');
   dock.innerHTML = `
     <button type="button" data-campus-tab="home"><svg aria-hidden="true"><use href="#i-grid"/></svg>홈</button>
-    <button type="button" data-campus-tab="notices"><svg aria-hidden="true"><use href="#i-file"/></svg>교내 소식</button>
+    <button type="button" data-campus-tab="notices" data-web-news><svg aria-hidden="true"><use href="#i-file"/></svg><span>교내 소식</span></button>
     <button type="button" data-campus-tab="events"><svg aria-hidden="true"><use href="#i-calendar"/></svg>행사</button>
     <button type="button" data-campus-tab="messages"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M21 4 10 15m11-11-7 17-4-6-7-4Z"/></svg>문자<span class="ieum-message-badge hidden" aria-hidden="true"></span></button>
     <button type="button" aria-controls="ieumWebMenu" aria-expanded="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>전체 메뉴</button>`;
@@ -75,8 +75,15 @@
   const sourceBadge = messageSource.querySelector('[data-message-badge]');
 
   function syncDock() {
+    const personal = personalAccount();
+    const news = dock.querySelector('[data-web-news]');
+    news.dataset.campusTab = personal ? 'nurijip' : 'notices';
+    news.querySelector('span').textContent = personal ? '누리집' : '교내 소식';
+    dock.classList.toggle('ieum-web-dock-personal',personal);
     const active = sourceNav.querySelector('[aria-current=page]')?.dataset.campusTab;
     for (const button of dock.querySelectorAll('[data-campus-tab]')) {
+      const source = sourceNav.querySelector('[data-campus-tab="' + button.dataset.campusTab + '"]');
+      button.classList.toggle('hidden',Boolean(source?.classList.contains('hidden')));
       if (active === button.dataset.campusTab) button.setAttribute('aria-current', 'page');
       else button.removeAttribute('aria-current');
     }
@@ -97,7 +104,7 @@
       workspace.prepend(rail);
       workspace.insertBefore(extras,dock);
     }
-    if (campusParticipant()) showCampusExtras(campus.request);
+    if (campusParticipant() || personalAccount()) showCampusExtras(campus.request);
   }
 
   toggle.addEventListener('click', () => {

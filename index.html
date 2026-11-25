@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
 <meta name="color-scheme" content="light"><meta name="robots" content="noindex,nofollow">
 <title>이음 · 충남반도체마이스터고등학교</title>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-2KXEI8KMOmmmFx8TF0ve7EzpAhuJ9orRYISerUEpWFE='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; frame-src blob:; connect-src 'self' https://bareun-csmh-student-care.kimm2112.chatgpt.site https://raw.githubusercontent.com; base-uri 'none'; object-src 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-6h6gzEIzy1vXLt37WeV+Tu7Aeng6RIyNywOiqSuqHTs='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; frame-src blob:; connect-src 'self' https://bareun-csmh-student-care.kimm2112.chatgpt.site https://raw.githubusercontent.com; base-uri 'none'; object-src 'none'; form-action 'none'">
   <meta name="referrer" content="no-referrer">
   <meta name="description" content="충남반도체마이스터고등학교의 소통 공간 이음에서 교내 소식, 학사일정, 시간표와 급식을 확인해요.">
   <meta property="og:title" content="이음 · 충남반도체마이스터고등학교">
@@ -403,7 +403,6 @@ html{scrollbar-gutter:stable}
 .ieum-manage-card h3{margin:0;color:#123f73;font-size:14px}
 .ieum-manage-card strong{color:#023f8f;font-size:18px}
 .ieum-manage-card .btn{justify-self:start;min-height:36px}
-body[data-sync="shared"] [data-login-kind="staff"]{display:none}
 .ieum-attachments{list-style:none;margin:9px 0;padding:0;overflow-wrap:anywhere}
 .ieum-attachments:empty{display:none}
 .ieum-attachments li{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:4px 0}
@@ -561,12 +560,18 @@ body[data-sync="shared"] [data-login-kind="staff"]{display:none}
   .campus-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .ieum-desk-head.ieum-home-hero{align-items:flex-start;flex-direction:column}
 }
+.login-form .ieum-first-login{margin-top:8px}
+.ieum-first-setup>p:not(.form-error){margin:6px 0 16px;font-size:14px}
+.ieum-first-setup .ieum-reveal-password{display:flex;align-items:center;gap:6px;width:max-content;max-width:100%;min-height:28px;font-size:13px;color:var(--ink);cursor:pointer}
+.ieum-first-setup .ieum-reveal-password input{width:auto;min-width:0;min-height:0;margin:0;accent-color:#195cb4}
 </style>
-<link rel="stylesheet" href="./assets/ieum-web.css?v=95fe54004f68">
+<link rel="stylesheet" href="./assets/ieum-bus.css?v=2991e101ef31">
+<link rel="stylesheet" href="./assets/ieum-web.css?v=e82f370467ef">
 </head>
 <body class="auth-mode" data-entry="choose" data-sync="shared">
 <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"><defs>
 <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M19 4C8 2 3 8 6 14c3 6 14 4 13-10Z"/><path d="m5 21 10-13M10 13l-1-4m2 5 5 1"/></symbol>
+<symbol id="i-bus" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="16" rx="3"/><path d="M4 12h16M8 19v2m8-2v2M8 15.5h1m6 0h1"/></symbol>
 <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
 <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 5"/></symbol>
 <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Zm0 0v6h6M8 13h8m-8 4h5"/></symbol>
@@ -595,7 +600,7 @@ body[data-sync="shared"] [data-login-kind="staff"]{display:none}
 <div id="sidebarScrim" class="sidebar-scrim" data-action="menu-close"></div>
 <aside class="sidebar" id="sidebar" aria-label="주 메뉴">
  <div class="brand"><span class="brand-mark"><svg><use href="#i-leaf"/></svg></span><div><div class="brand-name">바른</div><div class="brand-sub">학생 생활지도</div></div></div>
- <button type="button" class="btn secondary ieum-staff-return" data-ieum-staff-home="open">← 이음 홈</button><button type="button" class="btn secondary ieum-staff-return ieum-duty-button" data-duty-roster>선도표 보기</button><button type="button" class="btn secondary ieum-staff-return ieum-duty-button hidden" id="managedDutyRegister" data-duty-roster-register>선도표 등록</button><button type="button" class="btn secondary ieum-staff-return hidden" id="bareunSwitchAccount">학생 계정으로 전환</button><nav class="nav-list"><button class="nav-btn active" data-view="dashboard"><svg><use href="#i-grid"/></svg>대시보드</button><button class="nav-btn" data-view="students"><svg><use href="#i-users"/></svg>학생 관리<span class="nav-count" id="navStudentCount">0</span></button><button class="nav-btn" data-view="accounts"><svg><use href="#i-shield"/></svg>계정 관리</button><button class="nav-btn" data-view="records"><svg><use href="#i-file"/></svg>지도 기록</button><button class="nav-btn" data-view="reports"><svg><use href="#i-chart"/></svg>통계 리포트</button></nav>
+ <button type="button" class="btn secondary ieum-staff-return" data-ieum-staff-home="open">← 이음 홈</button><button type="button" class="btn secondary ieum-staff-return ieum-duty-button" data-duty-roster>선도표 보기</button><button type="button" class="btn secondary ieum-staff-return ieum-duty-button hidden" id="managedDutyRegister" data-duty-roster-register>선도표 등록</button><nav class="nav-list"><button class="nav-btn active" data-view="dashboard"><svg><use href="#i-grid"/></svg>대시보드</button><button class="nav-btn" data-view="students"><svg><use href="#i-users"/></svg>학생 관리<span class="nav-count" id="navStudentCount">0</span></button><button class="nav-btn" data-view="accounts"><svg><use href="#i-shield"/></svg>계정 관리</button><button class="nav-btn" data-view="records"><svg><use href="#i-file"/></svg>지도 기록</button><button class="nav-btn" data-view="reports"><svg><use href="#i-chart"/></svg>통계 리포트</button></nav>
  <div class="sidebar-bottom"><nav class="nav-list"><button class="nav-btn" data-view="data"><svg><use href="#i-folder"/></svg>데이터 관리</button><button class="nav-btn" data-view="settings"><svg><use href="#i-settings"/></svg>설정</button></nav>
  <div class="profile"><div class="avatar" id="profileAvatar">바</div><div class="grow"><div class="profile-name" id="profileName">시작하기</div><div class="profile-role" id="profileRole">학생 생활지도</div></div><button class="icon-btn" data-action="logout" aria-label="로그아웃" title="로그아웃"><svg><use href="#i-logout"/></svg></button></div></div>
 </aside>
@@ -614,12 +619,17 @@ body[data-sync="shared"] [data-login-kind="staff"]{display:none}
   <section id="view-records" class="view hidden" aria-label="지도 기록"><div class="panel"><div class="panel-head"><div><h2>지도 기록 전체<span class="count-badge" id="recordCount">0</span></h2></div><button class="btn secondary" data-action="export-records"><svg><use href="#i-download"/></svg>엑셀 내보내기</button></div><div class="record-toolbar"><label class="searchbox"><svg><use href="#i-search"/></svg><input id="recordSearch" type="search" placeholder="학번, 이름, 사유 검색" aria-label="지도 기록 검색"></label><button class="text-btn" data-action="records-reset">초기화</button></div><div class="table-scroll"><table><thead><tr><th>학생</th><th>지도 날짜</th><th>지도 사유</th><th>담당자</th><th>관리</th></tr></thead><tbody id="recordsBody"></tbody></table></div><div class="pager" id="recordsPager"></div></div></section>
   <section id="view-reports" class="view hidden" aria-label="통계 리포트"><div class="flex between wrap" style="gap:15px;margin-bottom:18px"><label for="reportYear" class="small muted">연도</label><select id="reportYear" class="filter" aria-label="리포트 연도"></select></div><div class="stats" id="reportStats"></div><div class="report-grid"><section class="panel"><div class="panel-head"><div><h2>월별 지도 기록</h2></div><span class="pill green" id="reportYearLabel"></span></div><div class="panel-body"><div id="monthlyChart" class="bars" role="img" aria-label="월별 지도 기록 막대그래프"></div></div></section><section class="panel"><div class="panel-head"><div><h2>주요 지도 사유</h2></div></div><div class="panel-body" id="reasonChart"></div></section></div><section class="panel" style="margin-top:21px"><div class="panel-head"><h2>학년별 현황</h2><button class="text-btn" data-action="print-report"><svg><use href="#i-print"/></svg>리포트 인쇄</button></div><div class="table-scroll"><table><thead><tr><th>학년</th><th>등록 학생</th><th>지도 기록</th><th>지도 대상 학생</th></tr></thead><tbody id="gradeReport"></tbody></table></div></section></section>
   <section id="view-data" class="view hidden" aria-label="데이터 관리"><div class="data-grid"><section class="panel data-card"><div class="icon-box"><svg><use href="#i-upload"/></svg></div><h2>학생 명단 가져오기</h2><p>CSV · 학번, 이름</p><button class="btn primary" data-action="import-csv">CSV 가져오기</button><button class="btn secondary" data-action="csv-template">양식 다운로드</button></section><section class="panel data-card"><div class="icon-box"><svg><use href="#i-download"/></svg></div><h2>데이터 내보내기</h2><p>Excel · .xlsx</p><button class="btn secondary" data-action="export-students">학생 명단 엑셀</button><button class="btn secondary" data-action="export-all">전체 지도 기록 엑셀</button></section><section class="panel data-card"><div class="icon-box"><svg><use href="#i-shield"/></svg></div><h2>전체 데이터 백업</h2><p>학생·지도 기록 전체 · JSON</p><button class="btn primary" data-action="backup">백업 파일 저장</button><p class="tiny" id="backupInfo" style="margin:8px 0 0"></p></section><section class="panel data-card"><div class="icon-box"><svg><use href="#i-folder"/></svg></div><h2>백업 파일 복원</h2><p>백업 합치기 또는 전체 교체</p><button class="btn secondary" data-action="restore">백업 불러오기</button><button class="text-btn" data-action="recovery" id="recoveryButton">이전 복구본 확인</button></section></div><details class="storage-details"><summary>저장 안내</summary><p id="storageDetailsText">현재 브라우저에만 저장됩니다. 다른 기기·브라우저로 옮기기 전에 백업해 주세요. 서버 전송 및 실시간 공유는 지원하지 않습니다.</p></details></section>
-  <section id="view-accounts" class="view hidden"><div class="panel"><div class="panel-head"><div><h2>학생 계정 <span class="count-badge" id="accountCount">0</span></h2></div><button class="text-btn" data-action="accounts-refresh">새로고침</button></div><div class="filters"><label class="searchbox"><svg><use href="#i-search"/></svg><input id="accountSearch" type="search" aria-label="가입 학생 검색" placeholder="학번 · 이름"></label></div><div class="table-scroll"><table><thead><tr><th>학생</th><th>관리</th></tr></thead><tbody id="accountRows"></tbody></table></div></div><section class="panel" id="adminCodesPanel"><div class="panel-head"><h2>관리자 공통 코드</h2></div><form id="commonAdminForm" class="settings-form stack"><div class="fields"><div class="field"><label for="commonCodeNew">새 코드</label><input id="commonCodeNew" type="password" minlength="6" maxlength="32" autocomplete="new-password" required></div><div class="field"><label for="commonCodeConfirm">새 코드 확인</label><input id="commonCodeConfirm" type="password" minlength="6" maxlength="32" autocomplete="new-password" required></div></div><p id="commonCodeError" class="form-error" role="alert"></p><div><button class="btn primary">공통 코드 변경</button></div></form></section></section>
+  <section id="view-accounts" class="view hidden"><div class="panel"><div class="panel-head"><div><h2>학생 계정 <span class="count-badge" id="accountCount">0</span></h2></div><button class="text-btn" data-action="accounts-refresh">새로고침</button></div><div class="filters"><label class="searchbox"><svg><use href="#i-search"/></svg><input id="accountSearch" type="search" aria-label="가입 학생 검색" placeholder="학번 · 이름"></label></div><div class="table-scroll"><table><thead><tr><th>학생</th><th>관리</th></tr></thead><tbody id="accountRows"></tbody></table></div></div></section>
 <section id="view-settings" class="view hidden" aria-label="설정"><div class="settings-grid"><section class="panel"><div class="panel-head"><div><h2>담당자 정보</h2></div></div><form id="profileForm" class="settings-form stack"><div class="fields"><div class="field"><label for="settingName">이름</label><input id="settingName" required maxlength="30"></div><div class="field"><label for="settingRole">직책</label><select id="settingRole" required></select></div><div class="field full"><label for="schoolName">학교</label><input id="schoolName" readonly value="충남반도체마이스터고등학교"></div></div><div class="form-error" id="profileError" role="alert"></div><div><button class="btn primary">변경 내용 저장</button></div></form></section></div></section>
   <footer class="footer"><span>바른 © <span id="footerYear"></span></span><span id="footerCount">학생 0명 / 기록 0건</span></footer>
  </main>
 </div>
-<section id="studentPortal" class="student-portal hidden" aria-label="이음 학생 소통방"><header class="own-topbar"><div class="school-identity"><img class="school-logo" data-school-logo width="38" height="38" alt="학교 로고"><span>충남반도체마이스터고등학교</span></div><div class="flex gap"><span class="own-brand ieum-wordmark" id="ownBrand">이음</span><button class="icon-btn" data-action="student-logout" aria-label="로그아웃"><svg><use href="#i-logout"/></svg></button></div></header><main class="own-main" id="ieumStudentMain" tabindex="-1"><div id="ieumWorkspace" class="ieum-workspace">
+<section id="studentPortal" class="student-portal hidden" aria-label="이음 학생 소통방"><header class="own-topbar"><div class="school-identity"><img class="school-logo" data-school-logo width="38" height="38" alt="학교 로고"><span>충남반도체마이스터고등학교</span></div><div class="flex gap"><span class="own-brand ieum-wordmark" id="ownBrand">이음</span><button class="icon-btn" data-action="student-logout" aria-label="로그아웃"><svg><use href="#i-logout"/></svg></button></div></header><main class="own-main" id="ieumStudentMain" tabindex="-1">
+  <section id="ieumBusProgram" class="hidden" tabindex="-1" aria-label="길벗 통학버스">
+    <nav class="bus-program-nav" aria-label="프로그램 이동"><button type="button" class="btn secondary" data-campus-tab="home">← 이음 홈</button></nav>
+    <div id="ieumBusContent"></div>
+  </section>
+  <div id="ieumWorkspace" class="ieum-workspace">
   <aside class="ieum-rail">
     <div class="ieum-rail-brand"><span><svg aria-hidden="true"><use href="#i-grid"/></svg></span><div><strong>이음</strong><small>우리 학교 소통방</small></div></div>
     <nav class="ieum-nav" aria-label="이음 메뉴" id="campusNav">
@@ -631,21 +641,18 @@ body[data-sync="shared"] [data-login-kind="staff"]{display:none}
       <button type="button" data-campus-tab="suggestions" id="campusSuggestionNav"><svg aria-hidden="true"><use href="#i-folder"/></svg>건의함</button>
       <button type="button" data-campus-tab="board"><svg aria-hidden="true"><use href="#i-users"/></svg>학생 자유 소통</button>
       <button type="button" id="ieumDataEntry" class="hidden" data-campus-tab="manage"><svg aria-hidden="true"><use href="#i-settings"/></svg>데이터 관리</button>
-      <span class="ieum-nav-label">교내 프로그램</span>
+      <span class="ieum-nav-label" id="ieumProgramsNavLabel">교내 프로그램</span>
       <button type="button" class="ieum-nav-bareun" id="ieumBareunEntry"><svg aria-hidden="true"><use href="#i-leaf"/></svg>바른</button>
+      <button type="button" class="hidden" id="ieumBusEntry" data-campus-tab="bus"><svg aria-hidden="true"><use href="#i-bus"/></svg>길벗 · 통학버스</button>
       <button type="button" class="ieum-nav-docs hidden" id="ieumDocEntry" data-document-room><svg aria-hidden="true"><use href="#i-folder"/></svg>글마루</button>
       <button type="button" class="hidden" id="ieumMessagesEntry" data-campus-tab="messages">
         <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M21 4 10 15m11-11-7 17-4-6-7-4Z"/></svg>
         문자 <span class="ieum-message-badge hidden" data-message-badge></span>
       </button>
-      <span class="ieum-nav-label ieum-nav-account-label">계정 관리</span>
+      <span class="ieum-nav-label ieum-nav-account-label" id="ieumAccountNavLabel">계정 관리</span>
       <button type="button" id="ieumPasswordEntry">
         <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 4v3"/></svg>
         비밀번호 변경
-      </button>
-      <button type="button" id="ieumSwitchAccount">
-        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 8h15m-4-4 4 4-4 4M20 16H5m4-4-4 4 4 4"/></svg>
-        <span id="ieumSwitchAccountLabel">계정 전환</span>
       </button>
     </nav>
     <div id="ieumRailIdentity" class="ieum-rail-identity"></div>
@@ -832,14 +839,14 @@ body[data-sync="shared"] [data-login-kind="staff"]{display:none}
     <button type="button" class="icon-btn" data-close="ieumRosterDialog" aria-label="닫기"><svg aria-hidden="true"><use href="#i-close"/></svg></button></div>
   <form id="ieumRosterForm" class="panel-body stack">
     <label class="field">학생 명단 파일<input type="file" name="roster" accept=".xlsx" required></label>
-    <p class="small muted">한 번에 최대 500명입니다. 기존 계정은 건너뛰어요. 새 계정은 학번이 초기 비밀번호이며, 첫 로그인 때 바꿔야 해요.</p>
+    <p class="small muted">한 번에 최대 500명입니다. 학생은 회원가입에서 본인 비밀번호를 정합니다.</p>
     <div class="ieum-item-actions"><button type="button" class="btn secondary" id="ieumRosterTemplate">엑셀 양식</button>
-      <button type="submit" class="btn primary">학생 일괄 가입</button><button type="button" class="btn secondary hidden" id="ieumRosterDownload">초기 비밀번호 엑셀 저장</button></div>
+      <button type="submit" class="btn primary">학생 일괄 가입</button><button type="button" class="btn secondary hidden" id="ieumRosterDownload">등록 결과 엑셀 저장</button></div>
     <p id="ieumRosterStatus" class="campus-status" role="status"></p>
   </form>
 </dialog>
 <dialog id="ieumStudentsDialog" class="modal" aria-labelledby="ieumStudentsTitle">
-  <div class="modal-head"><div><h2 id="ieumStudentsTitle">학생 계정 관리</h2><p>학번과 이름을 관리하고 초기 비밀번호를 확인해요. 비밀번호 초기화 후에는 학번으로 로그인해요.</p></div>
+  <div class="modal-head"><div><h2 id="ieumStudentsTitle">학생 계정 관리</h2><p>학번과 이름을 관리해요.</p></div>
     <button type="button" class="icon-btn" data-close="ieumStudentsDialog" aria-label="닫기"><svg aria-hidden="true"><use href="#i-close"/></svg></button></div>
   <div class="panel-body stack">
     <label class="field">학생 검색<input id="ieumStudentsSearch" type="search" placeholder="학번 또는 이름" maxlength="100"></label>
@@ -883,21 +890,28 @@ body[data-sync="shared"] [data-login-kind="staff"]{display:none}
 </dialog>
 <dialog id="councilAccountsDialog" class="modal" aria-labelledby="councilAccountsTitle">
   <div class="modal-head">
-    <div><h2 id="councilAccountsTitle">학생회 계정 관리</h2><p>담당교사 초기 비밀번호는 12345, 학생회 직책 계정은 1234입니다. 등록 후 표시되는 일회용 코드를 계정 주인에게 전달하세요.</p></div>
+    <div><h2 id="councilAccountsTitle">학생회 계정 관리</h2><p>학교 계정의 직책과 부서를 관리해요.</p></div>
     <button class="icon-btn" type="button" data-close="councilAccountsDialog" aria-label="닫기"><svg><use href="#i-close"/></svg></button>
   </div>
   <div class="panel-body stack">
-    <form id="councilAccountForm" class="stack">
-      <h3 id="councilAccountFormTitle">새 직책 계정 등록</h3>
-      <div id="councilAccountFields" class="stack">
-        <label class="field">이름<input name="name" maxlength="40" required></label>
-        <label class="field">직책<select name="roleId" data-council-role required></select></label>
-        <label class="field hidden" data-department-field>부서<select name="department"></select></label>
-      </div>
-      <div class="campus-field-row">
-        <button type="submit" class="btn primary" id="saveCouncilAccount">등록</button>
-      </div>
+    <form id="councilRosterForm" class="stack">
+      <h3>학생회 명단 등록</h3>
+      <label class="field">이름<input name="name" maxlength="40" required></label>
+      <label class="field">직책<select name="roleId" data-council-role required></select></label>
+      <label class="field hidden" data-department-field>부서<select name="department"></select></label>
+      <div><button type="submit" class="btn secondary">명단에 추가</button></div>
     </form>
+    <form id="teacherInviteForm" class="stack hidden">
+      <h3>선생님 계정 초대</h3>
+      <label class="field">직책<select name="roleId"><option value="teacher">선생님</option><option value="principal">교장선생님</option><option value="vice-principal">교감선생님</option></select></label>
+      <label class="field">이름<input name="name" maxlength="40" required></label>
+      <div class="campus-field-row"><button type="submit" class="btn secondary">가입 링크 만들기</button>
+      <button type="button" id="teacherSharedInvite" class="btn secondary">공용 가입 링크 만들기</button></div>
+    </form>
+    <div id="schoolInviteOutput" class="campus-item stack hidden">
+      <label class="field">24시간 동안 사용할 가입 링크<input id="schoolInviteLink" type="url" readonly></label>
+      <div><button id="schoolInviteCopy" type="button" class="btn secondary">링크 복사</button></div>
+    </div>
     <form id="councilProfileForm" class="stack campus-item hidden" aria-labelledby="councilProfileTitle">
       <h3 id="councilProfileTitle">학생회 계정 수정</h3>
       <label class="field">이름<input name="name" maxlength="40" required></label>
@@ -914,18 +928,17 @@ body[data-sync="shared"] [data-login-kind="staff"]{display:none}
       </div>
       <p id="councilProfileStatus" class="small" role="status"></p>
     </form>
-    <p id="councilIssuedPassword" class="ieum-issued-password hidden" role="status"></p>
     <div id="councilAccountRows" class="campus-items"></div>
     <p class="campus-status small" id="councilAccountStatus" role="status"></p>
   </div>
 </dialog>
 <dialog id="councilOwnPasswordDialog" class="modal" aria-labelledby="councilOwnPasswordTitle">
-  <div class="modal-head"><h2 id="councilOwnPasswordTitle">학생회 비밀번호 변경</h2>
+  <div class="modal-head"><h2 id="councilOwnPasswordTitle">비밀번호 변경</h2>
     <button type="button" class="icon-btn" data-close="councilOwnPasswordDialog" aria-label="닫기"><svg aria-hidden="true"><use href="#i-close"/></svg></button></div>
   <form id="councilOwnPasswordForm" class="panel-body stack">
-    <label class="field">현재 비밀번호<input name="current" type="password" maxlength="64" autocomplete="current-password" required></label>
-    <label class="field">새 비밀번호 · 8~64자<input name="password" type="password" minlength="8" maxlength="64" autocomplete="new-password" required></label>
-    <label class="field">새 비밀번호 확인<input name="confirm" type="password" minlength="8" maxlength="64" autocomplete="new-password" required></label>
+    <label class="field">현재 비밀번호<input name="current" type="password" autocomplete="current-password" required></label>
+    <label class="field">새 비밀번호 · 4자 이상<input name="password" type="password" minlength="4" autocomplete="new-password" required></label>
+    <label class="field">새 비밀번호 확인<input name="confirm" type="password" minlength="4" autocomplete="new-password" required></label>
     <p id="councilOwnPasswordStatus" class="form-error" role="alert"></p>
     <div><button type="submit" class="btn primary">변경</button></div>
   </form>
@@ -963,10 +976,7 @@ body[data-sync="shared"] [data-login-kind="staff"]{display:none}
         <span class="ieum-choice-icon"><svg aria-hidden="true"><use href="#i-file"/></svg></span><span><strong>학생회 로그인</strong><small>직책과 비밀번호</small></span><svg aria-hidden="true" class="ieum-choice-arrow"><use href="#i-chevron"/></svg>
       </button>
       <button type="button" class="ieum-choice" data-login-kind="teacher">
-        <span class="ieum-choice-icon"><svg aria-hidden="true"><use href="#i-users"/></svg></span><span><strong>선생님 로그인</strong><small>이름과 공통 비밀번호</small></span><svg aria-hidden="true" class="ieum-choice-arrow"><use href="#i-chevron"/></svg>
-      </button>
-      <button type="button" class="ieum-choice" data-login-kind="staff">
-        <span class="ieum-choice-icon"><svg aria-hidden="true"><use href="#i-shield"/></svg></span><span><strong>관리자 로그인</strong><small>관리자 공통 코드</small></span><svg aria-hidden="true" class="ieum-choice-arrow"><use href="#i-chevron"/></svg>
+        <span class="ieum-choice-icon"><svg aria-hidden="true"><use href="#i-users"/></svg></span><span><strong>선생님 로그인</strong><small>이름과 비밀번호</small></span><svg aria-hidden="true" class="ieum-choice-arrow"><use href="#i-chevron"/></svg>
       </button>
     </div>
   </div>
@@ -974,12 +984,11 @@ body[data-sync="shared"] [data-login-kind="staff"]{display:none}
 <form id="councilLoginForm" class="login-form hidden">
   <h2>이음 학생회 로그인</h2>
   <div class="stack">
-    <label class="field">직책<select name="roleId" data-council-role required></select></label>
-    <label class="field hidden" data-department-field>부서<select name="department"></select></label>
-    <label class="field">비밀번호<input name="password" type="password" maxlength="64" autocomplete="current-password" required></label>
-    <label class="field hidden" id="councilInitialNameField">등록된 이름<input name="name" maxlength="40" autocomplete="username" disabled>
-      <span class="small muted">초기 비밀번호를 사용하는 계정은 등록된 이름을 입력하세요.</span></label>
+    <label class="field">직책<select name="position" required></select></label>
+    <label class="field hidden" id="councilLoginNameField">이름<input name="name" maxlength="40" autocomplete="username" disabled></label>
+    <label class="field">비밀번호<input name="password" type="password" autocomplete="current-password" required></label>
   </div>
+  <label class="ieum-remember-login"><input type="checkbox" data-keep-signed-in> 이 기기에서 로그인 유지</label>
   <label class="ieum-remember-login hidden"><input type="checkbox" data-save-login> 이 PC에 로그인 정보 저장</label>
   <p class="form-error" id="councilLoginError" role="alert"></p>
   <button type="submit" class="btn primary">로그인</button>
@@ -987,23 +996,63 @@ body[data-sync="shared"] [data-login-kind="staff"]{display:none}
 </form>
 <form id="teacherLoginForm" class="login-form hidden">
   <h2>이음 선생님 로그인</h2>
-  <label class="field">직책<select name="roleId"><option value="teacher">선생님</option><option value="principal">교장선생님</option><option value="vice-principal">교감선생님</option></select></label>
-  <label class="field">이름<input name="name" maxlength="40" autocomplete="username" required></label>
-  <label class="field">비밀번호<input name="password" type="password" maxlength="64" autocomplete="current-password" required></label>
+  <div class="stack">
+    <label class="field">이름<input name="name" maxlength="72" autocomplete="username" required></label>
+    <label class="field">비밀번호<input name="password" type="password" autocomplete="current-password" required></label>
+  </div>
+  <label class="ieum-remember-login"><input type="checkbox" data-keep-signed-in> 이 기기에서 로그인 유지</label>
   <label class="ieum-remember-login hidden"><input type="checkbox" data-save-login> 이 PC에 로그인 정보 저장</label>
   <p class="form-error" id="teacherLoginError" role="alert"></p>
   <button type="submit" class="btn primary">로그인</button>
   <div class="auth-links"><button type="button" class="text-btn" data-login-kind="choose">← 이음 홈</button></div>
-</form><form id="studentLoginForm" class="login-form hidden"><h2 id="studentLoginTitle">학생 로그인</h2><div class="stack"><div class="field"><label for="studentLoginId">학번</label><input id="studentLoginId" inputmode="numeric" pattern="[1-3][1-9][0-9]{2}" maxlength="4" autocomplete="username" required placeholder="예: 2201"></div><div class="field"><label for="studentLoginPassword">비밀번호</label><input id="studentLoginPassword" type="password" minlength="4" maxlength="6" autocomplete="current-password" required></div></div><p class="form-error" id="studentLoginError" role="alert"></p><button id="studentLoginSubmit" class="btn primary">로그인</button><label class="ieum-remember-login hidden"><input type="checkbox" data-save-login> 이 PC에 로그인 정보 저장</label><p class="small muted">관리자가 새로 등록한 계정의 초기 비밀번호는 학번이에요.</p><div class="auth-links"><button type="button" class="text-btn" data-login-kind="choose">← 이음 홈</button></div></form><form id="loginForm" class="login-form hidden"><h2 id="loginTitle">이음 관리자 로그인</h2><div class="stack"><div class="field"><label for="adminRole">직책</label><select id="adminRole" required></select></div><div class="field"><label for="adminCode">공통 관리자 코드</label><input id="adminCode" type="password" maxlength="40" autocomplete="current-password" required></div></div><p class="form-error" id="loginError" role="alert"></p><button id="loginSubmit" class="btn primary">로그인</button><div class="auth-links"><button type="button" class="text-btn" data-login-kind="choose">← 이음 홈</button></div></form><form id="migrateForm" class="login-form hidden"><h2>초기 비밀번호 변경</h2><p class="small muted">이름을 입력하고 새 비밀번호를 정하세요.</p><div class="stack"><div class="field"><label for="migrateId">학번</label><input id="migrateId" inputmode="numeric" pattern="[1-3][1-9][0-9]{2}" maxlength="4" autocomplete="username" required></div><div class="field"><label for="migrateCurrent">초기 비밀번호</label><input id="migrateCurrent" type="password" maxlength="128" autocomplete="current-password" required></div><div class="field"><label for="migrateName">이름</label><input id="migrateName" maxlength="100" autocomplete="name" required></div><div class="field"><label for="migratePassword">새 비밀번호 · 6자리</label><input id="migratePassword" type="password" minlength="6" maxlength="6" autocomplete="new-password" required></div><div class="field"><label for="migrateConfirm">새 비밀번호 확인</label><input id="migrateConfirm" type="password" minlength="6" maxlength="6" autocomplete="new-password" required></div></div><p id="migrateError" class="form-error" role="alert"></p><button id="migrateSubmit" class="btn primary">변경</button><div class="auth-links"><button type="button" class="text-btn" data-action="auth-student">로그인으로</button></div></form></div></dialog>
+</form>
+<form id="studentLoginForm" class="login-form hidden">
+  <h2>이음 학생 로그인</h2>
+  <div class="stack">
+    <div class="field"><label for="studentLoginId">학번</label><input id="studentLoginId" inputmode="numeric" pattern="[1-3][1-9][0-9]{2}" maxlength="4" autocomplete="username" required placeholder="예: 2201"></div>
+    <div class="field"><label for="studentLoginPassword">비밀번호</label><input id="studentLoginPassword" type="password" autocomplete="current-password" required></div>
+  </div>
+  <label class="ieum-remember-login"><input type="checkbox" data-keep-signed-in> 이 기기에서 로그인 유지</label>
+  <p class="form-error" id="studentLoginError" role="alert"></p>
+  <button id="studentLoginSubmit" class="btn primary">로그인</button>
+  <button type="button" class="btn secondary ieum-first-login" data-login-kind="register">회원가입</button>
+  <button type="button" class="text-btn" data-login-kind="personal">개인 계정으로 로그인</button>
+  <label class="ieum-remember-login hidden"><input type="checkbox" data-save-login> 이 PC에 로그인 정보 저장</label>
+  <div class="auth-links"><button type="button" class="text-btn" data-login-kind="choose">← 이음 홈</button></div>
+</form>
+<form id="registrationForm" class="login-form ieum-first-setup hidden">
+  <h2 id="registrationTitle">이음 회원가입</h2>
+  <div class="stack">
+    <input type="hidden" name="kind" value="student">
+    <label class="field">이름<input name="name" maxlength="40" autocomplete="username" required></label>
+    <div class="field"><label for="registrationPassword">사용할 비밀번호</label><input id="registrationPassword" name="password" type="password" minlength="4" autocomplete="new-password" required>
+      <label class="ieum-reveal-password"><input id="registrationReveal" type="checkbox" aria-controls="registrationPassword"> 비밀번호 표시</label>
+    </div>
+  </div>
+  <label class="ieum-remember-login"><input type="checkbox" name="keepSignedIn"> 이 기기에서 로그인 유지</label>
+  <p id="registrationError" class="form-error" role="alert"></p>
+  <button id="registrationSubmit" type="submit" class="btn primary">가입하고 로그인</button>
+  <div class="auth-links"><button id="registrationBack" type="button" class="text-btn" data-login-kind="student">로그인으로</button></div>
+</form>
+<form id="personalLoginForm" class="login-form hidden">
+  <h2>개인 계정 로그인</h2>
+  <label class="field">이름<input name="name" maxlength="40" autocomplete="username" required></label>
+  <label class="field">비밀번호<input name="password" type="password" autocomplete="current-password" required></label>
+  <label class="ieum-remember-login"><input type="checkbox" name="keepSignedIn"> 이 기기에서 로그인 유지</label>
+  <p class="form-error" id="personalLoginError" role="alert"></p>
+  <button type="submit" class="btn primary">로그인</button>
+  <div class="auth-links"><button id="personalLoginBack" type="button" class="text-btn" data-login-kind="choose">← 뒤로</button></div>
+</form></div></dialog>
 <dialog id="studentDialog" class="modal" aria-labelledby="studentDialogTitle"><form id="studentForm"><div class="modal-head"><div><h2 id="studentDialogTitle">새 학생 등록</h2></div><button class="icon-btn" type="button" data-close="studentDialog" aria-label="닫기"><svg><use href="#i-close"/></svg></button></div><div class="modal-body stack"><div class="fields"><div class="field"><label for="studentId">학번</label><input id="studentId" inputmode="numeric" pattern="[1-3][1-9][0-9]{2}" maxlength="4" required placeholder="예: 2201"><span class="field-help">학년 1자리 + 반 1자리 + 번호 2자리</span></div><div class="field"><label for="studentName">학생 이름</label><input id="studentName" required maxlength="30" placeholder="이름 입력"></div></div><p class="form-error" id="studentError" role="alert"></p></div><div class="modal-footer"><button type="button" class="btn secondary" data-close="studentDialog">취소</button><button class="btn primary" id="studentSave">학생 등록</button></div></form></dialog>
 <dialog id="warningDialog" class="modal" aria-labelledby="warningDialogTitle"><form id="warningForm"><div class="modal-head"><div><h2 id="warningDialogTitle">지도 기록 등록</h2></div><button class="icon-btn" type="button" data-close="warningDialog" aria-label="닫기"><svg><use href="#i-close"/></svg></button></div><div class="modal-body stack"><div class="field student-picker"><label for="studentSearchInput">학생 선택</label><input id="studentSearchInput" type="search" placeholder="학번 또는 이름 검색" autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="studentDropdown" aria-expanded="false"><div class="suggestions hidden" id="studentDropdown" role="listbox" aria-label="학생 검색 결과"></div><div id="selectedStudentBadge" class="selected-student hidden"><span id="selectedStudentText"></span><button type="button" data-action="student-clear" aria-label="학생 선택 해제">×</button></div></div><div class="fields"><div class="field full"><label for="warningDate">지도 날짜</label><input id="warningDate" type="date" min="2026-11-01" required></div><div class="field full"><label for="warningReason">지도 사유</label><select id="warningReason" required><option value="">사유를 선택하세요</option><option>복장 부적합 / 교복 미착용</option><option>지각 (등교시간 위반)</option><option>무단 외출 / 무단 이탈</option><option>휴대폰 미제출 / 수업 중 사용</option><option>용모 규정 위반 (두발/슬리퍼)</option><option>기타 지도 사항</option></select></div><div class="field full"><label for="warningNotes">관리 메모 · 학생 비공개</label><textarea id="warningNotes" maxlength="1000" placeholder="장소, 상황, 안내한 내용 등을 기록하세요."></textarea></div><div class="field full"><label for="warningStudentNotes">학생 공개 메모 (선택)</label><textarea id="warningStudentNotes" maxlength="1000" placeholder="학생에게 안내할 내용"></textarea></div></div><p class="form-error" id="warningError" role="alert"></p></div><div class="modal-footer"><button type="button" class="btn secondary" data-close="warningDialog">취소</button><button class="btn primary" id="warningSave">기록 등록</button></div></form></dialog>
 <dialog id="historyDialog" class="modal wide" aria-labelledby="historyTitle"><div class="modal-head"><div><h2 id="historyTitle">학생 지도 내역</h2><p id="historySubtitle"></p></div><button class="icon-btn" data-close="historyDialog" aria-label="닫기"><svg><use href="#i-close"/></svg></button></div><div class="modal-body" id="historyBody"></div><div class="modal-footer wrap"><button class="btn danger" data-action="student-delete"><svg><use href="#i-trash"/></svg>학생 삭제</button><div class="grow"></div><button class="btn secondary" data-action="student-account">학생 계정</button><button class="btn secondary" data-action="student-edit"><svg><use href="#i-edit"/></svg>정보 수정</button><button class="btn primary" data-action="history-add"><svg><use href="#i-plus"/></svg>기록 등록</button></div></dialog>
 <dialog id="confirmDialog" class="modal" aria-labelledby="confirmTitle"><div class="modal-head"><h2 id="confirmTitle">확인</h2><button class="icon-btn" data-close="confirmDialog" aria-label="닫기"><svg><use href="#i-close"/></svg></button></div><div class="modal-body"><p id="confirmMessage" class="small" style="white-space:pre-wrap"></p></div><div class="modal-footer"><button class="btn secondary" data-close="confirmDialog">취소</button><button class="btn danger" id="confirmAccept">삭제</button></div></dialog>
 <dialog id="importDialog" class="modal" aria-labelledby="importTitle"><div class="modal-head"><div><h2 id="importTitle">가져오기 확인</h2><p id="importDescription"></p></div><button class="icon-btn" data-close="importDialog" aria-label="닫기"><svg><use href="#i-close"/></svg></button></div><div class="modal-body"><div class="field hidden" id="restoreModeField"><label for="restoreMode">복원 방식</label><select id="restoreMode"><option value="merge">현재 데이터와 합치기</option><option value="replace">백업 데이터로 전체 교체</option></select><p class="field-help">합치기: 같은 학번의 기존 학생 정보는 유지하고, 새로운 학생과 새 ID의 기록만 추가합니다. 교체: 현재 목록을 백업 내용으로 바꿉니다.</p></div><div class="import-preview" id="importPreview"></div><p class="form-error" id="importError" role="alert" style="margin-top:10px"></p></div><div class="modal-footer"><button class="btn secondary" data-close="importDialog">취소</button><button class="btn primary" id="importAccept">가져오기</button></div></dialog>
 
-<dialog id="ownPasswordDialog" class="modal" aria-labelledby="ownPasswordTitle"><form id="ownPasswordForm"><div class="modal-head"><h2 id="ownPasswordTitle">비밀번호 변경</h2><button class="icon-btn" type="button" data-close="ownPasswordDialog" aria-label="닫기"><svg><use href="#i-close"/></svg></button></div><div class="modal-body stack"><div class="field"><label for="ownCurrentPassword">현재 비밀번호</label><input id="ownCurrentPassword" type="password" autocomplete="current-password" required maxlength="128"></div><div class="field"><label for="ownNewPassword">새 비밀번호 · 6자리</label><input id="ownNewPassword" type="password" minlength="6" maxlength="6" autocomplete="new-password" required></div><div class="field"><label for="ownConfirmPassword">새 비밀번호 확인</label><input id="ownConfirmPassword" type="password" minlength="6" maxlength="6" autocomplete="new-password" required></div><p id="ownPasswordError" class="form-error" role="alert"></p></div><div class="modal-footer"><button class="btn primary">변경</button></div></form></dialog>
+<dialog id="ownPasswordDialog" class="modal" aria-labelledby="ownPasswordTitle"><form id="ownPasswordForm"><div class="modal-head"><h2 id="ownPasswordTitle">비밀번호 변경</h2><button class="icon-btn" type="button" data-close="ownPasswordDialog" aria-label="닫기"><svg><use href="#i-close"/></svg></button></div><div class="modal-body stack"><div class="field"><label for="ownCurrentPassword">현재 비밀번호</label><input id="ownCurrentPassword" type="password" autocomplete="current-password" required></div><div class="field"><label for="ownNewPassword">새 비밀번호 · 4자 이상</label><input id="ownNewPassword" type="password" minlength="4" autocomplete="new-password" required></div><div class="field"><label for="ownConfirmPassword">새 비밀번호 확인</label><input id="ownConfirmPassword" type="password" minlength="4" autocomplete="new-password" required></div><p id="ownPasswordError" class="form-error" role="alert"></p></div><div class="modal-footer"><button class="btn primary">변경</button></div></form></dialog>
 <div id="toastRegion" class="toast-region" role="status" aria-live="polite"></div>
 <div class="print-area" id="printArea"></div>
+<script src="./assets/ieum-bus.js?v=a5f91c61f19c"></script>
 <script>
 'use strict';
 const SCHOOL_NAME="충남반도체마이스터고등학교";
@@ -1173,7 +1222,6 @@ const actions={
  'backup':backup,'restore':()=>$('backupInput').click(),'recovery':recovery,'import-csv':()=>$('csvInput').click(),'csv-template':()=>download(makeCSV([['학번','이름'],['2201','학생이름']]),'학생명단_양식.csv','text/csv;charset=utf-8'),'export-students':exportStudents,'export-records':()=>exportRecords(true),'export-all':()=>exportRecords(false),'print-students':printStudents,'print-report':printReport,
  'logout':logout,'student-refresh':()=>refreshOwn().catch(()=>{}),'student-logout':logout,'student-password':()=>{if(studentDemo){toast('예시 화면입니다.');return}$('ownPasswordError').textContent='';$('ownPasswordForm').reset();showDialog('ownPasswordDialog')},
  'auth-student':()=>setAuthTab('student'),'accounts-refresh':()=>loadAccounts().catch(e=>toast(e.message,'error')),'student-account':()=>{switchView('accounts');$('accountSearch').value=activeStudent||'';closeDialog('historyDialog');renderAccounts()},
- 'account-reset':b=>requestAccountAction(b.dataset.id,'reset'),
  'undo':async()=>{const action=undoAction;undoAction=null;if(action)await action()},'toast-close':()=>{clearTimeout(toastTimer);$('toastRegion').replaceChildren();undoAction=null}
 };
 
@@ -1215,15 +1263,14 @@ function printReport(){const year=$('reportYear').value,rows=allRecords().filter
 
 function renderOwn(){if(!ownStudent)return;const s=ownStudent,all=s.warnings.filter(w=>w.date>=START_DATE).sort((a,b)=>timeKey(b).localeCompare(timeKey(a))),rows=all.filter(w=>ownMonth==='ALL'||w.date.slice(0,7)===ownMonth);$('ownName').textContent=s.name;$('ownIdentity').textContent=`${s.id} · ${s.grade}학년 ${s.classNum}반 ${s.number}번`;$('ownStats').innerHTML=metric(ownMonth==='ALL'?'전체 경고':'월별 경고',rows.length,'회','','file',true)+metric('전체 누적',all.length,'회','','calendar');$('ownMode').textContent=studentDemo?'예시':'학생';$('ownUpdate').textContent=ownUpdatedAt?'갱신 '+new Date(ownUpdatedAt).toLocaleString('ko-KR',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}):'';$('ownMonth').value=ownMonth==='ALL'?'':ownMonth;$('ownAll').classList.toggle('active',ownMonth==='ALL');$('ownPrev').disabled=ownMonth==='ALL'||ownMonth<=START_MONTH;$('ownNext').disabled=ownMonth==='ALL'||ownMonth>=today().slice(0,7);$('ownCount').textContent=rows.length;$('ownHistory').innerHTML=rows.length?rows.map(w=>`<article class="own-record"><time class="small muted">${fullDate(w.date)}</time><h3>${esc(w.reason)}</h3>${w.studentNotes?`<p>${esc(w.studentNotes)}</p>`:''}</article>`).join(''):'<div class="empty"><h3>기록 없음</h3></div>'}
 
-const ADMIN_ROLES=[{id:'president',label:'학생회장'},{id:'vice_2',label:'2학년 학생부회장'},{id:'vice_1',label:'1학년 학생부회장'},{id:'teacher_1',label:'학생부 담당 선생님 1'},{id:'teacher_2',label:'학생부 담당 선생님 2'},{id:'guidance_head',label:'선도부 부장'}];
 const LIVE_URL='https://bareun-csmh-student-care.kimm2112.chatgpt.site';
 const service={enabled:true,user:null,token:null,version:0,saving:false};
-let ownStudent=null,ownUpdatedAt=null,studentDemo=false,portalTimer=null,studentAccounts=[],codeRoles=[],authTab='student';
+let ownStudent=null,ownUpdatedAt=null,studentDemo=false,portalTimer=null,studentAccounts=[],authTab='student';
 
 function post(route,data){return api(route,{method:'POST',body:JSON.stringify(data)})}
 function load(){students=[];prefs={};user=null;if(!service.enabled){try{const raw=localStorage.getItem(KEY);if(raw)students=normalizeStudents(JSON.parse(raw))}catch{storageBlocked=true}}}
 function savePrefs(next){prefs=next;return true}
-async function persist(next){if(ownStudent)return false;if(isDemo){students=next;writeVersion++;return true}if(!service.enabled||!canUseManagedBareun()){toast('관리자 로그인이 필요합니다.','error');return false}if(service.saving){toast('저장 중입니다.','error');return false}service.saving=true;$('saveState').textContent='저장 중';try{const result=await api('/admin/data',{method:'PUT',body:JSON.stringify({students:next,version:service.version})});service.version=result.version;students=normalizeStudents(next);writeVersion++;$('saveState').textContent='저장됨';return true}catch(error){if(error.status===409)await loadSchool();else $('saveState').textContent='저장 실패';toast(error.message,'error');return false}finally{service.saving=false}}
+async function persist(next){if(ownStudent)return false;if(isDemo){students=next;writeVersion++;return true}if(!service.enabled||!canUseManagedBareun()){toast('학생회 계정으로 로그인하세요.','error');return false}if(service.saving){toast('저장 중입니다.','error');return false}service.saving=true;$('saveState').textContent='저장 중';try{const result=await api('/admin/data',{method:'PUT',body:JSON.stringify({students:next,version:service.version})});service.version=result.version;students=normalizeStudents(next);writeVersion++;$('saveState').textContent='저장됨';return true}catch(error){if(error.status===409)await loadSchool();else $('saveState').textContent='저장 실패';toast(error.message,'error');return false}finally{service.saving=false}}
 async function loadSchool(){const data=await api('/admin/data');students=normalizeStudents(data.students);service.version=data.version;storageBlocked=false;$('saveState').textContent='저장됨';renderAll()}
 function renderProfile(){$('profileName').textContent=user?.name||'바른';$('profileRole').textContent=user?.name===user?.role?'':(user?.role||'');$('profileAvatar').textContent=user?.name?.slice(0,1)||'바';$('navStudentCount').textContent=students.length;$('footerCount').textContent=`학생 ${students.length}명 / 기록 ${allRecords().length}건`;if(view==='settings'){$('settingName').value=user?.name||'';$('settingRole').innerHTML=`<option>${esc(user?.role||'')}</option>`;$('settingRole').disabled=true;$('schoolName').value=SCHOOL_NAME}}
 function switchView(next){if(ownStudent||!TITLES[next])return;recordManagedView(next);view=next;document.querySelectorAll('.view').forEach(el=>el.classList.toggle('hidden',el.id!==`view-${next}`));document.querySelectorAll('.nav-btn').forEach(b=>{b.classList.toggle('active',b.dataset.view===next);if(b.dataset.view===next)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});$('pageTitle').textContent=TITLES[next];$('headingAction').classList.toggle('hidden',!['dashboard','records'].includes(next));$('headingAction').dataset.action='warning-add';$('headingAction').innerHTML=icon('plus')+'<span>기록 등록</span>';$('managePeriod').classList.toggle('hidden',!['dashboard','students','records'].includes(next));if(next==='dashboard'||next==='students'){$(next==='dashboard'?'dashboardTableMount':'studentsTableMount').appendChild($('studentTablePanel'));tablePage=1;renderStudentTable()}if(next==='records'){recordPage=1;renderRecords()}if(next==='reports')renderReports();if(next==='data')renderDataInfo();if(next==='accounts')loadAccounts().catch(e=>toast(e.message,'error'));renderProfile();closeMenu()}
@@ -1264,18 +1311,16 @@ async function recovery(){if(isDemo){toast('예시 화면입니다.');return}try
 
 
 
-async function accountAction(id,action){try{await post('/admin/student-accounts',{studentId:id,action});await loadAccounts();toast('계정을 초기화했습니다.')}catch(error){toast(error.message,'error')}}
-function requestAccountAction(id){confirmBox('계정 초기화',`${id} 학생은 다시 가입해야 합니다.`,()=>accountAction(id,'reset'),'초기화')}
-
-
 function initApp(){
  $('schoolFavicon').href=SCHOOL_LOGO;
- document.querySelectorAll('[data-school-logo]').forEach(img=>img.src=SCHOOL_LOGO);load();createStudentTable();$('adminRole').innerHTML=ADMIN_ROLES.map(r=>`<option value="${r.id}">${r.label}</option>`).join('');$('manageMonth').max=today().slice(0,7);$('ownMonth').max=today().slice(0,7);$('todayLabel').textContent=new Date().toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric'});$('footerYear').textContent=new Date().getFullYear();renderAll();setActiveMonth(activeMonth);
- document.addEventListener('click',e=>{const tab=e.target.closest('[data-login-kind]');if(tab){setAuthTab(tab.dataset.loginKind);return}const b=e.target.closest('[data-action],[data-view],[data-close],[data-page-kind]');if(!b||b.disabled)return;if(ownStudent&&!['student-refresh','student-logout','student-password','own-prev','own-next','own-all','toast-close'].includes(b.dataset.action)&&!b.dataset.close)return;if(b.dataset.close){closeDialog(b.dataset.close);return}if(b.dataset.view){switchView(b.dataset.view);return}if(b.dataset.pageKind){if(b.dataset.pageKind==='students'){tablePage=Number(b.dataset.page);renderStudentTable()}else{recordPage=Number(b.dataset.page);renderRecords()}return}actions[b.dataset.action]?.(b)});
+ document.querySelectorAll('[data-school-logo]').forEach(img=>img.src=SCHOOL_LOGO);load();createStudentTable(); document.addEventListener('click',e=>{const tab=e.target.closest('[data-login-kind]');if(tab){setAuthTab(tab.dataset.loginKind);return}const b=e.target.closest('[data-action],[data-view],[data-close],[data-page-kind]');if(!b||b.disabled)return;if(ownStudent&&!['student-refresh','student-logout','student-password','own-prev','own-next','own-all','toast-close'].includes(b.dataset.action)&&!b.dataset.close)return;if(b.dataset.close){closeDialog(b.dataset.close);return}if(b.dataset.view){switchView(b.dataset.view);return}if(b.dataset.pageKind){if(b.dataset.pageKind==='students'){tablePage=Number(b.dataset.page);renderStudentTable()}else{recordPage=Number(b.dataset.page);renderRecords()}return}actions[b.dataset.action]?.(b)});
  document.addEventListener('pointerdown',e=>{if(!e.target.closest('.student-picker'))hideDropdown()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu();if(!ownStudent&&(e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'&&!document.querySelector('dialog[open]')){e.preventDefault();switchView('students');$('tableSearch').focus()}});
  $('studentSearchInput').addEventListener('input',studentSuggestions);$('studentSearchInput').addEventListener('focus',studentSuggestions);$('studentSearchInput').addEventListener('keydown',e=>{if(e.key==='ArrowDown'){e.preventDefault();$('studentDropdown').querySelector('button')?.focus()}if(e.key==='Enter'){e.preventDefault();const buttons=$('studentDropdown').querySelectorAll('button');if(buttons.length===1)selectStudent(buttons[0].dataset.id)}});
  $('studentDropdown').addEventListener('keydown',e=>{const buttons=[...$('studentDropdown').querySelectorAll('button')],index=buttons.indexOf(document.activeElement);if(e.key==='ArrowDown'){e.preventDefault();buttons[(index+1)%buttons.length]?.focus()}if(e.key==='ArrowUp'){e.preventDefault();if(index<=0)$('studentSearchInput').focus();else buttons[index-1]?.focus()}});
- $('loginForm').addEventListener('submit',staffLogin);$('studentLoginForm').addEventListener('submit',studentLogin);$('studentForm').addEventListener('submit',saveStudent);$('warningForm').addEventListener('submit',saveWarning);$('ownPasswordForm').addEventListener('submit',changeOwnPassword);$('migrateForm').addEventListener('submit',migratePassword);$('commonAdminForm').addEventListener('submit',changeCommonCode);
+ $('studentLoginForm').addEventListener('submit',studentLogin);$('studentForm').addEventListener('submit',saveStudent);$('warningForm').addEventListener('submit',saveWarning);$('ownPasswordForm').addEventListener('submit',changeOwnPassword);$('registrationForm').addEventListener('submit',registerAccount);
+ $('personalLoginForm').addEventListener('submit',loginPersonalAccount);
+ $('studentLoginId').addEventListener('input',event=>{event.target.value=studentDigits(event.target.value)});
+ $('registrationReveal').addEventListener('change',event=>{$('registrationPassword').type=event.target.checked?'text':'password'});
  $('profileForm').addEventListener('submit',async e=>{e.preventDefault();const name=$('settingName').value.trim();if(!name)return;try{if(isDemo)user.name=name;else{const result=await post('/admin/profile',{name});service.user=result.user;user=result.user}renderProfile();toast('저장했습니다.')}catch(error){$('profileError').textContent=error.message}});
  $('recordSearch').addEventListener('input',()=>{recordPage=1;renderRecords()});$('reportYear').addEventListener('change',renderReports);$('manageMonth').addEventListener('change',()=>setActiveMonth($('manageMonth').value||today().slice(0,7)));$('ownMonth').addEventListener('change',()=>setOwnMonth($('ownMonth').value||today().slice(0,7)));$('accountSearch').addEventListener('input',renderAccounts);
  $('confirmAccept').addEventListener('click',()=>{const action=confirmAction;closeDialog('confirmDialog');action?.()});$('importAccept').addEventListener('click',applyImport);$('csvInput').addEventListener('change',e=>{const f=e.target.files[0];e.target.value='';if(f)prepareCSV(f)});$('backupInput').addEventListener('change',e=>{const f=e.target.files[0];e.target.value='';if(f)prepareRestore(f)});
@@ -1289,36 +1334,87 @@ const SERVICE_ORIGIN='https://bareun-csmh-student-care.kimm2112.chatgpt.site';
 const API_ROOT=globalThis.BAREUN_API_BASE||((document.body.dataset.server==='true'||location.origin===SERVICE_ORIGIN||(['localhost','127.0.0.1'].includes(location.hostname)&&location.port==='5173'))?'/api':SERVICE_ORIGIN+'/api');
 
 const TOKEN_KEY='bareun_access_v4';
-function clearAccess(){service.token=null;service.user=null;try{sessionStorage.removeItem(TOKEN_KEY)}catch{}}
-function applySession(result){service.user=result.user;service.token=result.token;try{sessionStorage.setItem(TOKEN_KEY,JSON.stringify({token:result.token,kind:result.user.kind,expiresAt:result.expiresAt}))}catch{}}
-async function api(route,options={}){const response=await fetch(API_ROOT+route,{credentials:'omit',cache:'no-store',...options,headers:{...(options.body?{'Content-Type':'application/json'}:{}),...(service.token?{Authorization:'Bearer '+service.token}:{}),...options.headers}});let data;try{data=await response.json()}catch{throw Error('서버에 연결하지 못했습니다.')}if(!response.ok){const error=Error(data.error||'처리하지 못했습니다.');error.status=response.status;throw error}return data}
+
+function clearAccess(){
+  const token=service.token;
+  service.token=null;service.user=null;service.keepSignedIn=false;
+  try{sessionStorage.removeItem(TOKEN_KEY);}catch{}
+  try{
+    const saved=JSON.parse(localStorage.getItem(TOKEN_KEY)||'null');
+    if(!saved||saved.token===token||saved.expiresAt<=Date.now())localStorage.removeItem(TOKEN_KEY);
+  }catch{}
+}
+function applySession(result,keepSignedIn=service.keepSignedIn===true){
+  service.user=result.user;service.token=result.token;service.keepSignedIn=keepSignedIn;
+  const value=JSON.stringify({token:result.token,kind:result.user.kind,expiresAt:result.expiresAt});
+  try{sessionStorage.setItem(TOKEN_KEY,value);}catch{}
+  try{
+    if(keepSignedIn)localStorage.setItem(TOKEN_KEY,value);
+    else localStorage.removeItem(TOKEN_KEY);
+  }catch{}
+}
+async function api(route,options={}){const response=await fetch(API_ROOT+route,{credentials:'omit',cache:'no-store',...options,headers:{...(options.body?{'Content-Type':'application/json'}:{}),...(service.token?{Authorization:'Bearer '+service.token}:{}),...options.headers}});let data;try{data=await response.json()}catch{throw Error('서버에 연결하지 못했습니다.')}if(!response.ok){const error=Error(data.error||'처리하지 못했습니다.');error.status=response.status;error.needsName=data.needsName===true;throw error}return data}
+
+const pendingSchoolInvite=()=>location.hash.startsWith('#join=')?location.hash.slice(6):null;
+async function showSchoolSignup(invite,form){
+  $('registrationSubmit').disabled=true;
+  try {
+    const account=await post('/school-invite',{invite});
+    if(authTab!=='register'||pendingSchoolInvite()!==invite)return;
+    form.elements.kind.value=account.kind;
+    form.elements.name.value=account.name;
+    form.elements.name.readOnly=!account.chooseName;
+    $('registrationTitle').textContent=account.resetPassword?'학생회장 비밀번호 재설정':
+      [account.department,account.role,'가입'].filter(Boolean).join(' ');
+    $('registrationBack').dataset.loginKind=account.kind;
+    if(account.resetPassword)$('registrationSubmit').textContent='저장하고 로그인';
+    $('registrationSubmit').disabled=false;
+    (account.chooseName?form.elements.name:form.elements.password).focus();
+  }catch(error){
+    if(authTab==='register'&&pendingSchoolInvite()===invite)$('registrationError').textContent=error.message;
+  }
+}
 function setAuthTab(tab){
+  if(tab==='staff')tab='council';
+  const previous=authTab;
   authTab=tab;
-  $('studentLoginTitle').textContent='이음 학생 로그인';
-  for(const [name,id] of Object.entries({choose:'entryChoose',council:'councilLoginForm',staff:'loginForm',student:'studentLoginForm',teacher:'teacherLoginForm',migrate:'migrateForm'})){
+  for(const [name,id] of Object.entries({choose:'entryChoose',council:'councilLoginForm',student:'studentLoginForm',teacher:'teacherLoginForm',register:'registrationForm',personal:'personalLoginForm'})){
     $(id).classList.toggle('hidden',name!==tab);
   }
-  if(tab!=='migrate'){$('migrateForm').reset();pendingStudentRemember=false;}
-  if(tab!=='student')$('studentLoginPassword').value='';
-  if(tab!=='council'){
-    const form=$('councilLoginForm');
-    form.elements.password.value='';form.elements.name.value='';updateCouncilInitialNameField();
+  const signup=$('registrationForm');
+  signup.reset();
+  signup.elements.kind.value='student';
+  $('registrationBack').dataset.loginKind='student';
+  signup.elements.name.readOnly=false;
+  $('registrationTitle').textContent='이음 학생 회원가입';
+  $('registrationSubmit').textContent='가입하고 로그인';
+  $('registrationSubmit').disabled=false;
+  $('registrationPassword').type='password';
+  if(tab==='register'){
+    const invite=pendingSchoolInvite();
+    if(invite!==null)showSchoolSignup(invite,signup);
+    else signup.elements.name.focus();
+  }else if(pendingSchoolInvite()!==null||['#register','#council-setup'].includes(location.hash)||
+    (location.hash==='#teacher'&&tab!=='teacher')){
+    history.replaceState(history.state,'',location.pathname+location.search);
   }
+  if(tab!=='student')$('studentLoginPassword').value='';
+  if(tab!=='council')$('councilLoginForm').elements.password.value='';
+  setCouncilLoginNameRequired(false);
   if(tab!=='teacher')$('teacherLoginForm').elements.password.value='';
-  ['loginError','studentLoginError','councilLoginError','teacherLoginError','migrateError'].forEach(id=>$(id).textContent='');
+  if(tab!=='personal')$('personalLoginForm').elements.password.value='';
+  if(tab==='personal')$('personalLoginBack').dataset.loginKind=['student','council','teacher'].includes(previous)?previous:'choose';
+  ['studentLoginError','councilLoginError','teacherLoginError','registrationError','personalLoginError'].forEach(id=>$(id).textContent='');
   loadSavedLogin(tab);
 }
-function renderLogin(){setAuthTab(document.body.dataset.entry||'choose')}
-async function staffLogin(event){
-  event.preventDefault();$('loginError').textContent='';$('loginSubmit').disabled=true;
-  try{
-    const result=await post('/login',{kind:'staff',roleId:$('adminRole').value,code:$('adminCode').value});
-    applySession(result);user=result.user;ownStudent=null;await loadSchool();$('adminCode').value='';
-    $('loginDialog').close();document.body.classList.remove('auth-mode');switchView('dashboard');showStaffHome(true);
-  }catch(error){$('loginError').textContent=error.message}finally{$('loginSubmit').disabled=false}
+function renderLogin(){
+  if(pendingSchoolInvite()!==null||location.hash==='#register')setAuthTab('register');
+  else if(location.hash==='#council-setup')setAuthTab('council');
+  else if(location.hash==='#teacher')setAuthTab('teacher');
+  else setAuthTab(document.body.dataset.entry||'choose');
 }
-async function enterStudent(result){
-  applySession(result);
+async function enterStudent(result,keepSignedIn){
+  applySession(result,keepSignedIn);
   user=null;
   clearManagementState();
   renderAll();
@@ -1336,33 +1432,81 @@ async function enterStudent(result){
 }
 async function studentLogin(event){
   event.preventDefault();$('studentLoginError').textContent='';$('studentLoginSubmit').disabled=true;
-  const username=$('studentLoginId').value.trim(),password=$('studentLoginPassword').value;
+  const username=studentDigits($('studentLoginId').value).trim(),password=$('studentLoginPassword').value;
   const remember=remembersLogin('student');
   try{
-    const result=await post('/login',{kind:'student',username,password});
+    const keepSignedIn=event.currentTarget.querySelector('[data-keep-signed-in]').checked;
+    const result=await post('/login',{kind:'student',username,password,keepSignedIn});
     $('studentLoginPassword').value='';
-    if(result.mustChangePassword){
-      setAuthTab('migrate');pendingStudentRemember=remember;$('migrateForm').reset();$('migrateId').value=username;$('migrateCurrent').value=password;$('migrateName').focus();
-      return;
-    }
+    if(result.mustChangePassword)throw Error('공용 서버에 회원가입 업데이트를 적용해 주세요.');
     rememberSuccessfulLogin('student',remember,result.user,password);
-    await enterStudent(result);
+    await enterStudent(result,keepSignedIn);
   }catch(error){$('studentLoginError').textContent=error.message}finally{$('studentLoginSubmit').disabled=false}
 }
 
-async function migratePassword(e){e.preventDefault();$('migrateError').textContent='';const password=$('migratePassword').value;if(password!==$('migrateConfirm').value){$('migrateError').textContent='비밀번호가 서로 다릅니다.';return}$('migrateSubmit').disabled=true;try{const result=await post('/student/migrate-password',{studentId:$('migrateId').value.trim(),current:$('migrateCurrent').value,name:$('migrateName').value,password});rememberSuccessfulLogin('student',pendingStudentRemember,result.user,password);pendingStudentRemember=false;$('migrateForm').reset();await enterStudent(result)}catch(error){$('migrateError').textContent=error.message}finally{$('migrateSubmit').disabled=false}}
-async function changeOwnPassword(e){e.preventDefault();$('ownPasswordError').textContent='';const password=$('ownNewPassword').value;if(password!==$('ownConfirmPassword').value){$('ownPasswordError').textContent='비밀번호가 서로 다릅니다.';return}if(studentDemo){$('ownPasswordError').textContent='예시 화면입니다.';return}e.submitter.disabled=true;try{const result=await post('/student/password',{current:$('ownCurrentPassword').value,password});applySession(result);updateSavedPassword(result.user,password);$('ownPasswordForm').reset();closeDialog('ownPasswordDialog');toast('비밀번호를 변경했습니다.')}catch(error){$('ownPasswordError').textContent=error.message}finally{e.submitter.disabled=false}}
-async function logout(){clearInterval(portalTimer);try{await post('/logout',{})}catch{toast('서버 연결을 확인하세요.','error');return}clearAccess();students=[];user=null;ownStudent=null;resetCampus();showStaffHome(false);document.body.classList.remove('student-mode');document.body.classList.add('auth-mode');$('studentPortal').classList.add('hidden');document.querySelectorAll('dialog[open]').forEach(d=>d.close());clearManagementState();renderAll();switchView('dashboard');setAuthTab('choose');$('adminCode').value='';$('studentLoginPassword').value='';showDialog('loginDialog')}
+const studentDigits=value=>value.replace(/[０-９]/g,digit=>String(digit.charCodeAt(0)-0xff10));
+
+async function loginPersonalAccount(event){
+  event.preventDefault();
+  const form=event.currentTarget,button=event.submitter,status=$('personalLoginError');
+  const {name,password}=Object.fromEntries(new FormData(form));
+  const keepSignedIn=form.elements.keepSignedIn.checked;
+  button.disabled=true;
+  status.textContent='';
+  try{
+    const result=await post('/login',{kind:'personal',name,password,keepSignedIn});
+    applySession(result,keepSignedIn);
+    form.reset();
+    openCampusPortal();
+  }catch(error){status.textContent=error.message;}
+  finally{button.disabled=false;}
+}
+
+async function registerAccount(event){
+  event.preventDefault();
+  const form=event.currentTarget,button=event.submitter,message=$('registrationError');
+  const values=Object.fromEntries(new FormData(form));
+  const keepSignedIn=form.elements.keepSignedIn.checked;
+  if(Array.from(values.password.normalize('NFC')).length<4){
+    message.textContent='비밀번호는 4자 이상으로 입력하세요.';
+    return;
+  }
+  message.textContent='';
+  button.disabled=true;
+  try{
+    const status=await api('/ieum/status');
+    if(!status.nameRegistration)throw Error('공용 서버에 회원가입 업데이트를 적용해 주세요.');
+    const invite=pendingSchoolInvite();
+    const result=await post('/register',{...values,keepSignedIn,...(invite===null?{}:{invite})});
+    history.replaceState(history.state,'',location.pathname+location.search);
+    form.reset();
+    $('registrationPassword').type='password';
+    applySession(result,keepSignedIn);
+    openCampusPortal();
+  }catch(error){message.textContent=error.message;}
+  finally{button.disabled=false;}
+}
+async function changeOwnPassword(e){e.preventDefault();$('ownPasswordError').textContent='';const password=$('ownNewPassword').value;if(password!==$('ownConfirmPassword').value){$('ownPasswordError').textContent='비밀번호가 서로 다릅니다.';return}if(studentDemo){$('ownPasswordError').textContent='예시 화면입니다.';return}e.submitter.disabled=true;try{const result=await post('/student/password',{current:$('ownCurrentPassword').value,password,keepSignedIn:service.keepSignedIn});applySession(result);updateSavedPassword(result.user,password);$('ownPasswordForm').reset();closeDialog('ownPasswordDialog');toast('비밀번호를 변경했습니다.')}catch(error){$('ownPasswordError').textContent=error.message}finally{e.submitter.disabled=false}}
+async function logout(){clearInterval(portalTimer);try{await post('/logout',{})}catch{toast('서버 연결을 확인하세요.','error');return}clearAccess();students=[];user=null;ownStudent=null;resetCampus();showStaffHome(false);document.body.classList.remove('student-mode');document.body.classList.add('auth-mode');$('studentPortal').classList.add('hidden');document.querySelectorAll('dialog[open]').forEach(d=>d.close());clearManagementState();renderAll();switchView('dashboard');setAuthTab('choose');$('studentLoginPassword').value='';showDialog('loginDialog')}
 async function loadAccounts(){if(isDemo){studentAccounts=[];renderAccounts();return}const a=await api('/admin/student-accounts');studentAccounts=a.accounts;renderAccounts()}
-function renderAccounts(){const q=$('accountSearch').value.trim().toLocaleLowerCase(),rows=studentAccounts.filter(a=>`${a.student_id} ${a.requested_name}`.toLocaleLowerCase().includes(q));$('accountCount').textContent=studentAccounts.length;$('accountRows').innerHTML=rows.length?rows.map(a=>`<tr><td><strong>${esc(a.requested_name)}</strong><div class="student-id">${a.student_id}</div></td><td><button class="text-btn" data-action="account-reset" data-id="${a.student_id}">비밀번호 초기화</button></td></tr>`).join(''):'<tr><td colspan="2"><div class="empty"><h3>등록된 계정 없음</h3></div></td></tr>'}
-async function changeCommonCode(e){e.preventDefault();$('commonCodeError').textContent='';const code=$('commonCodeNew').value;if(code!==$('commonCodeConfirm').value){$('commonCodeError').textContent='코드가 서로 다릅니다.';return}if(isDemo){$('commonCodeError').textContent='예시 화면입니다.';return}e.submitter.disabled=true;try{const result=await post('/admin/admin-codes',{code});applySession(result);user=result.user;$('commonAdminForm').reset();toast('공통 코드를 변경했습니다.')}catch(error){$('commonCodeError').textContent=error.message}finally{e.submitter.disabled=false}}
-function clearManagementState(){students=[];studentAccounts=[];codeRoles=[];activeStudent=null;selectedStudent=null;pendingImport=null;confirmAction=null;undoAction=null;clearTimeout(toastTimer);$('toastRegion').replaceChildren();['historyBody','printArea','importPreview','studentDropdown'].forEach(id=>$(id).replaceChildren());$('historyTitle').textContent='학생 지도 내역';$('historySubtitle').textContent='';$('selectedStudentText').textContent='';$('warningForm').reset();$('studentForm').reset();$('commonAdminForm').reset();$('settingName').value='';$('recordSearch').value='';$('tableSearch').value='';renderAccounts()}
+function renderAccounts(){const q=$('accountSearch').value.trim().toLocaleLowerCase(),rows=studentAccounts.filter(a=>`${a.student_id} ${a.requested_name}`.toLocaleLowerCase().includes(q));$('accountCount').textContent=studentAccounts.length;$('accountRows').innerHTML=rows.length?rows.map(a=>`<tr><td><strong>${esc(a.requested_name)}</strong><div class="student-id">${a.student_id}</div></td><td>등록됨</td></tr>`).join(''):'<tr><td colspan="2"><div class="empty"><h3>등록된 계정 없음</h3></div></td></tr>'}
+function clearManagementState(){students=[];studentAccounts=[];activeStudent=null;selectedStudent=null;pendingImport=null;confirmAction=null;undoAction=null;clearTimeout(toastTimer);$('toastRegion').replaceChildren();['historyBody','printArea','importPreview','studentDropdown'].forEach(id=>$(id).replaceChildren());$('historyTitle').textContent='학생 지도 내역';$('historySubtitle').textContent='';$('selectedStudentText').textContent='';$('warningForm').reset();$('studentForm').reset();$('settingName').value='';$('recordSearch').value='';$('tableSearch').value='';renderAccounts()}
 async function bootstrapSession(){
+  if(pendingSchoolInvite()!==null||location.hash==='#teacher'){
+    renderLogin();
+    showDialog('loginDialog');
+    return;
+  }
   let kind=null;
   try{
+
     const stored=JSON.parse(sessionStorage.getItem(TOKEN_KEY)||'null');
-    if(['staff','student','council','teacher'].includes(stored?.kind)&&stored.expiresAt>Date.now()&&/^[a-f0-9]{64}$/.test(stored.token)){
-      kind=stored.kind;service.token=stored.token;
+    let saved;
+    try{saved=JSON.parse(localStorage.getItem(TOKEN_KEY)||'null');}catch{}
+    const valid=value=>['staff','student','council','teacher','personal'].includes(value?.kind)&&value.expiresAt>Date.now()&&/^[a-f0-9]{64}$/.test(value.token);
+    const access=valid(stored)?stored:saved;
+    if(valid(access)){
+      kind=access.kind;service.token=access.token;service.keepSignedIn=saved?.token===access.token;
     }else clearAccess();
   }catch{clearAccess()}
   if(!kind){renderLogin();showDialog('loginDialog');return}
@@ -1372,15 +1516,15 @@ async function bootstrapSession(){
     service.user=result.user;
     if(kind==='staff'){
       user=result.user;await loadSchool();document.body.classList.remove('auth-mode');switchView('dashboard');showStaffHome(true);
-    }else if(kind==='council'||kind==='teacher'){
-      openCampusPortal();
+    }else if(kind==='council'||kind==='teacher'||kind==='personal'){
+      openCampusPortal(signedInCampusPage());
     }else if(await refreshOwn()){
-      showOwnPortal('home');
+      showOwnPortal(signedInCampusPage());
     }
     $('loginDialog').close();
   }catch(error){
     clearAccess();setAuthTab(kind);
-    $({staff:'loginError',student:'studentLoginError',council:'councilLoginError',teacher:'teacherLoginError'}[kind]).textContent=error.message;
+    $({staff:'councilLoginError',student:'studentLoginError',council:'councilLoginError',teacher:'teacherLoginError',personal:'personalLoginError'}[kind]).textContent=error.message;
     showDialog('loginDialog');
   }
 }
@@ -1445,11 +1589,23 @@ let councilAccountRows = [];
 let councilProfile = null;
 const councilAccount = () => service.user?.kind === 'council';
 const teacherAccount = () => service.user?.kind === 'teacher';
+const canOpenDocumentRoom = () => councilAccount() && !['teacher', 'teacher_1', 'teacher_2'].includes(service.user.roleId);
+const personalAccount = () => service.user?.kind === 'personal';
 const studentLikeAccount = () => Boolean(ownStudent || teacherAccount());
 const campusParticipant = () => studentLikeAccount() || councilAccount();
+const canUseBus = () => studentLikeAccount() || canManageCampusData();
 const canManageCampusData = () => councilAccount() && service.user.canModerate === true;
 const canManageSchool = () => service.user?.kind === 'staff' || canManageCampusData();
 const canUseManagedBareun = () => councilAccount() || service.user?.kind==='staff';
+const signedInCampusPage = () => canUseBus() && new URLSearchParams(location.search).get('program')==='gilbeot' ? 'bus' : 'home';
+
+function syncBusLocation(bus) {
+  const url = new URL(window.location.href);
+  if (bus === (url.searchParams.get('program') === 'gilbeot')) return;
+  if (bus) url.searchParams.set('program','gilbeot');
+  else url.searchParams.delete('program');
+  history.replaceState(history.state,'',url);
+}
 
 function schoolDate() {
   const parts = new Intl.DateTimeFormat('en-CA', {
@@ -1482,7 +1638,6 @@ function resetCampus() {
   $('campusContent').replaceChildren();
   $('ieumHomeExtras').classList.add('hidden');
   $('managedDutyRegister').classList.add('hidden');
-  $('bareunSwitchAccount').classList.add('hidden');
   $('ieumStaffExtras').replaceChildren();
   $('councilAccountRows').replaceChildren();
   councilAccountRows = [];
@@ -1593,7 +1748,10 @@ function goCampusBack() {
 }
 
 async function showCampus(page, message = '', target, fromBack = false) {
-  if (!campusParticipant() || !['home', 'discipline', 'nurijip', 'chat', 'messages', 'manage', ...Object.keys(campusRoutes)].includes(page)) return;
+  const personal = personalAccount();
+  if (!campusParticipant() && !(personal && ['home','nurijip'].includes(page))) return;
+  if (!['home', 'discipline', 'nurijip', 'chat', 'messages', 'manage', 'bus', ...Object.keys(campusRoutes)].includes(page)) return;
+  if (page === 'bus' && !canUseBus()) return;
   if (page==='discipline' && teacherAccount()) return;
   if (page === 'manage' && !canManageCampusData()) return;
   stopChat();
@@ -1615,6 +1773,8 @@ async function showCampus(page, message = '', target, fromBack = false) {
   }
   const request = ++campus.request;
   const fromDiscipline = campus.page === 'discipline';
+  const bus = page === 'bus';
+  syncBusLocation(bus);
   campus.page = page;
   campus.target = location;
   showCampusExtras(request);
@@ -1626,25 +1786,30 @@ async function showCampus(page, message = '', target, fromBack = false) {
     const active = page === 'council' ? 'suggestions' : page === 'chat' ? 'board' : page;
     if (button.dataset.campusTab === active) button.setAttribute('aria-current', 'page');
     else button.removeAttribute('aria-current');
+    if (['notices','events','board'].includes(button.dataset.campusTab)) button.classList.toggle('hidden',personal);
   }
   const discipline = page === 'discipline';
-  $('ieumWorkspace').classList.toggle('hidden', discipline);
+  $('ieumWorkspace').classList.toggle('hidden', discipline || bus);
+  $('ieumBusProgram').classList.toggle('hidden', !bus);
+  if (!bus) $('ieumBusContent').replaceChildren();
+  $('ieumBusEntry').classList.toggle('hidden', !canUseBus());
   $('campusSuggestionNav').classList.toggle('hidden', !studentLikeAccount() && !campus.council);
-  $('ieumDocEntry').classList.toggle('hidden', !councilAccount());
+  $('ieumDocEntry').classList.toggle('hidden', !canOpenDocumentRoom());
   $('ieumDataEntry').classList.toggle('hidden', !canManageCampusData());
+  $('ieumProgramsNavLabel').classList.toggle('hidden',personal);
+  $('ieumAccountNavLabel').classList.toggle('hidden',personal);
   const password = $('ieumPasswordEntry');
-  password.classList.toggle('hidden',teacherAccount());
-  password.toggleAttribute('data-council-password',councilAccount());
+  password.classList.toggle('hidden',personal);
+  password.toggleAttribute('data-school-password',councilAccount()||teacherAccount());
   if (ownStudent) password.dataset.action = 'student-password';
   else delete password.dataset.action;
-  $('ieumSwitchAccountLabel').textContent=ownStudent?'학생회 계정으로 전환':'학생 계정으로 전환';
   renderCampusIdentity();
   const bareun = $('ieumBareunEntry');
-  bareun.classList.toggle('hidden',teacherAccount());
+  bareun.classList.toggle('hidden',teacherAccount()||personal);
   if (canUseManagedBareun()) { bareun.setAttribute('data-ieum-bareun',''); bareun.removeAttribute('data-campus-tab'); }
   else { bareun.dataset.campusTab = 'discipline'; bareun.removeAttribute('data-ieum-bareun'); }
-  $('ownBrand').dataset.program = discipline ? 'bareun' : 'ieum';
-  $('ownBrand').textContent = discipline ? '바른' : '이음';
+  $('ownBrand').dataset.program = discipline ? 'bareun' : bus ? 'bus' : 'ieum';
+  $('ownBrand').textContent = discipline ? '바른' : bus ? '길벗' : '이음';
   $('ownDiscipline').classList.toggle('hidden', !discipline);
   $('campusStatus').textContent = message;
   if (discipline) {
@@ -1662,10 +1827,18 @@ async function showCampus(page, message = '', target, fromBack = false) {
   if (page === 'chat') { openChatRoom(location.room); return; }
   if (page === 'messages') { showDmPage(request); return; }
   if (page === 'manage') { showCampusManagement(request); return; }
+  if (bus) {
+    window.mountIeumBus({
+      host: $('ieumBusContent'), get: path => api(path, {signal:AbortSignal.timeout(12000)}), post, escape: esc,
+      current: () => request === campus.request && campus.page === 'bus' && canUseBus(), signOut: logout,
+    });
+    $('ieumBusProgram').focus();
+    return;
+  }
   if (page === 'home') {
     $('campusContent').innerHTML = workspaceHome();
     renderCampusIdentity();
-    loadWorkspaceHome();
+    if(!personal)loadWorkspaceHome();
     if (fromDiscipline) bareun.focus();
     return;
   }
@@ -1715,11 +1888,13 @@ async function showCampus(page, message = '', target, fromBack = false) {
 
 function showCampusExtras(request) {
   const extras = $('ieumHomeExtras');
-  const visible = campus.page !== 'discipline' && (campus.page === 'home' || extras.parentElement === $('ieumWorkspace'));
+  const visible = campus.page !== 'discipline' && campus.page !== 'bus' &&
+    (campus.page === 'home' || extras.parentElement === $('ieumWorkspace'));
   extras.classList.toggle('hidden', !visible);
   if (!visible || $('studentPortal').classList.contains('hidden')) return;
   if (!workspace.month) loadPinnedCalendar();
-  loadPinnedSong(request);
+  $('pinnedSong').classList.toggle('hidden',personalAccount());
+  if(!personalAccount())loadPinnedSong(request);
 }
 
 function showStaffHome(open) {
@@ -1756,7 +1931,6 @@ async function openManagedBareun(next = 'dashboard') {
     campus.request++;
     campus.bareun = {view:'',history:[],restoring:false};
     $('managedDutyRegister').classList.remove('hidden');
-    $('bareunSwitchAccount').classList.remove('hidden');
     syncCampusBack();
     document.body.classList.remove('student-mode');
     $('studentPortal').classList.add('hidden');
@@ -1910,50 +2084,42 @@ function openSchedule() {
 
 function updateDepartment(select) {
   const field = select.form.querySelector('[data-department-field]');
-  const required = ['head','member'].includes(select.value);
+  const required = !select.disabled && ['head','member'].includes(select.value);
   field.classList.toggle('hidden', !required);
   const department = field.querySelector('select');
   department.required = required;
   department.disabled = !required;
 }
 
-function updateCouncilInitialNameField() {
-  const form = $('councilLoginForm');
-  const role = form.elements.roleId.value;
-  const required = role !== 'president' && form.elements.password.value === (isTeacherSlot(role) ? '12345' : '1234');
-  $('councilInitialNameField').classList.toggle('hidden',!required);
-  form.elements.name.required = required;
-  form.elements.name.disabled = !required;
-}
-
-function openCampusPortal() {
+function openCampusPortal(initial='home') {
   ownStudent = null;
   clearManagementState();
   setCouncilAccess(councilAccount());
   $('loginDialog').close();
-  showOwnPortal('home');
+  showOwnPortal(initial);
 }
 
-function updateTeacherNameField() {
-  const form = $('teacherLoginForm');
-  const ordinary = form.elements.roleId.value === 'teacher';
-  const name = form.elements.name;
-  name.required = ordinary;
-  name.disabled = !ordinary;
-  name.closest('label').classList.toggle('hidden', !ordinary);
+function setCouncilLoginNameRequired(required){
+  const form=$('councilLoginForm');
+  form.elements.name.required=required;
+  form.elements.name.disabled=!required;
+  $('councilLoginNameField').classList.toggle('hidden',!required);
+  if(required)form.elements.name.focus();
 }
 
 async function teacherLogin(event) {
   event.preventDefault();
   const form=event.currentTarget,button=event.submitter,status=$('teacherLoginError');
-  const {name,password,roleId}=Object.fromEntries(new FormData(form));
+  const {name,password}=Object.fromEntries(new FormData(form));
   const remember=remembersLogin('teacher');
   button.disabled=true;
   status.textContent='';
   try {
-    const result=await post('/login',{kind:'teacher',name,password,roleId});
+    const keepSignedIn=form.querySelector('[data-keep-signed-in]').checked;
+    const result=await post('/login',{kind:'teacher',name,password,keepSignedIn});
+    if(location.hash==='#teacher')history.replaceState(history.state,'',location.pathname+location.search);
     rememberSuccessfulLogin('teacher',remember,result.user,password);
-    applySession(result);
+    applySession(result,keepSignedIn);
     form.elements.password.value='';
     openCampusPortal();
   } catch(error) {status.textContent=error.message;}
@@ -1967,23 +2133,25 @@ async function councilLogin(event) {
   $('councilLoginError').textContent = '';
   button.disabled = true;
   try {
-    updateCouncilInitialNameField();
-    if (!form.reportValidity()) return;
-    const values = Object.fromEntries(new FormData(form));
+    const {position,password,name} = Object.fromEntries(new FormData(form));
+    const [roleId,department='']=position.split('|');
     const remember = remembersLogin('council');
-    const result = await post('/login', { ...values, kind: 'council' });
-    rememberSuccessfulLogin('council',remember,result.user,values.password);
-    applySession(result);
+    const keepSignedIn=form.querySelector('[data-keep-signed-in]').checked;
+    const result = await post('/login',{roleId,department,name,password,kind:'council',keepSignedIn});
+    if(result.user.kind==='council')rememberSuccessfulLogin('council',remember,result.user,password);
+    applySession(result,keepSignedIn);
     form.elements.password.value = '';
     openCampusPortal();
-    if (result.usesInitialPassword) toast('계정 관리에서 개인 비밀번호로 바꿀 수 있어요.');
-  } catch (error) { $('councilLoginError').textContent = error.message; }
+  } catch (error) {
+    $('councilLoginError').textContent=error.message;
+    if(error.needsName)setCouncilLoginNameRequired(true);
+  }
   finally { button.disabled = false; }
 }
 
-async function changeCouncilOwnPassword(event) {
+async function changeSchoolOwnPassword(event) {
   event.preventDefault();
-  if (!councilAccount()) return;
+  if (!councilAccount()&&!teacherAccount()) return;
   const form = event.currentTarget, button = event.submitter, token = service.token;
   const status = $('councilOwnPasswordStatus');
   if (form.elements.password.value !== form.elements.confirm.value) { status.textContent = '새 비밀번호가 서로 달라요.'; return; }
@@ -1991,7 +2159,7 @@ async function changeCouncilOwnPassword(event) {
   status.textContent = '';
   try {
     const password=form.elements.password.value;
-    const result = await post('/council/password',{current:form.elements.current.value,password});
+    const result = await post(teacherAccount()?'/teacher/password':'/council/password',{current:form.elements.current.value,password,keepSignedIn:service.keepSignedIn});
     if (token !== service.token) return;
     applySession(result);
     updateSavedPassword(result.user,password);
@@ -1999,21 +2167,6 @@ async function changeCouncilOwnPassword(event) {
     toast('비밀번호를 변경했어요.');
   } catch (error) { if (token === service.token) status.textContent = error.message; }
   finally { button.disabled = false; }
-}
-
-function resetCouncilEditor() {
-  const form = $('councilAccountForm');
-  form.reset();
-  for (const option of form.elements.roleId.options) {
-    if (isTeacherSlot(option.value)) option.disabled = !canManageCampusData();
-  }
-  updateDepartment(form.elements.roleId);
-}
-
-function showCouncilInitialPassword(data) {
-  const result = $('councilIssuedPassword');
-  result.textContent = `${data.name} · 초기 비밀번호 ${data.initialPassword}`;
-  result.classList.remove('hidden');
 }
 
 function resetCouncilProfile() {
@@ -2024,17 +2177,29 @@ function resetCouncilProfile() {
   councilProfile = null;
 }
 
+async function saveCouncilRosterMember(event){
+  event.preventDefault();
+  if(!canManageCampusData())return;
+  const form=event.currentTarget,button=event.submitter;
+  button.disabled=true;
+  try{
+    const status=await api('/ieum/status');
+    if(!status.directRegistration)throw Error('공용 서버에 회원가입 업데이트를 적용해 주세요.');
+    await post('/admin/council-accounts',{...Object.fromEntries(new FormData(form)),action:'add-roster'});
+    form.reset();
+    updateDepartment(form.elements.roleId);
+    await loadCouncilAccounts('학생회 명단에 추가했어요.');
+  }catch(error){$('councilAccountStatus').textContent=error.message;}
+  finally{button.disabled=false;}
+}
+
 function updateCouncilProfileFields() {
   if (!councilProfile) return;
   const form = $('councilProfileForm');
   updateDepartment(form.elements.roleId);
   const department = form.elements.department.disabled ? '' : form.elements.department.value;
   for (const checkbox of form.querySelectorAll('[name=membership]')) checkbox.disabled = checkbox.value === department;
-  const changesPosition = form.elements.roleId.value !== councilProfile.roleId || department !== councilProfile.department;
-  $('saveCouncilProfile').textContent = changesPosition ? '저장하고 초기 비밀번호 발급' : '변경 저장';
-  $('councilProfileHint').textContent = changesPosition
-    ? '직책이나 주 부서를 변경하면 기존 로그인이 종료됩니다. 등록된 이름과 초기 비밀번호로 로그인할 수 있어요.'
-    : '이름이나 겸임 부서만 바꾸면 기존 비밀번호로 계속 로그인할 수 있어요.';
+  $('councilProfileHint').textContent = '직책이나 부서를 바꾼 뒤에도 본인이 설정한 비밀번호를 사용해요.';
 }
 
 function openCouncilProfile(id) {
@@ -2070,14 +2235,13 @@ async function saveCouncilProfile(event) {
   button.disabled = true;
   $('councilProfileStatus').textContent = '';
   try {
-    const result = await post('/admin/council-accounts',{
+    await post('/admin/council-accounts',{
       action:'profile',id:account.id,revision:account.revision,name:form.elements.name.value,
       roleId:form.elements.roleId.value,department:form.elements.department.value,
       memberships:new FormData(form).getAll('membership'),
     });
     if (token!==service.token) return;
     if (councilProfile===account) resetCouncilProfile();
-    if (result.initialPassword) showCouncilInitialPassword(result);
     await loadCouncilAccounts('학생회 계정을 수정했어요.');
   } catch (error) {
     if (councilProfile===account) $('councilProfileStatus').textContent = error.message;
@@ -2091,39 +2255,39 @@ async function loadCouncilAccounts(message = '') {
     if (token !== service.token) return;
     councilAccountRows = data.accounts;
     const managesPositions = canManageCampusData();
+    $('teacherInviteForm').classList.toggle('hidden',!managesPositions);
     $('councilAccountRows').innerHTML = councilAccountRows.map(account => `<article class="campus-item">
-      <h3>${esc(account.name)} <span class="small muted">${esc(account.department)} ${esc(councilRoleLabels[account.roleId])}${account.usesInitialPassword?' · 초기 비밀번호 사용 중':''}</span></h3>
+      <h3>${esc(account.name)} <span class="small muted">${esc(account.department)} ${esc(councilRoleLabels[account.roleId])}${account.needsSetup?' · 미가입':''}</span></h3>
       ${account.memberships?.length?`<p class="small muted">겸임 부서 · ${esc(account.memberships.join(', '))}</p>`:''}
       <div class="campus-field-row">${managesPositions?`<button type="button" class="text-btn" data-council-edit="${esc(account.id)}">직책·부서 수정</button>`:''}
+      ${managesPositions&&account.needsSetup?`<button type="button" class="text-btn" data-council-invite="${esc(account.id)}">가입 링크 만들기</button>`:''}
       ${account.roleId==='president'||((account.roleId==='teacher'||isTeacherSlot(account.roleId))&&!managesPositions)?'':`
-      <button type="button" class="text-btn" data-council-reset="${esc(account.id)}" data-name="${esc(account.name)}">초기 비밀번호 재발급</button>
       <button type="button" class="text-btn" data-council-revoke="${esc(account.id)}" data-name="${esc(account.name)}">계정 해제</button>`}</div></article>`).join('');
     $('councilAccountStatus').textContent = message || (data.accounts.length ? '' : '등록된 학생회 계정이 없습니다.');
   } catch (error) { if (token === service.token) $('councilAccountStatus').textContent = error.message; }
 }
 
-async function saveCouncilAccount(event) {
-  event.preventDefault();
-  const form = event.currentTarget;
-  const button = event.submitter;
-  button.disabled = true;
-  try {
-    const result = await post('/admin/council-accounts', { ...Object.fromEntries(new FormData(form)), action:'create' });
-    resetCouncilEditor();
-    showCouncilInitialPassword(result);
-    await loadCouncilAccounts('학생회 계정을 등록했어요.');
-  } catch (error) { $('councilAccountStatus').textContent = error.message; }
-  finally { button.disabled = false; }
+function clearSchoolInviteLink(){
+  $('schoolInviteLink').value='';
+  $('schoolInviteOutput').classList.add('hidden');
 }
 
-function reissueCouncilAccount(button) {
-  confirmBox('초기 비밀번호를 재발급할까요?',`${button.dataset.name} 계정의 비밀번호를 초기화해요.`,async()=>{
-    try {
-      const result = await post('/admin/council-accounts',{action:'reset',id:button.dataset.councilReset});
-      showCouncilInitialPassword(result);
-      await loadCouncilAccounts('초기 비밀번호를 재발급했어요.');
-    } catch (error) { $('councilAccountStatus').textContent = error.message; }
-  },'재발급');
+async function createSchoolInvite(payload,button){
+  button.disabled=true;
+  clearSchoolInviteLink();
+  const token=service.token;
+  try{
+    const result=await post('/admin/school-invites',payload);
+    if(token!==service.token||!$('councilAccountsDialog').open)return;
+    const link=new URL(location.pathname,location.href);
+    link.hash='join='+result.invite;
+    $('schoolInviteLink').value=link.href;
+    $('schoolInviteOutput').classList.remove('hidden');
+    $('schoolInviteLink').select();
+    $('councilAccountStatus').textContent='가입 링크를 만들었어요.';
+  }catch(error){
+    if(token===service.token)$('councilAccountStatus').textContent=error.message;
+  }finally{button.disabled=false;}
 }
 
 function revokeCouncilAccount(button) {
@@ -2138,36 +2302,42 @@ function revokeCouncilAccount(button) {
 }
 
 async function openDocumentRoom(button) {
-  if (!councilAccount()) return;
+  if (!canOpenDocumentRoom()) return;
   button.disabled = true;
   try { await post('/campus/document-room/open', {}); toast('글마루를 열었습니다.'); }
   catch (error) { toast(error.message, 'error'); }
   finally { button.disabled = false; }
 }
 
-async function switchIeumAccount(event) {
-  const button=event.currentTarget;
-  if (button.disabled||!service.token) return;
-  const next=ownStudent?'council':'student';
-  button.disabled=true;
-  try {
-    await logout();
-    if (!service.token) setAuthTab(next);
-  } finally { button.disabled=false; }
-}
-
 function initCampus() {
   initEventQuestions();
-  $('ieumSwitchAccount').addEventListener('click',switchIeumAccount);
-  $('bareunSwitchAccount').addEventListener('click',switchIeumAccount);
+  $('teacherInviteForm').addEventListener('submit',event=>{
+    event.preventDefault();
+    createSchoolInvite({kind:'teacher',...Object.fromEntries(new FormData(event.currentTarget))},event.submitter);
+  });
+  $('teacherSharedInvite').addEventListener('click',event=>{
+    const roleId=$('teacherInviteForm').elements.roleId.value;
+    createSchoolInvite({kind:'teacher',roleId,openName:true},event.currentTarget);
+  });
+  $('councilAccountRows').addEventListener('click',event=>{
+    const button=event.target.closest('[data-council-invite]');
+    if(button)createSchoolInvite({kind:'council',id:button.dataset.councilInvite},button);
+  });
+  $('schoolInviteCopy').addEventListener('click',async ()=>{
+    const field=$('schoolInviteLink');
+    try{
+      await navigator.clipboard.writeText(field.value);
+      $('councilAccountStatus').textContent='가입 링크를 복사했어요.';
+    }catch{field.select();}
+  });
   document.addEventListener('keydown', event => {
-    if (event.altKey && event.key === 'ArrowLeft' && campusParticipant()) {
+    if (event.altKey && event.key === 'ArrowLeft' && (campusParticipant()||personalAccount())) {
       event.preventDefault();
       goCampusBack();
     }
   });
   document.addEventListener('click', event => {
-    const button = event.target.closest('[data-campus-back],[data-campus-tab],[data-campus-notice],[data-campus-event],[data-campus-reload],[data-campus-meals],[data-campus-calendar],[data-ieum-staff-home],[data-ieum-bareun],[data-document-room],[data-council-accounts],[data-council-edit],[data-council-reset],[data-council-revoke],[data-council-password],[data-schedule-shift],[data-schedule-today],[data-own-suggestion-delete]');
+    const button = event.target.closest('[data-campus-back],[data-campus-tab],[data-campus-notice],[data-campus-event],[data-campus-reload],[data-campus-meals],[data-campus-calendar],[data-ieum-staff-home],[data-ieum-bareun],[data-document-room],[data-council-accounts],[data-council-edit],[data-council-revoke],[data-school-password],[data-schedule-shift],[data-schedule-today],[data-own-suggestion-delete]');
     if (!button || button.disabled) return;
     if ('campusBack' in button.dataset) goCampusBack();
     else if ('campusNotice' in button.dataset) showCampus('notices','',{itemId:Number(button.dataset.campusNotice)});
@@ -2181,15 +2351,14 @@ function initCampus() {
     else if ('ieumStaffHome' in button.dataset) showStaffHome(button.dataset.ieumStaffHome === 'open');
     else if ('ieumBareun' in button.dataset) openManagedBareun(button.dataset.ieumBareun === 'data' ? 'data' : 'dashboard');
     else if ('documentRoom' in button.dataset) openDocumentRoom(button);
-    else if ('councilPassword' in button.dataset && councilAccount()) {
+    else if ('schoolPassword' in button.dataset && (councilAccount()||teacherAccount())) {
       $('councilOwnPasswordForm').reset();
       $('councilOwnPasswordStatus').textContent='';
       showDialog('councilOwnPasswordDialog');
     }
     else if ('councilAccounts' in button.dataset && canManageSchool()) {
-      resetCouncilEditor(); resetCouncilProfile(); showDialog('councilAccountsDialog'); loadCouncilAccounts();
+      resetCouncilProfile(); showDialog('councilAccountsDialog'); loadCouncilAccounts();
     } else if ('councilEdit' in button.dataset) openCouncilProfile(button.dataset.councilEdit);
-    else if ('councilReset' in button.dataset) reissueCouncilAccount(button);
     else if ('councilRevoke' in button.dataset) revokeCouncilAccount(button);
     else if ('scheduleToday' in button.dataset) { $('scheduleMonth').value = schoolDate().slice(0,7); loadSchedule(); }
     else if ('scheduleShift' in button.dataset) {
@@ -2214,28 +2383,34 @@ function initCampus() {
   $('scheduleDialog').addEventListener('close', () => { scheduleRequest++; });
   $('scheduleMonth').addEventListener('change', loadSchedule);
   for (const select of document.querySelectorAll('[data-council-role]')) {
-    const login = select.form.id==='councilLoginForm';
-    select.innerHTML = Object.entries(councilRoleLabels).filter(([role])=>login || !['vice','president','teacher'].includes(role))
+    select.innerHTML = Object.entries(councilRoleLabels).filter(([role])=>!['vice','teacher'].includes(role))
       .map(([role,label])=>`<option value="${role}">${label}</option>`).join('');
     select.form.elements.department.innerHTML = '<option value="">부서 선택</option>'+councilDepartmentNames.map(name=>`<option>${name}</option>`).join('');
-    select.addEventListener('change',()=>{updateDepartment(select);if(login)updateCouncilInitialNameField();});
+    select.addEventListener('change',()=>updateDepartment(select));
     updateDepartment(select);
   }
+  const positions=$('councilLoginForm').elements.position;
+  const mainPositions=Object.entries(councilRoleLabels).filter(([role])=>!['head','member'].includes(role));
+  positions.innerHTML='<option value="">직책 선택</option>'+
+    mainPositions.map(([role,label])=>`<option value="${role}">${label}</option>`).join('')+
+    councilDepartmentNames.map(department=>`<optgroup label="${department}">
+      <option value="head|${department}">${department} 부장</option>
+      <option value="member|${department}">${department} 부원</option></optgroup>`).join('');
+  positions.addEventListener('change',()=>{
+    positions.form.elements.name.value='';
+    setCouncilLoginNameRequired(false);
+  });
   $('councilLoginForm').addEventListener('submit', councilLogin);
+  window.addEventListener('hashchange',()=>{if(['#register','#teacher'].includes(location.hash)&&!service.token)renderLogin();});
   $('teacherLoginForm').addEventListener('submit',teacherLogin);
-  $('teacherLoginForm').elements.roleId.addEventListener('change',updateTeacherNameField);
-  $('councilLoginForm').addEventListener('input',updateCouncilInitialNameField);
-  $('councilOwnPasswordForm').addEventListener('submit',changeCouncilOwnPassword);
-  $('councilAccountForm').addEventListener('submit', saveCouncilAccount);
+  $('councilOwnPasswordForm').addEventListener('submit',changeSchoolOwnPassword);
   $('councilProfileForm').addEventListener('submit',saveCouncilProfile);
   $('councilProfileForm').addEventListener('change',updateCouncilProfileFields);
   $('cancelCouncilProfile').addEventListener('click',resetCouncilProfile);
-  $('councilAccountsDialog').addEventListener('close',()=>{
-    resetCouncilProfile();
-    $('councilIssuedPassword').textContent='';
-    $('councilIssuedPassword').classList.add('hidden');
-  });
-  updateCouncilInitialNameField();
+
+  $('councilAccountsDialog').addEventListener('close',resetCouncilProfile);
+  $('councilAccountsDialog').addEventListener('close',clearSchoolInviteLink);
+  $('councilRosterForm').addEventListener('submit',saveCouncilRosterMember);
 }
 
 const participation = { page:'polls', request:0, itemId:0, items:[] };
@@ -2521,7 +2696,8 @@ function renderCampusIdentity() {
     rail.innerHTML=name+' · '+esc(ownStudent.id);
     if (home) home.innerHTML=name+' · 학번 '+esc(ownStudent.id);
   } else if (service.user) {
-    rail.textContent=teacherAccount()?service.user.name:[service.user.department,service.user.role].filter(Boolean).join(' · ');
+    rail.textContent=personalAccount()?service.user.name+' · '+service.user.role:
+      teacherAccount()?service.user.name:[service.user.department,service.user.role].filter(Boolean).join(' · ');
   }
 }
 
@@ -2575,6 +2751,17 @@ function workspaceHome() {
   const actions = `<div class="ieum-header-actions">
     <button class="btn secondary" type="button" data-campus-meals>오늘 급식</button>
     <button class="btn secondary" type="button" data-school-timetable>오늘 시간표</button><button class="btn secondary ieum-web-calendar" type="button" data-campus-calendar>학사일정</button></div>`;
+  const shortcuts = `<section class="ieum-desk-section ieum-home-section"><header><h2>바로가기</h2></header>
+      <div class="ieum-home-shortcuts">
+        <a class="btn secondary ieum-outbound" href="https://www.moducbt.com/" target="_blank" rel="noopener noreferrer">모두의 CBT <span aria-hidden="true">↗</span></a>
+        <a class="btn secondary ieum-outbound" href="https://read365.edunet.net/" target="_blank" rel="noopener noreferrer">독서로 <span aria-hidden="true">↗</span></a>
+        <a class="btn secondary ieum-outbound" href="https://www.1365.go.kr/vols/main.do" target="_blank" rel="noopener noreferrer">1365 자원봉사포털 <span aria-hidden="true">↗</span></a>
+        <a class="btn secondary ieum-outbound" href="https://www.instagram.com/csmh_ieum/" target="_blank" rel="noopener noreferrer">학생회 인스타 <span aria-hidden="true">↗</span></a>
+      </div></section>`;
+  if(personalAccount())return workspaceHeader('이음',identity,actions,true)+
+    `<section class="ieum-desk-section ieum-home-section"><header><h2>학교 누리집</h2>
+     <button type="button" class="btn secondary" data-campus-tab="nurijip">누리집 보기</button></header></section>`+
+    shortcuts+schoolInfoCard();
   return workspaceHeader('이음', identity, actions, true) +
     `<section class="ieum-desk-section ieum-home-section"><header><h2>최근 교내 소식</h2><div class="ieum-section-actions">
       ${canPublish()?editorButton('notices','소식 올리기'):''}<button type="button" class="text-btn" data-campus-tab="notices">전체 보기</button></div></header>
@@ -2583,13 +2770,7 @@ function workspaceHome() {
       ${canPublish()?editorButton('events','행사 올리기'):''}<button type="button" class="text-btn" data-campus-tab="events">안내판 보기</button></div></header>
     <div id="workspaceEvents" class="campus-items" aria-live="polite"><p class="small muted">불러오는 중…</p></div></section>
     ${participationCards()}
-    <section class="ieum-desk-section ieum-home-section"><header><h2>바로가기</h2></header>
-      <div class="ieum-home-shortcuts">
-        <a class="btn secondary ieum-outbound" href="https://www.moducbt.com/" target="_blank" rel="noopener noreferrer">모두의 CBT <span aria-hidden="true">↗</span></a>
-        <a class="btn secondary ieum-outbound" href="https://read365.edunet.net/" target="_blank" rel="noopener noreferrer">독서로 <span aria-hidden="true">↗</span></a>
-        <a class="btn secondary ieum-outbound" href="https://www.1365.go.kr/vols/main.do" target="_blank" rel="noopener noreferrer">1365 자원봉사포털 <span aria-hidden="true">↗</span></a>
-        <a class="btn secondary ieum-outbound" href="https://www.instagram.com/csmh_ieum/" target="_blank" rel="noopener noreferrer">학생회 인스타 <span aria-hidden="true">↗</span></a>
-      </div></section>
+    ${shortcuts}
     <section class="ieum-desk-section ieum-home-section"><header><h2>이번 주 한마디</h2></header>
     <p>${weekPrompt()}</p><button type="button" class="text-btn" data-ieum-prompt="question">자유 소통에 한마디 남기기</button></section>`;
 }
@@ -2726,7 +2907,6 @@ function workspaceEventCards(items) {
     ${item.calendarPublished ? '<span class="ieum-calendar-source is-council">학사일정에 게시됨</span>' : ''}
     ${item.department ? `<div class="ieum-event-department"><span>작성 부서</span> ${esc(item.department)}</div>` : ''}
     ${item.detail ? `<p>${esc(item.detail)}</p>` : ''}
-    ${item.posterKey === 'ieum-demo' ? '<img class="ieum-event-poster" src="./assets/ieum-demo-poster.svg" alt="예시 홍보 포스터 · 반도체 체험 주간">' : ''}
     ${item.attachments?.length ? `<ul class="ieum-attachments" aria-label="첨부파일">${item.attachments.map(file => {
       const supported=canPreviewEventFile(file.name);
       return `<li class="ieum-event-attachment">
@@ -3143,7 +3323,7 @@ function eventQuestionEditor(action = 'ask', item, focus = false) {
   eventQuestions.action = action;
   eventQuestions.questionId = item?.id ?? 0;
   const field = $('eventQuestionsContent');
-  $('eventQuestionsForm').classList.toggle('hidden', action === 'ask' && !ownStudent);
+  $('eventQuestionsForm').classList.toggle('hidden', action === 'ask' && !studentLikeAccount());
   $('eventQuestionsCancel').classList.toggle('hidden', action === 'ask');
   $('eventQuestionsLabel').textContent = action === 'answer' ? '학생회 답변' : '행사 질문';
   $('eventQuestionsSubmit').textContent = action === 'edit' ? '질문 수정 저장' : action === 'answer' ? '답변 저장' : '질문 등록';
@@ -3209,7 +3389,7 @@ function initEventQuestions() {
   });
   dialog.addEventListener('close', () => { eventQuestions.request++; eventQuestions.id = 0; });
   $('eventQuestionsRefresh').addEventListener('click', () => loadEventQuestions());
-  $('eventQuestionsCancel').addEventListener('click', () => eventQuestionEditor('ask',undefined,Boolean(ownStudent)));
+  $('eventQuestionsCancel').addEventListener('click', () => eventQuestionEditor('ask',undefined,studentLikeAccount()));
   $('eventQuestionsForm').addEventListener('submit',event => {
     event.preventDefault();
     saveEventQuestion(eventQuestions.action,eventQuestions.questionId,$('eventQuestionsContent').value,$('eventQuestionsSubmit'));
@@ -3618,12 +3798,10 @@ function renderIeumStudents() {
   const rows=ieumStudents.filter(item=>`${item.student_id} ${item.requested_name}`.toLocaleLowerCase().includes(term));
   $('ieumStudentsRows').innerHTML=rows.length ? rows.map(item=>`<form class="campus-item ieum-student-row" data-ieum-student-form
       data-id="${esc(item.student_id)}" data-revision="${Number(item.revision)}">
-    <div class="ieum-student-state"><span class="small muted">${item.state==='active' ? '활성 계정' : '첫 로그인 대기'}</span>
-      ${item.state==='initial' ? `<span>초기 비밀번호 <strong>${esc(item.student_id)}</strong></span>` : '<span>비밀번호 설정됨</span>'}</div>
+    <div class="ieum-student-state"><span class="small muted">${item.state==='active' ? '활성 계정' : '가입 대기'}</span></div>
     <label class="field">학번<input name="studentId" value="${esc(item.student_id)}" inputmode="numeric" pattern="[1-3][1-9][0-9]{2}" maxlength="4" required></label>
     <label class="field">이름<input name="name" value="${esc(item.requested_name)}" maxlength="100" required></label>
     <div class="ieum-student-actions"><button type="submit" class="btn secondary">수정 저장</button>
-    <button type="button" class="btn secondary" data-ieum-student-reset>비밀번호 초기화</button>
     <button type="button" class="btn secondary ieum-delete" data-ieum-student-delete>계정 삭제</button></div></form>`).join('') :
     '<p class="small muted">표시할 학생 계정이 없습니다.</p>';
 }
@@ -3664,18 +3842,6 @@ function deleteIeumStudent(button) {
     try {
       await post('/admin/student-accounts',{action:'delete',studentId:student.student_id,revision:student.revision});
       await loadIeumStudents('학생 계정을 삭제했어요.');
-    } catch(error) { $('ieumStudentsStatus').textContent=error.message; }
-  });
-}
-
-function resetIeumStudentPassword(button) {
-  const form=button.closest('[data-ieum-student-form]');
-  const student=ieumStudents.find(item=>item.student_id===form.dataset.id);
-  if(!student || !canManageCampusData())return;
-  confirmBox('비밀번호를 초기화할까요?',`${student.student_id} ${student.requested_name} 학생의 비밀번호를 학번으로 바꿔요. 학생은 다음 로그인에서 새 비밀번호를 정해요.`,async()=>{
-    try {
-      await post('/admin/student-accounts',{action:'reset',studentId:student.student_id,revision:student.revision});
-      await loadIeumStudents('초기 비밀번호를 학번으로 설정했어요.');
     } catch(error) { $('ieumStudentsStatus').textContent=error.message; }
   });
 }
@@ -3725,8 +3891,6 @@ function initRoster() {
     }
     const deleteButton=event.target.closest('[data-ieum-student-delete]');
     if(deleteButton)deleteIeumStudent(deleteButton);
-    const resetButton=event.target.closest('[data-ieum-student-reset]');
-    if(resetButton)resetIeumStudentPassword(resetButton);
   });
   $('ieumStudentsSearch').addEventListener('input',renderIeumStudents);
   const officersForm=$('ieumClassOfficersForm');
@@ -3744,8 +3908,8 @@ function initRoster() {
     if(campus.page==='manage'&&canManageCampusData())showCampusManagement(campus.request);
   });
   $('ieumRosterTemplate').addEventListener('click',() => saveRosterWorkbook(['학번','이름'],[],'이음 학생 가입 양식.xlsx'));
-  download.addEventListener('click',() => saveRosterWorkbook(['학번','이름','초기 비밀번호'],
-    rosterCredentials.map(row => [row.id,row.name,row.password]),'이음 신규 학생 계정.xlsx'));
+  download.addEventListener('click',() => saveRosterWorkbook(['학번','이름'],
+    rosterCredentials.map(row => [row.id,row.name]),'이음 신규 학생 계정.xlsx'));
   form.addEventListener('submit',async event => {
     event.preventDefault();
     if (!canManageCampusData()) return;
@@ -3755,6 +3919,7 @@ function initRoster() {
     let enrolled = 0, skipped = 0;
     try {
       const rows = await readRoster(form.elements.roster.files[0]);
+      if(!(await api('/ieum/status')).directRegistration)throw Error('공용 서버에 회원가입 업데이트를 적용해 주세요.');
       for (let i=0;i<rows.length;i+=12) {
         if (token !== service.token) return;
         status.textContent = `${i}/${rows.length}명 처리 중…`;
@@ -3765,9 +3930,9 @@ function initRoster() {
         skipped += result.skipped;
         download.classList.toggle('hidden',!rosterCredentials.length);
       }
-      status.textContent = `${enrolled}명 가입 · 기존 계정 ${skipped}명 건너뜀`;
+      status.textContent = `${enrolled}명 등록 · 기존 계정 ${skipped}명 건너뜀`;
     } catch (error) {
-      if (token === service.token) status.textContent = (enrolled ? `${enrolled}명 가입 완료. ` : '') + error.message;
+      if (token === service.token) status.textContent = (enrolled ? `${enrolled}명 등록 완료. ` : '') + error.message;
     } finally { button.disabled = false; }
   });
 }
@@ -4833,7 +4998,6 @@ function initMessages() {
 const ieumLoginBridge = globalThis.chrome?.webview;
 const savedLoginForms = {student:'studentLoginForm',council:'councilLoginForm',teacher:'teacherLoginForm'};
 let savedLoginRequest = 0;
-let pendingStudentRemember = false;
 
 function sendSavedLogin(action,kind,credentials=null,requestId=0) {
   if (!ieumLoginBridge) return;
@@ -4890,17 +5054,14 @@ function initSavedLogin() {
       $('studentLoginId').value=credentials.Username;
       $('studentLoginPassword').value=credentials.Password;
     } else if (kind==='teacher') {
-      form.elements.roleId.value=credentials.RoleId || 'teacher';
-      updateTeacherNameField();
-      form.elements.name.value=credentials.Username;
+      const teacherNames={principal:'교장선생님','vice-principal':'교감선생님'};
+      form.elements.name.value=teacherNames[credentials.RoleId]||credentials.Username;
       form.elements.password.value=credentials.Password;
     } else {
-      form.elements.roleId.value=credentials.RoleId;
-      updateDepartment(form.elements.roleId);
-      form.elements.department.value=credentials.Department;
+      form.elements.position.value=[credentials.RoleId,credentials.Department].filter(Boolean).join('|');
+      form.elements.name.value=credentials.Username||'';
       form.elements.password.value=credentials.Password;
-      form.elements.name.value=credentials.Username || '';
-      updateCouncilInitialNameField();
+      setCouncilLoginNameRequired(false);
     }
     form.querySelector('[data-save-login]').checked=true;
   });
@@ -4916,6 +5077,6 @@ initMessages();
 initSavedLogin();
 initApp();</script>
 <script src="./assets/ieum-xlsx.js" defer></script>
-<script src="./assets/ieum-web.js" defer></script>
+<script src="./assets/ieum-web.js?v=500dc37ae0fc" defer></script>
 </body>
 </html>
