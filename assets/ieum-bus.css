@@ -161,21 +161,29 @@
 
 .bus-student-layout { display: grid; grid-template-columns: minmax(0,1.45fr) minmax(245px,.8fr); gap: 16px; align-items: start; }
 .bus-ticket {
-  padding: 0; overflow: hidden; border: 1px solid var(--bus-line);
-  border-radius: 22px; box-shadow: 0 8px 26px #224b7c12;
+  min-width: 0;
+  --ticket-inset: clamp(16px, 3.5vw, 29px);
+  --ticket-border: color-mix(in srgb,var(--bus-route-color) 24%,#fff);
+  filter: drop-shadow(0 9px 15px #173a6920);
+}
+.bus-ticket-paper {
+  border: 1px solid var(--ticket-border); border-bottom: 0;
+  border-radius: 20px 20px 0 0; overflow: hidden; background: #fff;
 }
 .bus-ticket .bus-panel-head {
-  padding: clamp(17px,4vw,29px); color: var(--bus-navy);
-  background: linear-gradient(120deg,var(--bus-route-wash),#f5faff);
+  padding: var(--ticket-inset); color: var(--bus-navy); align-items: start; flex-wrap: wrap; gap: 10px;
+  border-top: 6px solid var(--bus-route-color);
+  background: linear-gradient(128deg,var(--bus-route-wash),#fdfefe);
 }
-.bus-ticket .bus-panel-head p { margin: 0 0 8px; color: var(--bus-route-color); font-size: 14px; font-weight: 750; }
+.bus-ticket .bus-panel-head p { margin: 0 0 10px; color: var(--bus-route-color); font-size: 14px; font-weight: 750; }
 .bus-ticket .bus-route-label { gap: 10px; }
 .bus-ticket .bus-line-symbol { width: 42px; height: 42px; }
 .bus-ticket .bus-line-symbol .bus-icon { width: 24px; height: 24px; }
-.bus-ticket h2 { font-size: clamp(25px, 5vw, 37px); }
+.bus-ticket h2 { margin: 0; font-size: clamp(24px, 4vw, 35px); line-height: 1.22; letter-spacing: -.035em; }
 .bus-ticket .bus-trip-facts {
-  grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 15px; margin: 0; padding: clamp(16px,4vw,27px);
+  grid-template-columns: minmax(0,1fr) minmax(0,1.25fr); gap: 15px; margin: 0; padding: var(--ticket-inset);
 }
+.bus-ticket .bus-trip-facts dd { font-size: clamp(17px, 2.7vw, 24px); line-height: 1.3; }
 .bus-ticket .bus-trip-facts > div { position: relative; padding-top: 21px; }
 .bus-ticket .bus-trip-facts > div::before {
   content: ''; position: absolute; left: 0; top: 1px; width: 12px; height: 12px;
@@ -188,28 +196,44 @@
 .bus-ticket .bus-trip-facts > div:last-child::before { background: var(--bus-route-color); }
 .bus-ticket-action {
   display: flex; flex-wrap: wrap; align-items: center; gap: 9px;
-  padding: 13px clamp(16px,4vw,27px); border-top: 1px solid var(--bus-line);
+  padding: 13px var(--ticket-inset); border-top: 1px solid var(--bus-line);
 }
 .bus-ticket-action p { margin: 0; font-size: 13px; color: var(--bus-muted); }
 .bus-ticket-action p strong { color: var(--bus-ink); margin-right: 4px; }
 .bus-ticket-action .btn[data-bus-action=self-board] {
   min-height: 46px; padding-inline: 20px;
 }
-.bus-ticket-stub {
-  position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-  padding: 13px clamp(16px,4vw,24px); border-top: 1px dashed #adc3dd; background: #f7faff;
+.bus-ticket-coupon {
+  position: relative; background: #f8fbff;
+  border: 1px solid var(--ticket-border); border-top: 1px dashed var(--bus-route-color);
+  border-radius: 0 0 20px 20px;
+  transform-origin: 82% 0;
 }
-.bus-ticket-stub:has(.bus-ticket-duty) { grid-template-columns: repeat(3,minmax(0,1fr)); }
+.bus-ticket-stub {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px 14px; margin: 0;
+  padding: 16px var(--ticket-inset);
+}
+.bus-ticket-stub:has(.bus-ticket-duty) { grid-template-columns: minmax(0,.9fr) minmax(0,1.25fr) minmax(0,1fr); }
 .bus-ticket-stub > div { min-width: 0; overflow-wrap: anywhere; }
-.bus-ticket-stub::before,.bus-ticket-stub::after {
-  content: ''; position: absolute; top: -10px; width: 19px; height: 19px; border: 1px solid var(--bus-line);
+.bus-ticket-coupon::before,.bus-ticket-coupon::after {
+  content: ''; position: absolute; top: -10px; width: 19px; height: 19px; border: 1px solid var(--ticket-border);
   border-radius: 50%; background: var(--bus-bg);
 }
-.bus-ticket-stub::before { left: -10px; }
-.bus-ticket-stub::after { right: -10px; }
-.bus-ticket-stub span { display: block; margin-bottom: 4px; color: var(--bus-muted); font-size: 12px; }
-.bus-ticket-stub time,.bus-ticket-stub strong { font-size: 14px; font-weight: 750; }
-.bus-ticket-stub strong small { font-size: 12px; color: var(--bus-muted); font-weight: 500; }
+.bus-ticket-coupon::before { left: -10px; }
+.bus-ticket-coupon::after { right: -10px; }
+.bus-ticket-stub dt { margin-bottom: 4px; color: var(--bus-muted); font-size: 13px; }
+.bus-ticket-stub dd { margin: 0; font-size: 14px; font-weight: 750; font-variant-numeric: tabular-nums; }
+.bus-ticket-stub small { font-size: 12px; color: var(--bus-muted); font-weight: 550; }
+.bus-ticket:is([data-tearing],[data-ticket-state=boarded]) .bus-ticket-paper {
+  clip-path: polygon(0 0,100% 0,100% calc(100% - 5px),95% 100%,90% calc(100% - 4px),85% 100%,80% calc(100% - 5px),75% 100%,70% calc(100% - 4px),65% 100%,60% calc(100% - 5px),55% 100%,50% calc(100% - 4px),45% 100%,40% calc(100% - 5px),35% 100%,30% calc(100% - 4px),25% 100%,20% calc(100% - 5px),15% 100%,10% calc(100% - 4px),5% 100%,0 calc(100% - 4px));
+}
+.bus-ticket:is([data-tearing],[data-ticket-state=boarded]) .bus-ticket-coupon {
+  clip-path: polygon(0 0,5% 5px,10% 0,15% 5px,20% 0,25% 5px,30% 0,35% 5px,40% 0,45% 5px,50% 0,55% 5px,60% 0,65% 5px,70% 0,75% 5px,80% 0,85% 5px,90% 0,95% 5px,100% 0,100% 100%,0 100%);
+}
+.bus-ticket:is([data-tearing],[data-ticket-state=boarded]) .bus-ticket-coupon::before,
+.bus-ticket:is([data-tearing],[data-ticket-state=boarded]) .bus-ticket-coupon::after { display: none; }
+.bus-ticket[data-ticket-state=boarded] .bus-ticket-coupon { margin-top: 6px; background: #f0f9f5; }
+.bus-ticket[data-ticket-state=boarded] .bus-ticket-action time { font-weight: 750; color: #155841; }
 .bus-chip { display: inline-flex; flex: none; align-items: center; border-radius: 999px; padding: 5px 10px; font-size: 13px; font-weight: 700; }
 .bus-chip[data-state=boarded] { background: #e4f4eb; color: #155841; }
 .bus-chip[data-state=waiting] { background: #fff0cb; color: #694503; }
@@ -306,6 +330,9 @@
 
 @media (max-width: 760px) {
   .bus-settings { grid-template-columns: minmax(0,1fr); }
+}
+
+@media (max-width: 900px) {
   .bus-student-layout { grid-template-columns: minmax(0,1fr); }
 }
 
@@ -333,7 +360,15 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  .bus-ticket[data-tearing] .bus-ticket-coupon { animation: bus-ticket-tear .57s cubic-bezier(.26,.67,.26,1) both; }
   .bus-workspace :is(.bus-route-card,.bus-stat,.btn) {
     transition: background-color .16s ease, border-color .16s ease, box-shadow .16s ease;
   }
+}
+
+@keyframes bus-ticket-tear {
+  0% { transform: translateY(0) rotate(0); }
+  20% { transform: translate(0,3px) rotate(-.5deg); }
+  66% { transform: translate(-6px,18px) rotate(-2.4deg); }
+  100% { transform: translate(0,8px) rotate(0); }
 }

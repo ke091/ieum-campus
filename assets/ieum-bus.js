@@ -152,23 +152,27 @@
       if (!row) return `<section class="bus-panel"><h2>${data.editable ? '등록된 기본 노선이 없어요' : '해당 날짜의 이용 기록이 없어요'}</h2>
         <p>배정 내용을 확인하려면 통학버스 담당 선생님께 문의하세요.</p></section>`;
       const duty = dutyFor(row.route);
-      return `<div class="bus-student-layout"><section class="bus-panel bus-ticket" data-line="${escape(row.route || '')}">
-        <header class="bus-panel-head">
-          <div><p>내 탑승권</p><div class="bus-route-label">${lineSymbol}<h2>${escape(routeName(row.route))}</h2></div></div>
-          <span class="bus-chip" data-state="${boardingState(row)}">${stateLabel(row)}</span>
-        </header>
-        ${row.route ? tripFacts(row) : ''}
-        <div class="bus-ticket-stub">
-          <div><span>운행일</span><time datetime="${escape(data.date)}">${escape(fmtDate(data.date))}</time></div>
-          <div><span>탑승자</span><strong>${escape(row.name)} <small>${escape(row.id)}</small></strong></div>
-          ${row.route ? `<div class="bus-ticket-duty"><span>담당 선생님</span><strong>${escape(duty?.name || '미정')}</strong></div>` : ''}
+      const state = boardingState(row);
+      return `<div class="bus-student-layout"><section class="bus-ticket" data-line="${escape(row.route || '')}" data-ticket-state="${state}">
+        <div class="bus-ticket-paper">
+          <header class="bus-panel-head">
+            <div><p>내 탑승권</p><div class="bus-route-label">${lineSymbol}<h2>${escape(routeName(row.route))}</h2></div></div>
+            <span class="bus-chip" data-state="${state}">${stateLabel(row)}</span>
+          </header>
+          ${row.route ? tripFacts(row) : ''}
         </div>
+        <div class="bus-ticket-coupon">
+          <dl class="bus-ticket-stub">
+            <div><dt>탑승자</dt><dd>${escape(row.name)} <small>${escape(row.id)}</small></dd></div>
+            <div><dt>운행일</dt><dd><time datetime="${escape(data.date)}">${escape(fmtDate(data.date))}</time></dd></div>
+            ${row.route ? `<div class="bus-ticket-duty"><dt>담당 선생님</dt><dd>${escape(duty?.name || '미정')}</dd></div>` : ''}
+          </dl>
         ${row.boardedAt ? `<div class="bus-ticket-action">
           <p><strong>탑승 시각</strong> <time datetime="${escape(row.boardedAt)}">${boardClock.format(new Date(row.boardedAt))}</time></p>
           ${data.editable && row.boardedByStudent ? control('self-unboard','탑승 완료 취소',row) : ''}
         </div>` : data.editable && row.route ? `<div class="bus-ticket-action">
           ${control('self-board','탑승 완료',row,true)}<p>버스에 탄 뒤 눌러 주세요.</p>
-        </div>` : ''}</section>
+        </div>` : ''}</div></section>
         ${row.requestState || (data.editable && !row.boardedAt) ? `<section class="bus-panel bus-student-change"><h2>노선 변경</h2>
           ${row.requestState ? `<div class="bus-request-summary" data-state="${row.requestState}">
             <strong>${requestStates[row.requestState]}</strong><p>${escape(requestLabel(row))}</p>
@@ -462,6 +466,21 @@
       }
     }
 
+    async function tearTicket() {
+      const ticket = content.querySelector('.bus-ticket[data-ticket-state=waiting]');
+      const coupon = ticket?.querySelector('.bus-ticket-coupon');
+      if (!coupon || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      ticket.setAttribute('data-tearing','');
+      const animation = coupon.getAnimations().find(item => item.animationName === 'bus-ticket-tear');
+      if (animation) {
+        let timeout;
+        try {
+          await Promise.race([animation.finished.catch(() => {}), new Promise(resolve => { timeout = setTimeout(resolve, 800); })]);
+        } finally { clearTimeout(timeout); }
+      }
+      ticket.removeAttribute('data-tearing');
+    }
+
     async function modify(action, id, changes = {}) {
       if (busy || !data?.editable) return;
       const row = data.records.find(record => record.id === id) || data.records[0];
@@ -479,6 +498,10 @@
           'self-board':'탑승 완료로 기록했어요.', 'self-unboard':'탑승 대기로 돌아갔어요.',
           duty:'담당 선생님을 저장했어요.',
         }[action] || '변경을 저장했어요.';
+        if (action === 'self-board' && current()) {
+          feedback.textContent = message;
+          await tearTicket();
+        }
         if ((action === 'approve' || action === 'assign') && row) {
           const destination = result.route === undefined ? (action === 'approve' ? row.requestRoute : changes.route) : result.route;
           route = destination || row.baseRoute;

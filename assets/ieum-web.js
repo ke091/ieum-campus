@@ -2,8 +2,7 @@
   const workspace = document.getElementById('ieumWorkspace');
   const rail = workspace.querySelector('.ieum-rail');
   const sourceNav = document.getElementById('campusNav');
-  const compact = matchMedia('(max-width: 760px), (max-width: 1400px) and (pointer: coarse)');
-  const phone = matchMedia('(max-width: 760px)');
+  const compact = matchMedia('(max-width: 1023px), (max-width: 1400px) and (pointer: coarse)');
   const main = document.getElementById('campusSurface');
   const extras = document.getElementById('ieumHomeExtras');
 
@@ -29,7 +28,7 @@
     return timetableFeed;
   }
 
-  timetableWebFeed.load = async (week,grade,room) => {
+  if (document.body.hasAttribute('data-web-timetable')) timetableWebFeed.load = async (week,grade,room) => {
     const data = await getTimetableFeed();
     if (!data) return null;
     const academicYear = day => Number(day.slice(0,4)) - Number(Number(day.slice(5,7))<3);
@@ -125,6 +124,6 @@
 
   const navigation = '#campusNav button, [data-campus-tab], [data-campus-event], [data-campus-notice], [data-event-proposal], [data-school-section], [data-announcement-room], [data-linked-announcement]';
   document.addEventListener('click', event => {
-    if (phone.matches && event.target.closest(navigation)) window.scrollTo({ top: 0, behavior: 'instant' });
+    if (compact.matches && event.target.closest(navigation)) window.scrollTo({ top: 0, behavior: 'instant' });
   });
 })();

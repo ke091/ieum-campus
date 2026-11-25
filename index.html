@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
 <meta name="color-scheme" content="light"><meta name="robots" content="noindex,nofollow">
 <title>이음 · 충남반도체마이스터고등학교</title>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Dv9J+IRFznmVyib+xRuoZPLFY33ExQzh6+16HJqMHp8='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; frame-src blob:; connect-src 'self' https://bareun-csmh-student-care.kimm2112.chatgpt.site https://raw.githubusercontent.com; base-uri 'none'; object-src 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-lhHDVeXP2xYSjAzytZdrGZewZpbnK9XAt0KoQelQ2Co='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; frame-src 'self' blob:; connect-src 'self' https://bareun-csmh-student-care.kimm2112.chatgpt.site https://raw.githubusercontent.com; base-uri 'none'; object-src 'none'; form-action 'none'">
   <meta name="referrer" content="no-referrer">
   <meta name="description" content="충남반도체마이스터고등학교의 소통 공간 이음에서 교내 소식, 학사일정, 시간표와 급식을 확인해요.">
   <meta property="og:title" content="이음 · 충남반도체마이스터고등학교">
@@ -563,10 +563,10 @@ html{scrollbar-gutter:stable}
 .ieum-first-setup .ieum-reveal-password{display:flex;align-items:center;gap:6px;width:max-content;max-width:100%;min-height:28px;font-size:13px;color:var(--ink);cursor:pointer}
 .ieum-first-setup .ieum-reveal-password input{width:auto;min-width:0;min-height:0;margin:0;accent-color:#195cb4}
 </style>
-<link rel="stylesheet" href="./assets/ieum-bus.css?v=2991e101ef31">
-<link rel="stylesheet" href="./assets/ieum-web.css?v=d44551d30f84">
+<link rel="stylesheet" href="./assets/ieum-bus.css?v=dab1f28216ef">
+<link rel="stylesheet" href="./assets/ieum-web.css?v=c6bf5a02966c">
 </head>
-<body class="auth-mode" data-entry="choose" data-sync="shared">
+<body class="auth-mode" data-entry="choose" data-sync="shared" data-web-timetable>
 <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"><defs>
 <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M19 4C8 2 3 8 6 14c3 6 14 4 13-10Z"/><path d="m5 21 10-13M10 13l-1-4m2 5 5 1"/></symbol>
 <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 11 9-8 9 8M5 10v10h14V10M10 20v-6h4v6"/></symbol>
@@ -1014,32 +1014,23 @@ html{scrollbar-gutter:stable}
   <p class="form-error" id="studentLoginError" role="alert"></p>
   <button id="studentLoginSubmit" class="btn primary">로그인</button>
   <button type="button" class="btn secondary ieum-first-login" data-login-kind="register">회원가입</button>
-  <button type="button" class="text-btn" data-login-kind="personal">개인 계정으로 로그인</button>
   <label class="ieum-remember-login hidden"><input type="checkbox" data-save-login> 이 PC에 로그인 정보 저장</label>
   <div class="auth-links"><button type="button" class="text-btn" data-login-kind="choose">← 이음 홈</button></div>
 </form>
 <form id="registrationForm" class="login-form ieum-first-setup hidden">
   <h2 id="registrationTitle">이음 회원가입</h2>
-  <div class="stack">
+  <p id="registrationInviteNotice" class="small muted hidden">학교에서 받은 가입 링크를 열어 학교 계정을 등록해 주세요.</p>
+  <div class="stack" id="registrationFields">
     <input type="hidden" name="kind" value="student">
     <label class="field">이름<input name="name" maxlength="40" autocomplete="username" required></label>
     <div class="field"><label for="registrationPassword">사용할 비밀번호</label><input id="registrationPassword" name="password" type="password" minlength="4" autocomplete="new-password" required>
       <label class="ieum-reveal-password"><input id="registrationReveal" type="checkbox" aria-controls="registrationPassword"> 비밀번호 표시</label>
     </div>
   </div>
-  <label class="ieum-remember-login"><input type="checkbox" name="keepSignedIn"> 이 기기에서 로그인 유지</label>
+  <label class="ieum-remember-login" id="registrationRemember"><input type="checkbox" name="keepSignedIn"> 이 기기에서 로그인 유지</label>
   <p id="registrationError" class="form-error" role="alert"></p>
   <button id="registrationSubmit" type="submit" class="btn primary">가입하고 로그인</button>
   <div class="auth-links"><button id="registrationBack" type="button" class="text-btn" data-login-kind="student">로그인으로</button></div>
-</form>
-<form id="personalLoginForm" class="login-form hidden">
-  <h2>개인 계정 로그인</h2>
-  <label class="field">이름<input name="name" maxlength="40" autocomplete="username" required></label>
-  <label class="field">비밀번호<input name="password" type="password" autocomplete="current-password" required></label>
-  <label class="ieum-remember-login"><input type="checkbox" name="keepSignedIn"> 이 기기에서 로그인 유지</label>
-  <p class="form-error" id="personalLoginError" role="alert"></p>
-  <button type="submit" class="btn primary">로그인</button>
-  <div class="auth-links"><button id="personalLoginBack" type="button" class="text-btn" data-login-kind="choose">← 뒤로</button></div>
 </form></div></dialog>
 <dialog id="studentDialog" class="modal" aria-labelledby="studentDialogTitle"><form id="studentForm"><div class="modal-head"><div><h2 id="studentDialogTitle">새 학생 등록</h2></div><button class="icon-btn" type="button" data-close="studentDialog" aria-label="닫기"><svg><use href="#i-close"/></svg></button></div><div class="modal-body stack"><div class="fields"><div class="field"><label for="studentId">학번</label><input id="studentId" inputmode="numeric" pattern="[1-3][1-9][0-9]{2}" maxlength="4" required placeholder="예: 2201"><span class="field-help">학년 1자리 + 반 1자리 + 번호 2자리</span></div><div class="field"><label for="studentName">학생 이름</label><input id="studentName" required maxlength="30" placeholder="이름 입력"></div></div><p class="form-error" id="studentError" role="alert"></p></div><div class="modal-footer"><button type="button" class="btn secondary" data-close="studentDialog">취소</button><button class="btn primary" id="studentSave">학생 등록</button></div></form></dialog>
 <dialog id="warningDialog" class="modal" aria-labelledby="warningDialogTitle"><form id="warningForm"><div class="modal-head"><div><h2 id="warningDialogTitle">지도 기록 등록</h2></div><button class="icon-btn" type="button" data-close="warningDialog" aria-label="닫기"><svg><use href="#i-close"/></svg></button></div><div class="modal-body stack"><div class="field student-picker"><label for="studentSearchInput">학생 선택</label><input id="studentSearchInput" type="search" placeholder="학번 또는 이름 검색" autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="studentDropdown" aria-expanded="false"><div class="suggestions hidden" id="studentDropdown" role="listbox" aria-label="학생 검색 결과"></div><div id="selectedStudentBadge" class="selected-student hidden"><span id="selectedStudentText"></span><button type="button" data-action="student-clear" aria-label="학생 선택 해제">×</button></div></div><div class="fields"><div class="field full"><label for="warningDate">지도 날짜</label><input id="warningDate" type="date" min="2026-11-01" required></div><div class="field full"><label for="warningReason">지도 사유</label><select id="warningReason" required><option value="">사유를 선택하세요</option><option>복장 부적합 / 교복 미착용</option><option>지각 (등교시간 위반)</option><option>무단 외출 / 무단 이탈</option><option>휴대폰 미제출 / 수업 중 사용</option><option>용모 규정 위반 (두발/슬리퍼)</option><option>기타 지도 사항</option></select></div><div class="field full"><label for="warningNotes">관리 메모 · 학생 비공개</label><textarea id="warningNotes" maxlength="1000" placeholder="장소, 상황, 안내한 내용 등을 기록하세요."></textarea></div><div class="field full"><label for="warningStudentNotes">학생 공개 메모 (선택)</label><textarea id="warningStudentNotes" maxlength="1000" placeholder="학생에게 안내할 내용"></textarea></div></div><p class="form-error" id="warningError" role="alert"></p></div><div class="modal-footer"><button type="button" class="btn secondary" data-close="warningDialog">취소</button><button class="btn primary" id="warningSave">기록 등록</button></div></form></dialog>
@@ -1056,7 +1047,7 @@ html{scrollbar-gutter:stable}
   </div>
 </dialog>
 <div class="print-area" id="printArea"></div>
-<script src="./assets/ieum-bus.js?v=a5f91c61f19c"></script>
+<script src="./assets/ieum-bus.js?v=c4c02057028b"></script>
 <script>
 'use strict';
 const SCHOOL_NAME="충남반도체마이스터고등학교";
@@ -1322,7 +1313,6 @@ function initApp(){
  $('studentSearchInput').addEventListener('input',studentSuggestions);$('studentSearchInput').addEventListener('focus',studentSuggestions);$('studentSearchInput').addEventListener('keydown',e=>{if(e.key==='ArrowDown'){e.preventDefault();$('studentDropdown').querySelector('button')?.focus()}if(e.key==='Enter'){e.preventDefault();const buttons=$('studentDropdown').querySelectorAll('button');if(buttons.length===1)selectStudent(buttons[0].dataset.id)}});
  $('studentDropdown').addEventListener('keydown',e=>{const buttons=[...$('studentDropdown').querySelectorAll('button')],index=buttons.indexOf(document.activeElement);if(e.key==='ArrowDown'){e.preventDefault();buttons[(index+1)%buttons.length]?.focus()}if(e.key==='ArrowUp'){e.preventDefault();if(index<=0)$('studentSearchInput').focus();else buttons[index-1]?.focus()}});
  $('studentLoginForm').addEventListener('submit',studentLogin);$('studentForm').addEventListener('submit',saveStudent);$('warningForm').addEventListener('submit',saveWarning);$('ownPasswordForm').addEventListener('submit',changeOwnPassword);$('registrationForm').addEventListener('submit',registerAccount);
- $('personalLoginForm').addEventListener('submit',loginPersonalAccount);
  $('studentLoginId').addEventListener('input',event=>{event.target.value=studentDigits(event.target.value)});
  $('registrationReveal').addEventListener('change',event=>{$('registrationPassword').type=event.target.checked?'text':'password'});
  $('profileForm').addEventListener('submit',async e=>{e.preventDefault();const name=$('settingName').value.trim();if(!name)return;try{if(isDemo)user.name=name;else{const result=await post('/admin/profile',{name});service.user=result.user;user=result.user}renderProfile();toast('저장했습니다.')}catch(error){$('profileError').textContent=error.message}});
@@ -1380,9 +1370,8 @@ async function showSchoolSignup(invite,form){
 }
 function setAuthTab(tab){
   if(tab==='staff')tab='council';
-  const previous=authTab;
   authTab=tab;
-  for(const [name,id] of Object.entries({choose:'entryChoose',council:'councilLoginForm',student:'studentLoginForm',teacher:'teacherLoginForm',register:'registrationForm',personal:'personalLoginForm'})){
+  for(const [name,id] of Object.entries({choose:'entryChoose',council:'councilLoginForm',student:'studentLoginForm',teacher:'teacherLoginForm',register:'registrationForm'})){
     $(id).classList.toggle('hidden',name!==tab);
   }
   const signup=$('registrationForm');
@@ -1392,12 +1381,14 @@ function setAuthTab(tab){
   signup.elements.name.readOnly=false;
   $('registrationTitle').textContent='이음 학생 회원가입';
   $('registrationSubmit').textContent='가입하고 로그인';
-  $('registrationSubmit').disabled=false;
   $('registrationPassword').type='password';
   if(tab==='register'){
     const invite=pendingSchoolInvite();
+    $('registrationInviteNotice').classList.toggle('hidden',invite!==null);
+    for(const id of ['registrationFields','registrationRemember','registrationSubmit'])$(id).classList.toggle('hidden',invite===null);
+    $('registrationSubmit').disabled=true;
     if(invite!==null)showSchoolSignup(invite,signup);
-    else signup.elements.name.focus();
+    else $('registrationBack').focus();
   }else if(pendingSchoolInvite()!==null||['#register','#council-setup'].includes(location.hash)||
     (location.hash==='#teacher'&&tab!=='teacher')){
     history.replaceState(history.state,'',location.pathname+location.search);
@@ -1406,9 +1397,7 @@ function setAuthTab(tab){
   if(tab!=='council')$('councilLoginForm').elements.password.value='';
   setCouncilLoginNameRequired(false);
   if(tab!=='teacher')$('teacherLoginForm').elements.password.value='';
-  if(tab!=='personal')$('personalLoginForm').elements.password.value='';
-  if(tab==='personal')$('personalLoginBack').dataset.loginKind=['student','council','teacher'].includes(previous)?previous:'choose';
-  ['studentLoginError','councilLoginError','teacherLoginError','registrationError','personalLoginError'].forEach(id=>$(id).textContent='');
+  ['studentLoginError','councilLoginError','teacherLoginError','registrationError'].forEach(id=>$(id).textContent='');
   loadSavedLogin(tab);
 }
 function renderLogin(){
@@ -1450,25 +1439,11 @@ async function studentLogin(event){
 
 const studentDigits=value=>value.replace(/[０-９]/g,digit=>String(digit.charCodeAt(0)-0xff10));
 
-async function loginPersonalAccount(event){
-  event.preventDefault();
-  const form=event.currentTarget,button=event.submitter,status=$('personalLoginError');
-  const {name,password}=Object.fromEntries(new FormData(form));
-  const keepSignedIn=form.elements.keepSignedIn.checked;
-  button.disabled=true;
-  status.textContent='';
-  try{
-    const result=await post('/login',{kind:'personal',name,password,keepSignedIn});
-    applySession(result,keepSignedIn);
-    form.reset();
-    openCampusPortal();
-  }catch(error){status.textContent=error.message;}
-  finally{button.disabled=false;}
-}
-
 async function registerAccount(event){
   event.preventDefault();
   const form=event.currentTarget,button=event.submitter,message=$('registrationError');
+  const invite=pendingSchoolInvite();
+  if(invite===null)return;
   const values=Object.fromEntries(new FormData(form));
   const keepSignedIn=form.elements.keepSignedIn.checked;
   if(Array.from(values.password.normalize('NFC')).length<4){
@@ -1480,13 +1455,15 @@ async function registerAccount(event){
   try{
     const status=await api('/ieum/status');
     if(!status.nameRegistration)throw Error('공용 서버에 회원가입 업데이트를 적용해 주세요.');
-    const invite=pendingSchoolInvite();
-    const result=await post('/register',{...values,keepSignedIn,...(invite===null?{}:{invite})});
+    const result=await post('/register',{...values,keepSignedIn,invite});
     history.replaceState(history.state,'',location.pathname+location.search);
     form.reset();
     $('registrationPassword').type='password';
-    applySession(result,keepSignedIn);
-    openCampusPortal();
+    if(result.user.kind==='student')await enterStudent(result,keepSignedIn);
+    else {
+      applySession(result,keepSignedIn);
+      openCampusPortal();
+    }
   }catch(error){message.textContent=error.message;}
   finally{button.disabled=false;}
 }
@@ -1527,8 +1504,8 @@ async function bootstrapSession(){
     }
     $('loginDialog').close();
   }catch(error){
-    clearAccess();setAuthTab(kind);
-    $({staff:'councilLoginError',student:'studentLoginError',council:'councilLoginError',teacher:'teacherLoginError',personal:'personalLoginError'}[kind]).textContent=error.message;
+    clearAccess();setAuthTab(kind==='personal'?'student':kind);
+    $({staff:'councilLoginError',student:'studentLoginError',council:'councilLoginError',teacher:'teacherLoginError',personal:'studentLoginError'}[kind]).textContent=error.message;
     showDialog('loginDialog');
   }
 }
@@ -2441,7 +2418,7 @@ function initCampus() {
     setCouncilLoginNameRequired(false);
   });
   $('councilLoginForm').addEventListener('submit', councilLogin);
-  window.addEventListener('hashchange',()=>{if(['#register','#teacher'].includes(location.hash)&&!service.token)renderLogin();});
+  window.addEventListener('hashchange',()=>{if((pendingSchoolInvite()!==null||['#register','#teacher'].includes(location.hash))&&!service.token)renderLogin();});
   $('teacherLoginForm').addEventListener('submit',teacherLogin);
   $('councilOwnPasswordForm').addEventListener('submit',changeSchoolOwnPassword);
   $('councilProfileForm').addEventListener('submit',saveCouncilProfile);
@@ -5151,6 +5128,6 @@ initMessages();
 initSavedLogin();
 initApp();</script>
 <script src="./assets/ieum-xlsx.js" defer></script>
-<script src="./assets/ieum-web.js?v=500dc37ae0fc" defer></script>
+<script src="./assets/ieum-web.js?v=006ea90f6060" defer></script>
 </body>
 </html>

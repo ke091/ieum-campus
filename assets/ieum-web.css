@@ -3,14 +3,34 @@
   display: none;
 }
 
-@media (max-width: 760px), (max-width: 1400px) and (pointer: coarse) {
+@media (max-width: 1023px), (max-width: 1400px) and (pointer: coarse) {
   #campusSurface > .ieum-home-extras { margin-top: 14px; }
 
+  #studentPortal:not(.hidden):has(#ieumWorkspace:not(.hidden)) {
+    display: block;
+    height: auto;
+    min-height: 100dvh;
+  }
+
   #studentPortal .own-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
     min-height: 59px;
     height: auto;
     padding: max(8px, env(safe-area-inset-top)) 16px 8px;
   }
+
+  #ieumStudentMain:has(#ieumWorkspace:not(.hidden)) {
+    display: block;
+    width: min(100%, 1100px);
+    padding: 16px max(16px, env(safe-area-inset-right)) calc(75px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+  }
+
+  #ieumWorkspace:not(.hidden) { grid-template-columns: minmax(0, 1fr); }
+  #ieumWorkspace .ieum-desk-main { overflow: visible; overscroll-behavior-y: auto; scrollbar-gutter: auto; }
+  #ieumHomeExtras #ieumPinned { display: none; }
+  .ieum-home-hero .ieum-web-calendar { display: inline-flex; }
 
   #studentPortal .school-identity {
     gap: 8px;
@@ -125,6 +145,10 @@
   .ieum-workspace .ieum-section-actions .text-btn,
   dialog.modal .btn { min-height: 42px; }
 
+  dialog.modal form :is(input, select, textarea):not([type="checkbox"], [type="radio"]),
+  .ieum-chat-form textarea,
+  .ieum-dm :is(input, textarea) { min-width: 0; max-width: 100%; font-size: 16px; }
+
   .ieum-calendar-buttons { grid-template-columns: repeat(3, minmax(37px, auto)); }
   .ieum-calendar-buttons .btn { width: auto; }
 
@@ -135,25 +159,17 @@
   }
 }
 
-@media (min-width: 761px) and (max-width: 1400px) and (pointer: coarse) {
-  #ieumStudentMain:has(#ieumWorkspace:not(.hidden)) {
-    padding: 16px 18px calc(71px + env(safe-area-inset-bottom));
-  }
-
-  #ieumWorkspace {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 16px;
-  }
-
-  #ieumWorkspace .ieum-desk-main { scrollbar-gutter: auto; }
-
+@media (min-width: 761px) and (max-width: 1023px), (min-width: 761px) and (max-width: 1400px) and (pointer: coarse) {
+  #ieumWebMenu { width: min(100% - 32px, 560px); }
+  #ieumWebMenu .ieum-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  #ieumWorkspace { gap: 16px; }
+  .ieum-home-hero .ieum-header-actions { max-width: 100%; }
   .ieum-dm-panel { height: clamp(300px, calc(100dvh - 216px), 720px); }
 }
 
 @media (max-width: 760px) {
-  #studentPortal .own-topbar { position: sticky; top: 0; z-index: 20; }
-
-  #ieumStudentMain { padding: 12px 12px calc(78px + env(safe-area-inset-bottom)); }
+  #ieumStudentMain:has(#ieumWorkspace:not(.hidden)) { padding: 12px 12px calc(78px + env(safe-area-inset-bottom)); }
+  #ieumStudentMain { padding-inline: 12px; }
   #ieumStudentMain:has(#ieumWorkspace.hidden) { padding-bottom: 20px; }
   #ieumWorkspace { gap: 12px; }
   .ieum-desk-head.ieum-home-hero {
@@ -170,8 +186,6 @@
   }
 
   .ieum-home-hero .ieum-header-actions .btn { padding: 6px 3px; font-size: 12px; }
-  .ieum-home-hero .ieum-web-calendar { display: inline-flex; }
-  #ieumHomeExtras #ieumPinned { display: none; }
   .ieum-desk-head { flex-wrap: wrap; padding: 14px; }
   .ieum-home-section { margin-top: 12px; padding: 12px; }
   .ieum-workspace .ieum-participation { padding: 12px; }
@@ -184,10 +198,6 @@
     max-height: min(90dvh, 100dvh - 16px - env(safe-area-inset-bottom));
     overscroll-behavior: contain;
   }
-
-  dialog.modal form :is(input, select, textarea):not([type="checkbox"], [type="radio"]),
-  .ieum-chat-form textarea,
-  .ieum-dm :is(input, textarea) { min-width: 0; max-width: 100%; font-size: 16px; }
 
   .ieum-meal-date-controls input,
   .ieum-schedule-controls input { min-width: 0; max-width: 100%; }
