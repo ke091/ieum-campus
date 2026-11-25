@@ -277,6 +277,12 @@ html{scrollbar-gutter:stable}
 .ieum-today{margin-top:17px}
 .ieum-today h2{margin:0;color:#023f8f;font-size:17px}
 .ieum-program-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:8px}
+.modal.ieum-dorm-dialog{width:min(1240px,calc(100% - 28px));max-width:none;height:min(900px,calc(100dvh - 28px));max-height:none;margin:auto;overflow:hidden;background:#f3f4f9}
+.ieum-dorm-layout{height:100%;display:grid;grid-template-rows:auto minmax(0,1fr)}
+.ieum-dorm-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 14px;background:#fff;border-bottom:1px solid #dfe3ed}
+.ieum-dorm-frame{width:100%;height:100%;border:0}
+#ieumDormEntry svg,.ieum-dorm-card .ieum-program-icon{color:#6e49c7}
+@media(max-width:620px){.modal.ieum-dorm-dialog{width:100%;height:100dvh;margin:0;border:0;border-radius:0}.ieum-dorm-bar{padding-top:max(8px,env(safe-area-inset-top))}}
 .ieum-home-links{margin-top:10px}
 .ieum-calendar{margin-top:12px;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;text-align:center}
 .ieum-calendar>span{border-radius:5px;padding:5px 0;min-height:28px}
@@ -563,6 +569,7 @@ html{scrollbar-gutter:stable}
 <body class="auth-mode" data-entry="choose" data-sync="shared">
 <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"><defs>
 <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M19 4C8 2 3 8 6 14c3 6 14 4 13-10Z"/><path d="m5 21 10-13M10 13l-1-4m2 5 5 1"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="m3 11 9-8 9 8M5 10v10h14V10M10 20v-6h4v6"/></symbol>
 <symbol id="i-bus" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="16" rx="3"/><path d="M4 12h16M8 19v2m8-2v2M8 15.5h1m6 0h1"/></symbol>
 <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
 <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 5"/></symbol>
@@ -636,6 +643,7 @@ html{scrollbar-gutter:stable}
       <span class="ieum-nav-label" id="ieumProgramsNavLabel">교내 프로그램</span>
       <button type="button" class="ieum-nav-bareun" id="ieumBareunEntry"><svg aria-hidden="true"><use href="#i-leaf"/></svg>바른</button>
       <button type="button" class="hidden" id="ieumBusEntry" data-campus-tab="bus"><svg aria-hidden="true"><use href="#i-bus"/></svg>길벗</button>
+      <button type="button" class="hidden" id="ieumDormEntry" data-ieum-dorm><svg aria-hidden="true"><use href="#i-home"/></svg>보금자리</button>
       <button type="button" class="ieum-nav-docs hidden" id="ieumDocEntry" data-document-room><svg aria-hidden="true"><use href="#i-folder"/></svg>글마루</button>
       <button type="button" class="hidden" id="ieumMessagesEntry" data-campus-tab="messages">
         <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M21 4 10 15m11-11-7 17-4-6-7-4Z"/></svg>
@@ -1041,6 +1049,12 @@ html{scrollbar-gutter:stable}
 
 <dialog id="ownPasswordDialog" class="modal" aria-labelledby="ownPasswordTitle"><form id="ownPasswordForm"><div class="modal-head"><h2 id="ownPasswordTitle">비밀번호 변경</h2><button class="icon-btn" type="button" data-close="ownPasswordDialog" aria-label="닫기"><svg><use href="#i-close"/></svg></button></div><div class="modal-body stack"><div class="field"><label for="ownCurrentPassword">현재 비밀번호</label><input id="ownCurrentPassword" type="password" autocomplete="current-password" required></div><div class="field"><label for="ownNewPassword">새 비밀번호 · 4자 이상</label><input id="ownNewPassword" type="password" minlength="4" autocomplete="new-password" required></div><div class="field"><label for="ownConfirmPassword">새 비밀번호 확인</label><input id="ownConfirmPassword" type="password" minlength="4" autocomplete="new-password" required></div><p id="ownPasswordError" class="form-error" role="alert"></p></div><div class="modal-footer"><button class="btn primary">변경</button></div></form></dialog>
 <div id="toastRegion" class="toast-region" role="status" aria-live="polite"></div>
+<dialog id="ieumDormDialog" class="modal ieum-dorm-dialog" aria-labelledby="ieumDormTitle">
+  <div class="ieum-dorm-layout"><header class="ieum-dorm-bar"><strong id="ieumDormTitle">보금자리 · 기숙사 관리</strong>
+    <button class="btn secondary" type="button" data-close="ieumDormDialog">이음으로 돌아가기</button></header>
+    <iframe id="ieumDormFrame" class="ieum-dorm-frame" title="보금자리 기숙사 관리" referrerpolicy="no-referrer"></iframe>
+  </div>
+</dialog>
 <div class="print-area" id="printArea"></div>
 <script src="./assets/ieum-bus.js?v=a5f91c61f19c"></script>
 <script>
@@ -1584,6 +1598,39 @@ const personalAccount = () => service.user?.kind === 'personal';
 const studentLikeAccount = () => Boolean(ownStudent || teacherAccount());
 const campusParticipant = () => studentLikeAccount() || councilAccount();
 const canUseBus = () => studentLikeAccount() || canManageCampusData();
+const canOpenDorm = () => Boolean(service.token && ['student','teacher'].includes(service.user?.kind));
+let dormOpenCount = 0;
+function openDorm() {
+  if (!canOpenDorm() || $('ieumDormDialog').open) return;
+  dormOpenCount++;
+  $('ieumDormFrame').src = './assets/bogeumjari/index.html';
+  showDialog('ieumDormDialog');
+}
+$('ieumDormDialog').addEventListener('close', () => {
+  if (!$('ieumDormDialog').open) $('ieumDormFrame').removeAttribute('src');
+});
+window.addEventListener('message', async event => {
+  const frame = $('ieumDormFrame').contentWindow;
+  if (event.origin !== location.origin || event.source !== frame || !$('ieumDormDialog').open) return;
+  const {type, requestId, path, body} = event.data || {};
+  if (type !== 'ieum-dorm-request' || !Number.isSafeInteger(requestId) || !['state','write'].includes(path)) return;
+  const token = service.token;
+  const opening = dormOpenCount;
+  const answer = payload => {
+    if ($('ieumDormDialog').open && dormOpenCount === opening && service.token === token && $('ieumDormFrame').contentWindow === frame) {
+      frame.postMessage({type:'ieum-dorm-response',requestId,...payload},location.origin);
+    }
+  };
+  if (!canOpenDorm()) { answer({status:401,error:'이음에 다시 로그인해 주세요.'}); return; }
+  try {
+    const options = {signal:AbortSignal.timeout(12000)};
+    if (path === 'write') Object.assign(options,{method:'POST',body:JSON.stringify(body)});
+    const result = await api('/campus/dorm',options);
+    answer({result});
+  } catch (error) {
+    answer({status:error.status || 503,error:error.status ? error.message : '기숙사 서버에 연결할 수 없습니다.'});
+  }
+});
 const canManageCampusData = () => councilAccount() && service.user.canModerate === true;
 const canManageSchool = () => service.user?.kind === 'staff' || canManageCampusData();
 const canUseManagedBareun = () => councilAccount() || service.user?.kind==='staff';
@@ -1611,6 +1658,7 @@ function setCouncilAccess(enabled) {
 }
 
 function resetCampus() {
+  closeDialog('ieumDormDialog');
   stopChat();
   stopDm();
   dm.drafts.clear();
@@ -1783,6 +1831,7 @@ async function showCampus(page, message = '', target, fromBack = false) {
   $('ieumBusProgram').classList.toggle('hidden', !bus);
   if (!bus) $('ieumBusContent').replaceChildren();
   $('ieumBusEntry').classList.toggle('hidden', !canUseBus());
+  $('ieumDormEntry').classList.toggle('hidden', !canOpenDorm());
   $('campusSuggestionNav').classList.toggle('hidden', !studentLikeAccount() && !campus.council);
   $('ieumDocEntry').classList.toggle('hidden', !canOpenDocumentRoom());
   $('ieumDataEntry').classList.toggle('hidden', !canManageCampusData());
@@ -2327,7 +2376,7 @@ function initCampus() {
     }
   });
   document.addEventListener('click', event => {
-    const button = event.target.closest('[data-campus-back],[data-campus-tab],[data-campus-notice],[data-campus-event],[data-campus-reload],[data-campus-meals],[data-campus-calendar],[data-ieum-staff-home],[data-ieum-bareun],[data-document-room],[data-council-accounts],[data-council-edit],[data-council-revoke],[data-school-password],[data-schedule-shift],[data-schedule-today],[data-own-suggestion-delete]');
+    const button = event.target.closest('[data-campus-back],[data-campus-tab],[data-campus-notice],[data-campus-event],[data-campus-reload],[data-campus-meals],[data-campus-calendar],[data-ieum-staff-home],[data-ieum-bareun],[data-ieum-dorm],[data-document-room],[data-council-accounts],[data-council-edit],[data-council-revoke],[data-school-password],[data-schedule-shift],[data-schedule-today],[data-own-suggestion-delete]');
     if (!button || button.disabled) return;
     if ('campusBack' in button.dataset) goCampusBack();
     else if ('campusNotice' in button.dataset) showCampus('notices','',{itemId:Number(button.dataset.campusNotice)});
@@ -2340,6 +2389,7 @@ function initCampus() {
     else if ('campusCalendar' in button.dataset) openSchedule();
     else if ('ieumStaffHome' in button.dataset) showStaffHome(button.dataset.ieumStaffHome === 'open');
     else if ('ieumBareun' in button.dataset) openManagedBareun(button.dataset.ieumBareun === 'data' ? 'data' : 'dashboard');
+    else if ('ieumDorm' in button.dataset) openDorm();
     else if ('documentRoom' in button.dataset) openDocumentRoom(button);
     else if ('schoolPassword' in button.dataset && (councilAccount()||teacherAccount())) {
       $('councilOwnPasswordForm').reset();
@@ -2736,6 +2786,11 @@ function weekPrompt() {
 }
 
 function workspaceHome() {
+  const dorm = canOpenDorm() ? `<section class="ieum-desk-section ieum-home-section" aria-label="교내 프로그램">
+    <header><h2>교내 프로그램</h2></header><div class="ieum-program-grid">
+    <button type="button" class="ieum-program ieum-dorm-card" data-ieum-dorm><span class="ieum-program-icon">${icon('home')}</span>
+      <span><strong>보금자리</strong><span class="ieum-program-note">기숙사 관리</span></span>
+      <svg class="ieum-program-arrow" aria-hidden="true"><use href="#i-chevron"/></svg></button></div></section>` : '';
   const identity = ownStudent ? ownStudent.name + ' · 학번 ' + ownStudent.id : teacherAccount()?service.user.name:
     [service.user.department, service.user.role, service.user.name === service.user.role ? '' : service.user.name].filter(Boolean).join(' · ');
   const actions = `<div class="ieum-header-actions">
@@ -2760,6 +2815,7 @@ function workspaceHome() {
       ${canPublish()?editorButton('events','행사 올리기'):''}<button type="button" class="text-btn" data-campus-tab="events">안내판 보기</button></div></header>
     <div id="workspaceEvents" class="campus-items" aria-live="polite"><p class="small muted">불러오는 중…</p></div></section>
     ${participationCards()}
+    ${dorm}
     ${shortcuts}
     <section class="ieum-desk-section ieum-home-section"><header><h2>이번 주 한마디</h2></header>
     <p>${weekPrompt()}</p><button type="button" class="text-btn" data-ieum-prompt="question">자유 소통에 한마디 남기기</button></section>`;
