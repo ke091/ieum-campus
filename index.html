@@ -68,20 +68,14 @@ html{scrollbar-gutter:stable}
 .meal-source{display:inline-block;margin-top:12px;color:#023f8f;text-decoration:underline}
 .ieum-eyebrow{display:block;color:#e1f1ff;font-size:12px;font-weight:700}
 #loginDialog::backdrop{background:radial-gradient(ellipse at 20% 10%,#e4f0ff,#f1f5fa 56%,#edf3fa)}
-#loginDialog:has(#entryChoose:not(.hidden)){width:970px;max-width:calc(100vw - 36px);border-radius:24px;border:1px solid #d4e2f3;box-shadow:0 24px 72px #06274b22;background:#fff}
+#loginDialog:has(#entryChoose:not(.hidden)){width:432px;max-width:calc(100vw - 28px);border-radius:20px;border:1px solid #d4e2f3;box-shadow:0 24px 72px #06274b22;background:#fff}
 #loginDialog:has(#entryChoose:not(.hidden)) .login-school{display:none}
-#entryChoose.ieum-landing{padding:0;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}
-.ieum-landing-hero{position:relative;isolation:isolate;overflow:hidden;min-width:0;display:flex;flex-direction:column;justify-content:space-between;gap:38px;min-height:416px;padding:36px;color:white;background:linear-gradient(145deg,#092852,#023f8f 65%,#1d6395)}
-.ieum-landing-school{display:flex;gap:10px;align-items:center;font-size:13px;font-weight:650;line-height:1.5}
-.ieum-landing-school img{border-radius:50%;width:42px;height:42px;flex:0 0 42px}
-.ieum-chip{position:relative;width:min(100%,410px);margin:0 auto;aspect-ratio:320/232}
-.ieum-chip .ieum-chip-art{display:block;width:100%;height:100%;overflow:visible}
-.ieum-chip h1{position:absolute;top:50%;left:50%;transform:translate(-50%,-54%);margin:0;color:white;font-size:clamp(34px,6vw,72px);line-height:1;letter-spacing:-.07em;white-space:nowrap}
-.ieum-chip-caption{margin:0;color:#d9ebff;text-align:center;font-size:13px}
-.ieum-landing-access{padding:36px clamp(20px,4vw,40px);align-self:center;min-width:0}
-#entryChoose .ieum-landing-access h2{text-align:left;color:#153251;margin:0 0 4px;font-size:23px}
-.ieum-landing-access p{margin:0;color:#50657a;font-size:13px}
-.ieum-choice{display:flex;gap:12px;align-items:center;min-height:65px;padding:10px 12px;color:white;background:#215b9d;border:1px solid #215b9d;border-radius:11px;text-align:left;width:100%}
+#entryChoose.ieum-landing{display:grid;grid-template-columns:minmax(0,1fr);gap:22px;padding:clamp(18px,6vw,28px)}
+.ieum-web-brand{display:grid;justify-items:center;gap:8px;text-align:center;padding-top:4px}
+.ieum-web-brand img.school-logo{width:clamp(64px,18vw,72px);height:auto;object-fit:contain}
+.ieum-web-brand h1{margin:2px 0 0;font-size:38px;line-height:1.1;letter-spacing:-.045em;color:#09396f}
+.ieum-web-brand p{margin:0;color:#50657a;font-size:13px;font-weight:650}
+.ieum-choice{display:flex;gap:12px;align-items:center;min-height:55px;padding:10px 12px;color:white;background:#215b9d;border:1px solid #215b9d;border-radius:11px;text-align:left;width:100%}
 .ieum-choice-main{background:#023f8f;color:#fff;border-color:#023f8f}
 .ieum-choice strong,.ieum-choice small{display:block}
 .ieum-choice strong{font-size:14px;font-weight:720}
@@ -93,7 +87,14 @@ html{scrollbar-gutter:stable}
 .ieum-choice-arrow{margin-left:auto}
 .ieum-choice:hover{border-color:#4ca5dd}
 .ieum-choice:focus-visible{outline:3px solid #4ca5dd;outline-offset:2px}
-.ieum-entry-actions{display:grid;gap:7px;margin-top:13px}
+.ieum-entry-actions{display:grid;gap:7px}
+@media(max-height:440px){
+  #entryChoose.ieum-landing{gap:12px;padding-block:14px}
+  .ieum-choice{min-height:48px}
+  .ieum-web-brand{gap:4px;padding-top:0}
+  .ieum-web-brand img.school-logo{width:48px}
+  .ieum-web-brand h1{font-size:32px}
+}
 .ieum-entry-actions .btn{width:100%}
 #loginDialog .login-form .btn.primary{background:#023f8f;color:white;min-height:42px}
 .ieum-remember-login{display:flex;align-items:center;gap:7px;margin-top:8px;color:#315373;font-size:13px}
@@ -317,16 +318,7 @@ html{scrollbar-gutter:stable}
 .participation-list{margin:6px 0;padding-left:22px}
 .participation-actions{margin-top:9px}
 @media(max-width:640px){
-  #loginDialog:has(#entryChoose:not(.hidden)){max-width:calc(100vw - 24px);width:430px;border-radius:18px}
-  #entryChoose.ieum-landing{grid-template-columns:1fr}
-  .ieum-landing-hero{min-height:0;gap:21px;padding:20px 22px}
-  .ieum-landing-school{font-size:12px}
-  .ieum-landing-school img{width:34px;height:34px;flex-basis:34px}
-  .ieum-chip{width:min(100%,265px)}
-  .ieum-chip h1{font-size:44px}
-  .ieum-landing-access{padding:22px}
-  #entryChoose .ieum-landing-access h2{font-size:19px}
-  .ieum-choice{min-height:55px;padding:8px 10px}
+  .ieum-choice{padding:8px 10px}
 }
 
 #ieumStudentMain{max-width:1480px;padding:20px 24px 38px}
@@ -566,7 +558,7 @@ html{scrollbar-gutter:stable}
 .ieum-first-setup .ieum-reveal-password input{width:auto;min-width:0;min-height:0;margin:0;accent-color:#195cb4}
 </style>
 <link rel="stylesheet" href="./assets/ieum-bus.css?v=2991e101ef31">
-<link rel="stylesheet" href="./assets/ieum-web.css?v=e82f370467ef">
+<link rel="stylesheet" href="./assets/ieum-web.css?v=d44551d30f84">
 </head>
 <body class="auth-mode" data-entry="choose" data-sync="shared">
 <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"><defs>
@@ -967,19 +959,16 @@ html{scrollbar-gutter:stable}
     <img class="school-logo" data-school-logo width="72" height="72" alt="">
     <h1>이음</h1><p>충남반도체마이스터고등학교</p>
   </header>
-  <div class="ieum-landing-access">
-    <h2>이음에 들어가기</h2><p>이용할 계정을 선택하세요.</p>
-    <div class="ieum-entry-actions">
-      <button type="button" class="ieum-choice ieum-choice-main" data-login-kind="student">
-        <span class="ieum-choice-icon"><svg aria-hidden="true"><use href="#i-users"/></svg></span><span><strong>학생 로그인</strong><small>학번과 비밀번호</small></span><svg aria-hidden="true" class="ieum-choice-arrow"><use href="#i-chevron"/></svg>
-      </button>
-      <button type="button" class="ieum-choice" data-login-kind="council">
-        <span class="ieum-choice-icon"><svg aria-hidden="true"><use href="#i-file"/></svg></span><span><strong>학생회 로그인</strong><small>직책과 비밀번호</small></span><svg aria-hidden="true" class="ieum-choice-arrow"><use href="#i-chevron"/></svg>
-      </button>
-      <button type="button" class="ieum-choice" data-login-kind="teacher">
-        <span class="ieum-choice-icon"><svg aria-hidden="true"><use href="#i-users"/></svg></span><span><strong>선생님 로그인</strong><small>이름과 비밀번호</small></span><svg aria-hidden="true" class="ieum-choice-arrow"><use href="#i-chevron"/></svg>
-      </button>
-    </div>
+  <div class="ieum-entry-actions">
+    <button type="button" class="ieum-choice ieum-choice-main" data-login-kind="student">
+      <span class="ieum-choice-icon"><svg aria-hidden="true"><use href="#i-users"/></svg></span><span><strong>학생 로그인</strong><small>학번과 비밀번호</small></span><svg aria-hidden="true" class="ieum-choice-arrow"><use href="#i-chevron"/></svg>
+    </button>
+    <button type="button" class="ieum-choice" data-login-kind="council">
+      <span class="ieum-choice-icon"><svg aria-hidden="true"><use href="#i-file"/></svg></span><span><strong>학생회 로그인</strong><small>직책과 비밀번호</small></span><svg aria-hidden="true" class="ieum-choice-arrow"><use href="#i-chevron"/></svg>
+    </button>
+    <button type="button" class="ieum-choice" data-login-kind="teacher">
+      <span class="ieum-choice-icon"><svg aria-hidden="true"><use href="#i-users"/></svg></span><span><strong>선생님 로그인</strong><small>이름과 비밀번호</small></span><svg aria-hidden="true" class="ieum-choice-arrow"><use href="#i-chevron"/></svg>
+    </button>
   </div>
 </section>
 <form id="councilLoginForm" class="login-form hidden">
